@@ -21,7 +21,7 @@ export default function Home() {
           <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
           Dearest Gentle Viewer 
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
+          <p className=" text-lg leading-8 text-zinc-600 dark:text-zinc-400">
            Pray, do step into my little corner of the ton, where data waltzes with intuition, and every corner hides a story longing to be discovered while merging with the sudden burst of creativity of this author.
           </p>
         </div>
