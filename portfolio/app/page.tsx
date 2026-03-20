@@ -5,11 +5,13 @@ export default function Home() {
   console.log("Supabase URL: ", process.env.NEXT_PUBLIC_SUPABASE_URL)
   console.log(supabase) 
   return (
-    <div className="flex items-center justify-center bg-zinc font-sans dark:bg-amber-950">
+    <div className="flex items-center justify-center bg-cover bg-center bg-zinc font-sans dark:bg-amber-950"
+      style={{backgroundImage:"url('/public/assets/bg_ptfolio.jpg')"}}
+    >
       <main className="flex w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
         <Image
           className="dark:invert"
-          src="/assets/image.png"
+          src="/assets/logo.png"
           alt="Camila's Logo"
           width={100}
           height={20}
