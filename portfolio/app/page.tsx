@@ -1,7 +1,7 @@
 import Image from "next/image";
 import supabase  from "./config/supabase_client";
 
-export default function Home() {
+ {
   console.log("Supabase URL: ", process.env.NEXT_PUBLIC_SUPABASE_URL)
   console.log(supabase) 
   return (
