@@ -1,5 +1,5 @@
 export type Project = {
-    id: Int8Array;
+    id: string;
     title: string;
     image_url: string;
     description: string;
@@ -11,7 +11,7 @@ export type Project = {
   };
   
   export type Post = {
-    id: Int8Array;
+    id: string;
     title: string;
     slug: string;
     content: string;
@@ -21,7 +21,7 @@ export type Project = {
   };
 
   export type Subscribers= {
-    id: Int8Array;
+    id: string;
     created_at: string;
     email: string;
     confirmed: boolean;

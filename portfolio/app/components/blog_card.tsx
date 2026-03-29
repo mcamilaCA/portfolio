@@ -128,7 +128,7 @@ export default function VlogCard({ entry, index }: Props) {
         </p>
 
         <Link href={`/pages/blog/${entry.id}`} className="card-cta">
-          Read entry →
+          Read ba →
         </Link>
       </div>
     </div>
