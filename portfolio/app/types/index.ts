@@ -25,4 +25,5 @@ export type Project = {
     created_at: string;
     email: string;
     confirmed: boolean;
+    
   };
