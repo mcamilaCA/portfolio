@@ -8,10 +8,10 @@ import Image from "next/image";
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Blog", href: "/blog" },
-  { label: "About", href: "/about" },
-  { label: "Collaborate", href: "/collab" },
+  { label: "Projects", href: "/pages/projects" },
+  { label: "Blog", href: "/pages/blog" },
+  { label: "About", href: "/pages/about" },
+  { label: "Collaborate", href: "/pages/contact" },
 ];
 
 export default function Header() {

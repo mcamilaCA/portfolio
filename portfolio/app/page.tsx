@@ -129,19 +129,21 @@ export default function Home() {
           <h1
             style={{
               fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: "clamp(3.5rem, 9vw, 8rem)",
+              fontWeight: 150,
+              fontSize: "clamp(2.5rem, 3vw, 2rem)",
               lineHeight: 1.0,
               color: "var(--parchment)",
               letterSpacing: "-0.01em",
               marginBottom: "2rem",
             }}
           >
-            Crafting
+            Welcome to my part of the ton.
             <br />
-            <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>Digital</em>
+            <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}> Dearest viewer,</em>
             <br />
-            Experiences
+            hang tight and enjoy the ride.
+            <br/> Yours truly, 
+            <br/> <span style={{ fontStyle: "italic", color: "var(--gold-light)"}}>Maria Camila</span>
           </h1>
 
           <p
@@ -156,8 +158,8 @@ export default function Home() {
               letterSpacing: "0.02em",
             }}
           >
-            Designer, developer, content creator &amp; storyteller — building things that feel
-            as good as they look.
+            Designer, developer, content creator &amp; storyteller — never a dull day
+            if your mind is full with creativity.
           </p>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
