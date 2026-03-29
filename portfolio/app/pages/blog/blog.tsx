@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from "react";
 import supabase from "@/app/config/supabase_client";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
 import VlogCard from "@/app/components/blog_card";
 import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";

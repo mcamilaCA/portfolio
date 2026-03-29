@@ -3,6 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useScrolled } from "@/app/hooks/Usescrolled";
+import Image from "next/image";
+
 
 const NAV_LINKS = [
   { label: "Home", href: "/" },
@@ -45,9 +47,8 @@ export default function Header() {
           justifyContent: "space-between",
         }}
       >
-        {/* Logo */}
         <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
-          <span style={{ color: "var(--gold)", fontSize: "1.1rem", lineHeight: 1 }}>✦</span>
+          <Image src="/assets/logo.png" alt="Logo" width= {50} height={50}/>
           <span
             style={{
               fontFamily: "'Cormorant Garamond', serif",
@@ -57,7 +58,7 @@ export default function Header() {
               letterSpacing: "0.06em",
             }}
           >
-            Your Name
+            Maria Camila Copo Amador
           </span>
         </Link>
 
@@ -70,7 +71,7 @@ export default function Header() {
           ))}
         </nav>
 
-        {/* Mobile hamburger */}
+        {/* Mobile burger */}
         <button
           className="hamburger"
           onClick={() => setMenuOpen(!menuOpen)}
@@ -104,7 +105,7 @@ export default function Header() {
         </button>
       </div>
 
-      {/* Mobile drawer */}
+      {/* Mobile draw */}
       {menuOpen && (
         <div
           style={{

@@ -3,17 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import ProjectCard from "@/app/components/ProjectCard";
-import VlogCard from "@/app/components/VlogCard";
-import SkeletonCard from "@/app/components/SkeletonCard";
-import SectionHeader from "@/app/components/SectionHeader";
-import type { Project, VlogEntry } from "@/app/types";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
+import ProjectCard from "@/app/components/project_card";
+import VlogCard from "@/app/components/blog_card";
+import SkeletonCard from "@/app/components/skeletonCard";
+import SectionHeader from "@/app/components/sectionHeader";
+import type { Project, Post } from "@/app/types";
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [vlogs, setVlogs] = useState<VlogEntry[]>([]);
+  const [blogs, setBlogs] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   const heroContentRef = useRef<HTMLDivElement>(null);
@@ -21,21 +21,21 @@ export default function Home() {
   // ── Getting Supabase data ──────────────────────────────────────────────────
   useEffect(() => {
     async function fetchData() {
-      const [{ data: projectData }, { data: vlogData }] = await Promise.all([
+      const [{ data: projectData }, { data: blogData }] = await Promise.all([
         supabase
           .from("Projects")
-          .select("id, title, img_url, description, proj_url, date")
+          .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
           .order("date", { ascending: false })
           .limit(3),
         supabase
           .from("Posts")
-          .select("id, title, date, media_url, content")
+          .select("id, title, slug, content, published, media_url,date")
           .order("date", { ascending: false })
           .limit(3),
       ]);
 
       if (projectData) setProjects(projectData);
-      if (vlogData) setVlogs(vlogData);
+      if (blogData) setBlogs(blogData);
       setLoading(false);
     }
 
@@ -313,7 +313,7 @@ export default function Home() {
         >
           {loading
             ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
-            : vlogs.map((v, i) => (
+            : blogs.map((v, i) => (
                 <VlogCard key={v.id} entry={v} index={i} />
               ))}
         </div>
