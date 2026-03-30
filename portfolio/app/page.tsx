@@ -106,7 +106,7 @@ export default function Home() {
           style={{
             position: "relative",
             zIndex: 2,
-            maxWidth: 1200,
+            maxWidth: 1500,
             margin: "0 auto",
             width: "100%",
             paddingTop: "1rem",
@@ -119,18 +119,20 @@ export default function Home() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              maxWidth: 1200,
+              maxWidth: 1500,
               margin: "0 auto",
               width: "100%",
               paddingTop: "1rem",
               animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
+              gap: "1rem"
 
             }}
             > 
             {/* Content to the left */}
-            < div style={{ flex: 1, paddingRight: "2rem"}}>
+            < div style={{ flex: 1, paddingRight: "1rem", transform:"scale(1.2)"}}>
               <p style={{ fontFamily: "'Lato', sans-serif", 
                           fontWeight: 300, 
+                          maxWidth: 1500,
                           fontSize: "0.75rem", 
                           letterSpacing: "0.25em", 
                           textTransform: "uppercase", 
@@ -150,24 +152,31 @@ export default function Home() {
               </h1>
 
               <p style={{ fontFamily: "'Lato', sans-serif",
-                          fontWeight: 300,
+                          fontWeight: 400,
                           fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
                           color: "rgba(245,241,234,0.58)",
-                          maxWidth: 420,
+                          maxWidth: 1200,
                           lineHeight: 1.8,
                           marginBottom: "3rem",
                           letterSpacing: "0.02em" }}>
                 Learner, developer, content creator &amp; storyteller — for there&apos;s never a dull day
-                if one stays curious.
+                if one remains curious.
+
+                <br />
+                <br />
+
+                Graduated with a Bachelor&apos;s in Computer Science from Florida International University and studied Translational Medicine for half a year in Tsinghua University, 
+                I&apos;m currently exploring the realms of full-stack development, content creation, and the art of storytelling with a  focus on Data Science and Machine learning.
+                This portfolio is a collection of my projects, field notes, and musings as I navigate the ever-evolving landscape of technology and creativity.
               </p>
             
             </div>
 
             {/* Content to the rigth */}
-            < div style={{ flex: 1, textAlign:"center"}}>
+            < div style={{ flex: 1, textAlign:"left", maxWidth:"120%", transform:"scale(1.2)"}}>
                 <img src="/assets/home.png"
-                alt= "Home self-portrait"
-                style={{maxWidth: "100%",
+                alt= "Home Gyeongbokgung Palace self-portrait"
+                style={{maxWidth: "140%",
                         height: "auto",
                         borderRadius: "8px"
                 }} />
