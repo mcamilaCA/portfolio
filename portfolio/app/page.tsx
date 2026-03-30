@@ -63,10 +63,11 @@ export default function Home() {
       <section
         style={{
           position: "relative",
-          minHeight: "100svh",
+          minHeight: "80svh",
           display: "flex",
           alignItems: "center",
           padding: "0 2rem",
+          paddingTop: "1rem",
           overflow: "hidden",
           background:
             "radial-gradient(ellipse 80% 70% at 60% 40%, #2a2317 0%, #0e0d0b 100%)",
@@ -108,7 +109,7 @@ export default function Home() {
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
-            paddingTop: "3rem",
+            paddingTop: "1rem",
             animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
           }}
         >
@@ -121,7 +122,7 @@ export default function Home() {
               maxWidth: 1200,
               margin: "0 auto",
               width: "100%",
-              paddingTop: "8rem",
+              paddingTop: "1rem",
               animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
 
             }}
