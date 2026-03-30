@@ -108,59 +108,70 @@ export default function Home() {
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
-            paddingTop: "8rem",
+            paddingTop: "3rem",
             animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
           }}
         >
-          <p
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "0.7rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            Portfolio · {new Date().getFullYear()}
-          </p>
 
-          <h1
+          <div 
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 150,
-              fontSize: "clamp(2.5rem, 3vw, 2rem)",
-              lineHeight: 1.0,
-              color: "var(--parchment)",
-              letterSpacing: "-0.01em",
-              marginBottom: "2rem",
-            }}
-          >
-            Welcome to my part of the ton.
-            <br />
-            <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}> Dearest viewer,</em>
-            <br />
-            hang tight and enjoy the ride.
-            <br/> Yours truly, 
-            <br/> <span style={{ fontStyle: "italic", color: "var(--gold-light)"}}>Maria Camila</span>
-          </h1>
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              maxWidth: 1200,
+              margin: "0 auto",
+              width: "100%",
+              paddingTop: "8rem",
+              animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
 
-          <p
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
-              color: "rgba(245,241,234,0.58)",
-              maxWidth: 420,
-              lineHeight: 1.8,
-              marginBottom: "3rem",
-              letterSpacing: "0.02em",
             }}
-          >
-            Designer, developer, content creator &amp; storyteller — never a dull day
-            if your mind is full with creativity.
-          </p>
+            > 
+            {/* Content to the left */}
+            < div style={{ flex: 1, paddingRight: "2rem"}}>
+              <p style={{ fontFamily: "'Lato', sans-serif", 
+                          fontWeight: 300, 
+                          fontSize: "0.75rem", 
+                          letterSpacing: "0.25em", 
+                          textTransform: "uppercase", 
+                          color: "var(--gold)", 
+                          marginBottom: "1.5rem" }}>
+                Portfolio & Learning Journal · {new Date().getFullYear()}
+              </p>
+
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
+                          fontWeight: 150,
+                          fontSize: "clamp(2.5rem, 3vw, 2rem)",
+                          lineHeight: 1.0,
+                          color: "var(--parchment)",
+                          letterSpacing: "-0.01em",
+                          marginBottom: "2rem" }}>
+                Welcome to my part of the ton.
+              </h1>
+
+              <p style={{ fontFamily: "'Lato', sans-serif",
+                          fontWeight: 300,
+                          fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
+                          color: "rgba(245,241,234,0.58)",
+                          maxWidth: 420,
+                          lineHeight: 1.8,
+                          marginBottom: "3rem",
+                          letterSpacing: "0.02em" }}>
+                Learner, developer, content creator &amp; storyteller — for there&apos;s never a dull day
+                if one stays curious.
+              </p>
+            
+            </div>
+
+            {/* Content to the rigth */}
+            < div style={{ flex: 1, textAlign:"center"}}>
+                <img src="/assets/home.png"
+                alt= "Home self-portrait"
+                style={{maxWidth: "100%",
+                        height: "auto",
+                        borderRadius: "8px"
+                }} />
+            </div>
+          </div>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <Link
@@ -189,7 +200,7 @@ export default function Home() {
                 (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
               }}
             >
-              View Work
+              Peruse My Works
             </Link>
 
             <Link
@@ -221,7 +232,7 @@ export default function Home() {
                 el.style.transform = "scale(1)";
               }}
             >
-              About Me
+              Of My Person
             </Link>
           </div>
         </div>
@@ -295,7 +306,7 @@ export default function Home() {
           }}
         >
           <Link href="/pages/projects" className="view-all">
-            All projects →
+           Catalogue of Projects →
           </Link>
         </div>
       </section>
@@ -329,7 +340,7 @@ export default function Home() {
           }}
         >
           <Link href="/pages/blog" className="view-all">
-            All entries →
+           Compendium of Entries →
           </Link>
         </div>
       </section>
