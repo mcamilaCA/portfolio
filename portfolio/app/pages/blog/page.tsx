@@ -2,25 +2,25 @@
 
 import { useEffect, useState } from "react";
 import supabase from "@/app/config/supabase_client";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import ProjectCard from "@/app/components/project_card";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
+import VlogCard from "@/app/components/blog_card";
 import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";
-import type { Project } from "@/app/types";
+import type { Post } from "@/app/types";
 
-export default function Projects() {
-  const [projects, setProjects] = useState<Project[]>([]);
+export default function Blog() {
+  const [blogs, setBlogs] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     supabase
-      .from("projects")
-      .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
-      .order("created_at", { ascending: false })
+      .from("Post")
+      .select("id, title, slug, content, published, media_url,date")
+      .order("date", { ascending: false })
       .then(({ data }) => {
-        if (data) setProjects(data);
+        if (data) setBlogs(data);
         setLoading(false);
       });
   }, []);
@@ -30,7 +30,7 @@ export default function Projects() {
       <Header />
       <main style={{ paddingTop: "7rem" }}>
         <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>
-          <SectionHeader label="Selected Work" title="All Projects" />
+          <SectionHeader label="Field Notes" title="All Vlog Entries" />
           <div
             style={{
               maxWidth: 1200,
@@ -42,9 +42,7 @@ export default function Projects() {
           >
             {loading
               ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
-              : projects.map((p, i) => (
-                  <ProjectCard key={p.id} project={p} index={i} />
-                ))}
+              : blogs.map((v, i) => <VlogCard key={v.id} entry={v} index={i} />)}
           </div>
         </section>
       </main>

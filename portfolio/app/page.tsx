@@ -3,17 +3,17 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import ProjectCard from "@/app/components/ProjectCard";
-import VlogCard from "@/app/components/VlogCard";
-import SkeletonCard from "@/app/components/SkeletonCard";
-import SectionHeader from "@/app/components/SectionHeader";
-import type { Project, VlogEntry } from "@/app/types";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
+import ProjectCard from "@/app/components/project_card";
+import VlogCard from "@/app/components/blog_card";
+import SkeletonCard from "@/app/components/skeletonCard";
+import SectionHeader from "@/app/components/sectionHeader";
+import type { Project, Post } from "@/app/types";
 
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
-  const [vlogs, setVlogs] = useState<VlogEntry[]>([]);
+  const [blogs, setBlogs] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
 
   const heroContentRef = useRef<HTMLDivElement>(null);
@@ -21,21 +21,21 @@ export default function Home() {
   // ── Getting Supabase data ──────────────────────────────────────────────────
   useEffect(() => {
     async function fetchData() {
-      const [{ data: projectData }, { data: vlogData }] = await Promise.all([
+      const [{ data: projectData }, { data: blogData }] = await Promise.all([
         supabase
           .from("Projects")
-          .select("id, title, img_url, description, proj_url, date")
+          .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
           .order("date", { ascending: false })
           .limit(3),
         supabase
           .from("Posts")
-          .select("id, title, date, media_url, content")
+          .select("id, title, slug, content, published, media_url,date")
           .order("date", { ascending: false })
           .limit(3),
       ]);
 
       if (projectData) setProjects(projectData);
-      if (vlogData) setVlogs(vlogData);
+      if (blogData) setBlogs(blogData);
       setLoading(false);
     }
 
@@ -108,57 +108,70 @@ export default function Home() {
             maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
-            paddingTop: "8rem",
+            paddingTop: "3rem",
             animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
           }}
         >
-          <p
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "0.7rem",
-              letterSpacing: "0.25em",
-              textTransform: "uppercase",
-              color: "var(--gold)",
-              marginBottom: "1.5rem",
-            }}
-          >
-            Portfolio · {new Date().getFullYear()}
-          </p>
 
-          <h1
+          <div 
             style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: "clamp(3.5rem, 9vw, 8rem)",
-              lineHeight: 1.0,
-              color: "var(--parchment)",
-              letterSpacing: "-0.01em",
-              marginBottom: "2rem",
-            }}
-          >
-            Crafting
-            <br />
-            <em style={{ fontStyle: "italic", color: "var(--gold-light)" }}>Digital</em>
-            <br />
-            Experiences
-          </h1>
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "space-between",
+              maxWidth: 1200,
+              margin: "0 auto",
+              width: "100%",
+              paddingTop: "8rem",
+              animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
 
-          <p
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
-              color: "rgba(245,241,234,0.58)",
-              maxWidth: 420,
-              lineHeight: 1.8,
-              marginBottom: "3rem",
-              letterSpacing: "0.02em",
             }}
-          >
-            Designer, developer, content creator &amp; storyteller — building things that feel
-            as good as they look.
-          </p>
+            > 
+            {/* Content to the left */}
+            < div style={{ flex: 1, paddingRight: "2rem"}}>
+              <p style={{ fontFamily: "'Lato', sans-serif", 
+                          fontWeight: 300, 
+                          fontSize: "0.75rem", 
+                          letterSpacing: "0.25em", 
+                          textTransform: "uppercase", 
+                          color: "var(--gold)", 
+                          marginBottom: "1.5rem" }}>
+                Portfolio & Learning Journal · {new Date().getFullYear()}
+              </p>
+
+              <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
+                          fontWeight: 150,
+                          fontSize: "clamp(2.5rem, 3vw, 2rem)",
+                          lineHeight: 1.0,
+                          color: "var(--parchment)",
+                          letterSpacing: "-0.01em",
+                          marginBottom: "2rem" }}>
+                Welcome to my part of the ton.
+              </h1>
+
+              <p style={{ fontFamily: "'Lato', sans-serif",
+                          fontWeight: 300,
+                          fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
+                          color: "rgba(245,241,234,0.58)",
+                          maxWidth: 420,
+                          lineHeight: 1.8,
+                          marginBottom: "3rem",
+                          letterSpacing: "0.02em" }}>
+                Learner, developer, content creator &amp; storyteller — for there&apos;s never a dull day
+                if one stays curious.
+              </p>
+            
+            </div>
+
+            {/* Content to the rigth */}
+            < div style={{ flex: 1, textAlign:"center"}}>
+                <img src="/assets/home.png"
+                alt= "Home self-portrait"
+                style={{maxWidth: "100%",
+                        height: "auto",
+                        borderRadius: "8px"
+                }} />
+            </div>
+          </div>
 
           <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
             <Link
@@ -187,7 +200,7 @@ export default function Home() {
                 (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
               }}
             >
-              View Work
+              Peruse My Works
             </Link>
 
             <Link
@@ -219,7 +232,7 @@ export default function Home() {
                 el.style.transform = "scale(1)";
               }}
             >
-              About Me
+              Of My Person
             </Link>
           </div>
         </div>
@@ -293,7 +306,7 @@ export default function Home() {
           }}
         >
           <Link href="/pages/projects" className="view-all">
-            All projects →
+           Catalogue of Projects →
           </Link>
         </div>
       </section>
@@ -313,7 +326,7 @@ export default function Home() {
         >
           {loading
             ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
-            : vlogs.map((v, i) => (
+            : blogs.map((v, i) => (
                 <VlogCard key={v.id} entry={v} index={i} />
               ))}
         </div>
@@ -327,7 +340,7 @@ export default function Home() {
           }}
         >
           <Link href="/pages/blog" className="view-all">
-            All entries →
+           Compendium of Entries →
           </Link>
         </div>
       </section>

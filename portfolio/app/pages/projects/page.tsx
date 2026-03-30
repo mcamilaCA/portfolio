@@ -2,25 +2,25 @@
 
 import { useEffect, useState } from "react";
 import supabase from "@/app/config/supabase_client";
-import Header from "@/app/components/Header";
-import Footer from "@/app/components/Footer";
-import VlogCard from "@/app/components/blog_card";
+import Header from "@/app/components/header";
+import Footer from "@/app/components/footer";
+import ProjectCard from "@/app/components/project_card";
 import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";
-import type { Post } from "@/app/types";
+import type { Project } from "@/app/types";
 
-export default function Blog() {
-  const [blogs, setBlogs] = useState<Post[]>([]);
+export default function Projects() {
+  const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
 
 
   useEffect(() => {
     supabase
-      .from("Post")
-      .select("id, title, slug, content, published, media_url,date")
-      .order("date", { ascending: false })
+      .from("projects")
+      .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
+      .order("created_at", { ascending: false })
       .then(({ data }) => {
-        if (data) setBlogs(data);
+        if (data) setProjects(data);
         setLoading(false);
       });
   }, []);
@@ -30,7 +30,7 @@ export default function Blog() {
       <Header />
       <main style={{ paddingTop: "7rem" }}>
         <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>
-          <SectionHeader label="Field Notes" title="All Vlog Entries" />
+          <SectionHeader label="Selected Work" title="All Projects" />
           <div
             style={{
               maxWidth: 1200,
@@ -42,7 +42,9 @@ export default function Blog() {
           >
             {loading
               ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
-              : blogs.map((v, i) => <VlogCard key={v.id} entry={v} index={i} />)}
+              : projects.map((p, i) => (
+                  <ProjectCard key={p.id} project={p} index={i} />
+                ))}
           </div>
         </section>
       </main>
