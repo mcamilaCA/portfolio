@@ -1,7 +1,7 @@
 {
   "dependencies": {
     "@supabase/supabase-js": "^2.99.2",
-    "next": ">=18",
+    "next": "^18",
     "react": "^18.3.1",
     "react-dom": "^18.3.1"
   },
