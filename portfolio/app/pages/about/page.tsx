@@ -1,6 +1,7 @@
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import Greeting from "@/app/components/greeting";
+import Socials from "@/app/components/socials";
 
 export default function About() {
   return (
@@ -61,7 +62,7 @@ export default function About() {
           />
         </div>
       </div>
-
+        <Socials />
       </main>
       <Footer />
     </div>

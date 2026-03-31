@@ -13,7 +13,6 @@ const CONNECT = [
   { label: "Instagram", href: "https://www.instagram.com/camis.locket/", external: true },
   { label: "GitHub", href: "https://github.com/mcamilaCA", external: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/camicopoa/", external: true },
-  { label: "Instagram", href: "https://www.instagram.com/camis.locket/", external: true },
   { label: "Substack", href: "https://camilaspov.substack.com/", external: true}
 ];
 
