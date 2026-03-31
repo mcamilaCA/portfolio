@@ -167,6 +167,7 @@ export default function Home() {
 
                 Graduated with a Bachelor&apos;s in Computer Science from Florida International University and studied Translational Medicine for half a year in Tsinghua University, 
                 I&apos;m currently exploring the realms of full-stack development, content creation, and the art of storytelling with a  focus on Data Science and Machine learning.
+                <br/>
                 This portfolio is a collection of my projects, field notes, and musings as I navigate the ever-evolving landscape of technology and creativity.
               </p>
             
