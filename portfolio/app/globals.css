@@ -212,3 +212,58 @@ img {
     grid-template-columns: 1fr !important;
   }
 }
+
+/* ── Footer bubble and stickie style ────────────────────────────────────────────────── */
+
+.sticker-container {
+  position: relative;
+  width: fit-content;
+}
+
+.sticker-image {
+  width: 90%;
+  height: 90%;
+}
+
+/* Bubble  */
+.sticker-bubble {
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%) translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+/* When hover */
+.sticker-container:hover .sticker-bubble {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
+}
+
+/* Bubble style */
+.bubble-content {
+  font-size: 0.85rem;
+  padding: 6px 10px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  white-space: nowrap;
+  font-family: 'Cormorant Garamond', serif;
+  letter-spacing: 0.04em;
+  background: var(--parchment);
+  color: var(--ink);
+  border: 1px solid rgba(184,154,94,0.25);
+  
+}
+
+/* Bubble Tail */
+.bubble-tail {
+  width: 8px;
+  height: 8px;
+  background: white;
+  border-left: 1px solid rgba(0,0,0,0.08);
+  border-bottom: 1px solid rgba(0,0,0,0.08);
+  transform: rotate(45deg);
+  margin: -4px auto 0;
+}
