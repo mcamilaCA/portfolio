@@ -16,17 +16,23 @@ export default function Projects() {
 
   useEffect(() => {
     supabase
-      .from("projects")
+      .from("Projects")
       .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
-      .order("created_at", { ascending: false })
-      .then(({ data }) => {
-        if (data) setProjects(data);
+      .order("date", { ascending: false })
+      .then(({ data, error }) => {
+        if (error) {
+          console.error("Supabase error:", error);
+        } else if (data) {
+          setProjects(data);
+        }
         setLoading(false);
       });
   }, []);
 
+
   return (
     <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+      console.log(projects.length);
       <Header />
       <main style={{ paddingTop: "7rem" }}>
         <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>

@@ -39,15 +39,12 @@ export default function ProjectCard({ project, index }: Props) {
           <Image
             src={project.image_url}
             alt={project.title}
+            fill
+            className="card-img"
             style={{
-              width: "100%",
-              height: "100%",
               objectFit: "cover",
-              display: "block",
               transition: "transform 0.6s cubic-bezier(.22,.68,0,1)",
             }}
-            className="card-img"
-            layout="responsive"
           />
         ) : (
           <div
