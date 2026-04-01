@@ -9,7 +9,7 @@ type Props = {
   index: number;
 };
 
-export default function VlogCard({ entry, index }: Props) {
+export default function BlogCard({ entry, index }: Props) {
   const { ref, visible } = useReveal();
 
   const formattedDate = new Date(entry.date).toLocaleDateString("en-US", {

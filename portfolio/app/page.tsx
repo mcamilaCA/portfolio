@@ -297,11 +297,13 @@ export default function Home() {
 
         <div
           style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-            gap: "2rem",
+              maxWidth: 1200,
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
+              alignItems: "stretch",
+              justifyContent: "center",
+              gap: "2rem",
           }}
         >
           {loading
@@ -327,7 +329,7 @@ export default function Home() {
 
       {/* ════════════ VLOGS ════════════ */}
       <section style={{ padding: "7rem 2rem", background: "var(--surface-alt)" }}>
-        <SectionHeader label="Field Notes" title="Latest Vlog Entries" />
+        <SectionHeader label="Field Notes" title="Latest Blog Entries" />
 
         <div
           style={{

@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
-import VlogCard from "@/app/components/blog_card";
+import BlogCard from "@/app/components/blog_card";
 import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";
 import type { Post } from "@/app/types";
@@ -42,7 +42,7 @@ export default function Blog() {
           >
             {loading
               ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
-              : blogs.map((v, i) => <VlogCard key={v.id} entry={v} index={i} />)}
+              : blogs.map((v, i) => <BlogCard key={v.id} entry={v} index={i} />)}
           </div>
         </section>
       </main>
