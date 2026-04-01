@@ -15,6 +15,7 @@ html {
 :root {
   --ink: #0e0d0b;
   --parchment: #f5f1ea;
+  --warm-parchment: rgba(245, 241, 234, 0.92);
   --parchment-alt: #eee9de;
   --gold: #b89a5e;
   --gold-light: #d4b97a;

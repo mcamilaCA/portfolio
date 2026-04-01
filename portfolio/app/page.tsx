@@ -94,8 +94,7 @@ export default function Home() {
           style={{
             position: "absolute",
             inset: 0,
-            background:
-              "radial-gradient(ellipse 50% 60% at 20% 50%, transparent 0%, rgba(14,13,11,0.5) 100%)",
+            background: "linear-gradient(to right, rgba(20, 18, 16, 0.85) 0%, rgba(20, 18, 16, 0.65) 35%,rgba(20, 18, 16, 0.3) 60%,rgba(20, 18, 16, 0.1) 100%);, url('/assets/bg_ptfolio.jpg') center/cover no-repeat",
             pointerEvents: "none",
           }}
         />
@@ -137,28 +136,30 @@ export default function Home() {
                           letterSpacing: "0.25em", 
                           textTransform: "uppercase", 
                           color: "var(--gold)", 
+                          marginLeft: "7rem",
                           marginBottom: "1.5rem" }}>
                 Portfolio & Learning Journal · {new Date().getFullYear()}
               </p>
 
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
-                          fontWeight: 150,
-                          fontSize: "clamp(2.5rem, 3vw, 2rem)",
-                          lineHeight: 1.0,
-                          color: "var(--parchment)",
-                          letterSpacing: "-0.01em",
+                          fontWeight: 200,
+                          fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
+                          lineHeight: 1.15,
+                          color: "var(--warm-parchment)",
+                          letterSpacing: "0.01em",
                           marginBottom: "2rem" }}>
                 Welcome to my part of the ton.
               </h1>
 
               <p style={{ fontFamily: "'Lato', sans-serif",
                           fontWeight: 400,
-                          fontSize: "clamp(0.9rem, 2vw, 1.05rem)",
+                          fontSize: "0.95rem",
                           color: "rgba(245,241,234,0.58)",
-                          maxWidth: 1200,
+                          maxWidth: 480,
                           lineHeight: 1.8,
                           marginBottom: "3rem",
-                          letterSpacing: "0.02em" }}>
+                          letterSpacing: "0.03em",
+                          textShadow: "0 2px 12px rgba(0, 0, 0, 0.35)" }}>
                 Learner, developer, content creator &amp; storyteller — for there&apos;s never a dull day
                 if one remains curious.
 
@@ -191,12 +192,13 @@ export default function Home() {
               style={{
                 display: "inline-block",
                 padding: "0.85rem 2.2rem",
-                background: "var(--gold)",
+                background: "linear-gradient(135deg,#c6a15b,#b8924f)",
+                boxShadow: "0 4px 14px rgba(184,154,94,0.25)",
                 color: "var(--ink)",
                 fontFamily: "'Lato', sans-serif",
                 fontWeight: 400,
                 fontSize: "0.75rem",
-                letterSpacing: "0.12em",
+                letterSpacing: "0.08em",
                 textTransform: "uppercase",
                 textDecoration: "none",
                 borderRadius: 1,
@@ -219,7 +221,8 @@ export default function Home() {
               style={{
                 display: "inline-block",
                 padding: "0.85rem 2.2rem",
-                border: "1px solid rgba(245,241,234,0.3)",
+                border: "1px solid rgba(245,241,234,0.4)",
+                backdropFilter: "blur(4px)",
                 color: "var(--parchment)",
                 fontFamily: "'Lato', sans-serif",
                 fontWeight: 300,
