@@ -30,7 +30,7 @@ export default function Blog() {
       <Header />
       <main style={{ paddingTop: "7rem" }}>
         <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>
-          <SectionHeader label="Field Notes" title="All Vlog Entries" />
+          <SectionHeader label="Field Notes" title="All Blog Entries" />
           <div
             style={{
               maxWidth: 1200,
