@@ -21,6 +21,7 @@ export default function ProjectCard({ project, index }: Props) {
         transform: visible ? "translateY(0)" : "translateY(28px)",
         transition: `opacity 0.65s ease ${index * 0.12}s, transform 0.65s ease ${index * 0.12}s`,
         display: "flex",
+        height: "100%",
         flexDirection: "column",
         background: "var(--surface)",
         borderBottom: "3px solid var(--gold)",
@@ -31,7 +32,7 @@ export default function ProjectCard({ project, index }: Props) {
         style={{
           position: "relative",
           width: "100%",
-          aspectRatio: "16/9",
+          aspectRatio: "16/10",
           overflow: "hidden",
         }}
       >
@@ -75,7 +76,7 @@ export default function ProjectCard({ project, index }: Props) {
       {/* Body */}
       <div
         style={{
-          padding: "1.6rem",
+          padding: "1.1rem",
           display: "flex",
           flexDirection: "column",
           flex: 1,
@@ -85,11 +86,11 @@ export default function ProjectCard({ project, index }: Props) {
           style={{
             fontFamily: "'Lato', sans-serif",
             fontWeight: 300,
-            fontSize: "0.65rem",
+            fontSize: "0.55rem",
             letterSpacing: "0.2em",
             textTransform: "uppercase",
             color: "var(--gold)",
-            marginBottom: "0.5rem",
+            marginBottom: "0.4rem",
           }}
         >
           Project
@@ -99,7 +100,7 @@ export default function ProjectCard({ project, index }: Props) {
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 500,
-            fontSize: "1.3rem",
+            fontSize: "1.05rem",
             color: "var(--ink)",
             letterSpacing: "0.01em",
             lineHeight: 1.25,
@@ -120,10 +121,14 @@ export default function ProjectCard({ project, index }: Props) {
         <p
           style={{
             fontFamily: "'Lato', sans-serif",
+            display: "-webkit-box",
+            WebkitLineClamp:3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
             fontWeight: 300,
-            fontSize: "0.85rem",
+            fontSize: "0.78rem",
             color: "var(--ash)",
-            lineHeight: 1.7,
+            lineHeight: 1.6,
             marginBottom: "1.2rem",
             flex: 1,
           }}

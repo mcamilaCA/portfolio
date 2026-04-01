@@ -42,7 +42,9 @@ export default function Projects() {
               maxWidth: 1200,
               margin: "0 auto",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
+              alignItems: "stretch",
+              justifyContent: "center",
               gap: "2rem",
             }}
           >
