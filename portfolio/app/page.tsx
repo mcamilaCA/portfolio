@@ -6,7 +6,7 @@ import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import ProjectCard from "@/app/components/project_card";
-import VlogCard from "@/app/components/blog_card";
+import BlogCard from "@/app/components/blog_card";
 import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";
 import type { Project, Post } from "@/app/types";
@@ -327,7 +327,7 @@ export default function Home() {
         </div>
       </section>
 
-      {/* ════════════ VLOGS ════════════ */}
+      {/* ════════════ BLOGS ════════════ */}
       <section style={{ padding: "7rem 2rem", background: "var(--surface-alt)" }}>
         <SectionHeader label="Field Notes" title="Latest Blog Entries" />
 
@@ -343,7 +343,7 @@ export default function Home() {
           {loading
             ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
             : blogs.map((v, i) => (
-                <VlogCard key={v.id} entry={v} index={i} />
+                <BlogCard key={v.id} entry={v} index={i} />
               ))}
         </div>
 
