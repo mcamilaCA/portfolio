@@ -26,7 +26,7 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: scrolled ? "rgba(245,241,234,0.88)" : "transparent",
+        background: scrolled ? "linear-gradient(rgba(245,241,234,0.7), rgba(245,241,234,0.7)), url('/assets/bg_ptfolio.jpg') center/cover no-repeat" : "var(--parchment)",
         backdropFilter: scrolled ? "blur(18px) saturate(1.4)" : "none",
         WebkitBackdropFilter: scrolled ? "blur(18px) saturate(1.4)" : "none",
         borderBottom: scrolled
@@ -38,17 +38,17 @@ export default function Header() {
     >
       <div
         style={{
-          maxWidth: 1200,
-          margin: "0 auto",
-          padding: "0 2rem",
+          maxWidth: 1650,
+          margin: " auto",
+          padding: "2 0rem",
           height: 68,
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
         }}
       >
-        <Link href="/" style={{ display: "flex", alignItems: "center", gap: "0.6rem", textDecoration: "none" }}>
-          <Image src="/assets/logo.png" alt="Logo" width= {50} height={50}/>
+        <Link href="/" style={{ display: "flex", alignItems: "center", justifyContent:"left",gap: "0.6rem", textDecoration: "none" }}>
+          <Image src="/assets/logo.png" alt="Logo" width= {50} height={50} />
           <span
             style={{
               fontFamily: "'Cormorant Garamond', serif",
@@ -63,9 +63,9 @@ export default function Header() {
         </Link>
 
         {/* Desktop nav */}
-        <nav style={{ display: "flex", gap: "2.2rem", alignItems: "center" }} className="desktop-nav">
+        <nav style={{ display: "flex", gap: "2.2rem", alignItems: "center"}} className="desktop-nav">
           {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="nav-link">
+            <Link key={link.href} href={link.href} className="nav-link" >
               {link.label}
             </Link>
           ))}
@@ -125,7 +125,6 @@ export default function Header() {
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "1.3rem",
-                color: "var(--ink)",
                 textDecoration: "none",
                 padding: "0.6rem 0",
                 borderBottom: "1px solid rgba(184,154,94,0.22)",

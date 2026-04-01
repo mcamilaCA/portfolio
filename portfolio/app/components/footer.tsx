@@ -13,15 +13,9 @@ const CONNECT = [
   { label: "Instagram", href: "https://www.instagram.com/camis.locket/", external: true },
   { label: "GitHub", href: "https://github.com/mcamilaCA", external: true },
   { label: "LinkedIn", href: "https://www.linkedin.com/in/camicopoa/", external: true },
-  { label: "Instagram", href: "https://www.instagram.com/camis.locket/", external: true },
   { label: "Substack", href: "https://camilaspov.substack.com/", external: true}
 ];
 
-const MORE = [
-  { label: "Uses", href: "/uses", external: false },
-  { label: "RSS Feed", href: "/rss", external: false },
-  { label: "Colophon", href: "/colophon", external: false },
-];
 
 export default function Footer() {
   const year = new Date().getFullYear();
@@ -89,7 +83,20 @@ export default function Footer() {
         >
           <FooterColumn title="Navigate" links={NAVIGATE} />
           <FooterColumn title="Connect" links={CONNECT} />
-          <FooterColumn title="More" links={MORE} />
+          
+          <div className="sticker-container">
+            <img
+              src="/assets/stickie-me.png"
+              alt="footer sticker"
+              className="sticker-image"
+            />
+
+            <div className="sticker-bubble">
+              <div className="bubble-content">Hi! 🦋</div>
+              <div className="bubble-tail"></div>
+            </div>
+          </div>
+            
         </div>
       </div>
 
@@ -105,7 +112,7 @@ export default function Footer() {
           gap: "0.5rem",
         }}
       >
-        <p style={copyStyle}>© {year} Your Name. All rights reserved.</p>
+        <p style={copyStyle}>© {year}  Maria Camila Copo Amador. All rights reserved.</p>
         <p style={copyStyle}> The worst enemy of creativity is self-doubt.     - Sylvia plath</p>
       </div>
     </footer>
