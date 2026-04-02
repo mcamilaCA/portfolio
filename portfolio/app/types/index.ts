@@ -7,6 +7,7 @@ export type Project = {
     tags: string;
     slug: string;
     date: string;
+    summary: string;
   };
 
 export type ProjectDetail = {
@@ -15,6 +16,7 @@ export type ProjectDetail = {
     image_url: string;
     summary: string;
     created_at: string;
+    slug:string;
   
     
     full_description?: string;   // Long-form rich text / markdown body
@@ -33,6 +35,7 @@ export type Post = {
     published: boolean;
     media_url?: string;
     date: string;
+    summary: string;
   };
 
 
@@ -42,6 +45,7 @@ export type BlogDetail = {
     date: string;
     media_url?: string;
     short: string;
+    slug:string;
 
     body?: string;               // Long-form content / markdown
     tags?: string[];             // e.g. ["Travel", "Coding", "Life"]

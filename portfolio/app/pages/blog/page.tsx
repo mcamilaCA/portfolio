@@ -17,7 +17,7 @@ export default function Blog() {
   useEffect(() => {
     supabase
       .from("Post")
-      .select("id, title, slug, published, media_url,date")
+      .select("id, title, slug, published, media_url,date, summary")
       .order("date", { ascending: false })
       .then(({ data }) => {
         if (data) setBlogs(data);

@@ -104,18 +104,18 @@ function ProjectSkeleton() {
 // Main page
 // ─────────────────────────────────────────────────────────────────
 export default function ProjectPage() {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const router = useRouter();
   const [project, setProject] = useState<ProjectDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
+    if (!slug) return;
     supabase
       .from("ProjectDetail")
       .select("*")
-      .eq("id", id)
+      .eq("slug", slug)
       .single()
       .then(({ data, error }) => {
         if (error || !data) {
@@ -125,7 +125,7 @@ export default function ProjectPage() {
         }
         setLoading(false);
       });
-  }, [id]);
+  }, [slug]);
 
   if (loading) return <><Header /><ProjectSkeleton /><Footer /></>;
 

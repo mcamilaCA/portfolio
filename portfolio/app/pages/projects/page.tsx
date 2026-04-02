@@ -17,7 +17,7 @@ export default function Projects() {
   useEffect(() => {
     supabase
       .from("Projects")
-      .select("id, title, image_url, git_url, proj_url, tags, slug, date")
+      .select("id, title, image_url, summary, git_url, proj_url, tags, slug, date")
       .order("date", { ascending: false })
       .then(({ data, error }) => {
         if (error) {
