@@ -4,7 +4,7 @@ export type Project = {
     image_url: string;
     git_url: string;
     proj_url: string;
-    tags: string;
+    tags: string[];
     slug: string;
     date: string;
     summary: string;
