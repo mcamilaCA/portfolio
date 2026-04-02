@@ -113,7 +113,7 @@ export default function ProjectPage() {
   useEffect(() => {
     if (!id) return;
     supabase
-      .from("projects")
+      .from("ProjectDetail")
       .select("*")
       .eq("id", id)
       .single()

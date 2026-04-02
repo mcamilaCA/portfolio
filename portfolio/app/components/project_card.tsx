@@ -133,7 +133,7 @@ export default function ProjectCard({ project, index }: Props) {
             flex: 1,
           }}
         >
-          {project.description}
+          {project.slug}
         </p>
 
         <Link href={`/pages/projects/${project.id}`} className="card-cta">

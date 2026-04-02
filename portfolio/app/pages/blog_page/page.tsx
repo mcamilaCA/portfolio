@@ -98,7 +98,7 @@ export default function BlogEntryPage() {
   useEffect(() => {
     if (!id) return;
     supabase
-      .from("Post")
+      .from("BlogDetail")
       .select("*")
       .eq("id", id)
       .single()

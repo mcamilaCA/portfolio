@@ -124,7 +124,7 @@ export default function BlogCard({ entry, index }: Props) {
             flex: 1,
           }}
         >
-          {entry.content}
+          {entry.slug}
         </p>
 
         <Link href={`/pages/blog/${entry.id}`} className="card-cta">
