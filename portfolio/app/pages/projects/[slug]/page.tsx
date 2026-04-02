@@ -17,10 +17,10 @@ function Tag({ label }: { label: string }) {
       style={{
         display: "inline-block",
         padding: "0.3rem 0.85rem",
-        border: "1px solid var(--border)",
+        border: "3px solid var(--border)",
         fontFamily: "'Lato', sans-serif",
         fontWeight: 300,
-        fontSize: "0.68rem",
+        fontSize: "1rem",
         letterSpacing: "0.12em",
         textTransform: "uppercase",
         color: "var(--ash)",
@@ -165,7 +165,6 @@ export default function ProjectPage() {
   }
 
   const p = project!;
-  const hasGallery = p.gallery && p.gallery.length > 0;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
@@ -184,11 +183,11 @@ export default function ProjectPage() {
         {p.image_url && (
           <img
             src={p.image_url}
-            alt={p.name}
+            alt={p.title}
             style={{
               width: "100%",
               height: "100%",
-              objectFit: "cover",
+              objectFit: "scale-down",
               opacity: 0.75,
             }}
           />
@@ -200,7 +199,7 @@ export default function ProjectPage() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(14,13,11,0.2) 0%, rgba(245,241,234,1) 100%)",
+              "linear-gradient(to bottom, rgba(14,13,11,0.2) 0%, var(--gold-translucent) 170%)",
           }}
         />
 
@@ -226,7 +225,7 @@ export default function ProjectPage() {
           }}
           className="back-link"
         >
-          ← Projects
+          ← Back To Projects
         </Link>
       </div>
 
@@ -246,7 +245,7 @@ export default function ProjectPage() {
             fontSize: "0.68rem",
             letterSpacing: "0.25em",
             textTransform: "uppercase",
-            color: "var(--gold)",
+            color: "var(--ash)",
             marginBottom: "1rem",
           }}
         >
@@ -265,7 +264,7 @@ export default function ProjectPage() {
             marginBottom: "0.75rem",
           }}
         >
-          {p.name}
+          {p.title}
         </h1>
 
         {/* Lead / brief description */}
@@ -280,11 +279,11 @@ export default function ProjectPage() {
             marginBottom: "2rem",
           }}
         >
-          {p.summary}
+          {p.description}
         </p>
 
         {/* Gold rule */}
-        <div style={{ width: "100%", height: 1, background: "var(--border)", marginBottom: "2.5rem" }} />
+        <div style={{ width: "100%", height: 3, background: "var(--border)", marginBottom: "2.5rem" }} />
 
         {/* ── Meta row ──────────────────────────────────────────── */}
         {(p.role || p.year) && (
@@ -295,7 +294,7 @@ export default function ProjectPage() {
               flexWrap: "wrap",
               marginBottom: "3rem",
               paddingBottom: "2.5rem",
-              borderBottom: "1px solid var(--border)",
+              borderBottom: "3px solid var(--border)",
             }}
           >
             {p.role && <MetaItem label="Role" value={p.role} />}
@@ -311,7 +310,7 @@ export default function ProjectPage() {
               display: "flex",
               flexWrap: "wrap",
               gap: "0.5rem",
-              marginBottom: "3rem",
+              marginBottom: "1.5rem",
             }}
           >
             {p.tags.map((tag) => (
@@ -323,7 +322,7 @@ export default function ProjectPage() {
         {/* ── Full description / body ────────────────────────────
             Renders as plain paragraphs. If you want Markdown,
             swap this for a library like react-markdown.         */}
-        {p.full_description && (
+        {p.outcomes && (
           <div
             style={{
               fontFamily: "'Lato', sans-serif",
@@ -334,60 +333,11 @@ export default function ProjectPage() {
               marginBottom: "3rem",
             }}
           >
-            {p.full_description.split("\n\n").map((para, i) => (
+            {p.outcomes.split("\n\n").map((para, i) => (
               <p key={i} style={{ marginBottom: "1.4rem" }}>
                 {para}
               </p>
             ))}
-          </div>
-        )}
-
-        {/* ── Gallery ───────────────────────────────────────────── */}
-        {hasGallery && (
-          <div style={{ marginBottom: "3rem" }}>
-            <p
-              style={{
-                fontFamily: "'Lato', sans-serif",
-                fontWeight: 300,
-                fontSize: "0.63rem",
-                letterSpacing: "0.2em",
-                textTransform: "uppercase",
-                color: "var(--gold)",
-                marginBottom: "1.2rem",
-              }}
-            >
-              Gallery
-            </p>
-            <div
-              style={{
-                display: "grid",
-                gridTemplateColumns: "repeat(auto-fit, minmax(260px, 1fr))",
-                gap: "1rem",
-              }}
-            >
-              {p.gallery!.map((url, i) => (
-                <div
-                  key={i}
-                  style={{
-                    aspectRatio: "4/3",
-                    overflow: "hidden",
-                    background: "var(--parchment-alt)",
-                  }}
-                >
-                  <img
-                    src={url}
-                    alt={`${p.name} — image ${i + 1}`}
-                    style={{
-                      width: "100%",
-                      height: "100%",
-                      objectFit: "cover",
-                      transition: "transform 0.5s cubic-bezier(.22,.68,0,1)",
-                    }}
-                    className="gallery-img"
-                  />
-                </div>
-              ))}
-            </div>
           </div>
         )}
 
@@ -399,7 +349,7 @@ export default function ProjectPage() {
               gap: "1rem",
               flexWrap: "wrap",
               paddingTop: "2.5rem",
-              borderTop: "1px solid var(--border)",
+              borderTop: "3px solid var(--border)",
             }}
           >
             {p.live_url && (

@@ -12,20 +12,18 @@ export type Project = {
 
 export type ProjectDetail = {
     id: string;
-    name: string;
+    title: string;
     image_url: string;
-    summary: string;
+    description: string;
     created_at: string;
     slug:string;
   
-    
-    full_description?: string;   // Long-form rich text / markdown body
-    tags?: string[];             // e.g. ["React", "Supabase", "Design"]
+    outcomes?: string;            // Key learnings and impact
+    tags?: string[];             // In the format-> ["React", "Supabase", "Design"]
     live_url?: string;           // Link to live project
-    repo_url?: string;           // GitHub / GitLab repo
-    role?: string;               // e.g. "Lead Developer & Designer"
-    year?: string;               // e.g. "2024"
-    gallery?: string[];          // Extra image URLs shown in the grid
+    repo_url?: string;           // Code link
+    role?: string;               // Format -> Lead Developer & Designer
+    year?: string;               // Format-> 2024
   };
   
 export type Post = {
