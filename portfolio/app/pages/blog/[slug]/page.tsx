@@ -327,7 +327,7 @@ export default function BlogEntryPage() {
             marginBottom: "2rem",
           }}
         >
-          {e.short}
+          {e.summary}
         </p>
 
         {/* Gold rule */}
@@ -440,7 +440,7 @@ export default function BlogEntryPage() {
                     style={{
                       width: "100%",
                       height: "100%",
-                      objectFit: "cover",
+                      objectFit: "scale-down",
                       transition: "transform 0.5s cubic-bezier(.22,.68,0,1)",
                     }}
                     className="gallery-img"

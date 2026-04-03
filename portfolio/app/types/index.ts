@@ -42,8 +42,8 @@ export type BlogDetail = {
     title: string;
     date: string;
     media_url?: string;
-    short: string;
     slug:string;
+    summary: string;
 
     body?: string;               // Long-form content / markdown
     tags?: string[];             // e.g. ["Travel", "Coding", "Life"]

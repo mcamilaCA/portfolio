@@ -45,7 +45,6 @@ export default function Projects() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
               alignItems: "stretch",
-              justifyContent: "center",
               gap: "2rem",
             }}
           >

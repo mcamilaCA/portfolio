@@ -51,7 +51,7 @@ export default function BlogCard({ entry, index }: Props) {
             fill
             className="card-img"
             style={{
-                    objectFit: "cover",
+                    objectFit: "scale-down",
                     transition: "transform 0.6s cubic-bezier(.22,.68,0,1)",
             }}
           />
