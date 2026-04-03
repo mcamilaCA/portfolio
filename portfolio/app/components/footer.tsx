@@ -2,10 +2,10 @@ import Link from "next/link";
 
 const NAVIGATE = [
   { label: "Home", href: "/" },
-  { label: "Projects", href: "/projects" },
-  { label: "Vlog", href: "/blog" },
-  { label: "About", href: "/about" },
-  {label: "Collaborate", href: "/collaborate"}
+  { label: "Projects", href: "/pages/projects" },
+  { label: "Blog", href: "/pages/blog" },
+  { label: "About", href: "/pages/about" },
+  {label: "Collaborate", href: "/pages/contact"}
 ];
 
 const CONNECT = [
