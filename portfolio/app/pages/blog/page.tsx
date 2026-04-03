@@ -16,8 +16,8 @@ export default function Blog() {
 
   useEffect(() => {
     supabase
-      .from("Post")
-      .select("id, title, slug, content, published, media_url,date")
+      .from("Posts")
+      .select("id, title, slug, published, media_url, date, summary")
       .order("date", { ascending: false })
       .then(({ data }) => {
         if (data) setBlogs(data);
@@ -36,7 +36,7 @@ export default function Blog() {
               maxWidth: 1200,
               margin: "0 auto",
               display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 260px))",
               gap: "2rem",
             }}
           >

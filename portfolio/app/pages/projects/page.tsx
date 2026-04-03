@@ -17,12 +17,13 @@ export default function Projects() {
   useEffect(() => {
     supabase
       .from("Projects")
-      .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
+      .select("id, title, git_url, proj_url, date, slug, image_url, summary, tags")
       .order("date", { ascending: false })
       .then(({ data, error }) => {
         if (error) {
           console.error("Supabase error:", error);
-        } else if (data) {
+        } else {
+          console.log("Fetched data:", data);
           setProjects(data);
         }
         setLoading(false);
@@ -44,14 +45,13 @@ export default function Projects() {
               display: "grid",
               gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
               alignItems: "stretch",
-              justifyContent: "center",
               gap: "2rem",
             }}
           >
             {loading
               ? [0, 1, 2, 3, 4, 5].map((i) => <SkeletonCard key={i} />)
               : projects.map((p, i) => (
-                  <ProjectCard key={p.id} project={p} index={i} />
+                  <ProjectCard key={p.slug} project={p} index={i} />
                 ))}
           </div>
         </section>

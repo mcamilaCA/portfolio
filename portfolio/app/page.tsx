@@ -24,12 +24,12 @@ export default function Home() {
       const [{ data: projectData }, { data: blogData }] = await Promise.all([
         supabase
           .from("Projects")
-          .select("id, title, image_url, description, git_url, proj_url, tags, slug, date")
+          .select("id, title, summary, image_url, summary, git_url, proj_url, tags, slug, date")
           .order("date", { ascending: false })
           .limit(3),
         supabase
           .from("Posts")
-          .select("id, title, slug, content, published, media_url,date")
+          .select("id, title, slug, published, media_url,date, summary")
           .order("date", { ascending: false })
           .limit(3),
       ]);
@@ -336,7 +336,9 @@ export default function Home() {
             maxWidth: 1200,
             margin: "0 auto",
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
+            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 260px))",
+            alignItems: "stretch",
+            justifyContent: "center",
             gap: "2rem",
           }}
         >
