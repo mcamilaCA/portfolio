@@ -90,17 +90,17 @@ function BodyContent({ text }: { text: string }) {
 // Main page
 // ─────────────────────────────────────────────────────────────────
 export default function BlogEntryPage() {
-  const { id } = useParams<{ id: string }>();
+  const { slug } = useParams<{ slug: string }>();
   const [entry, setEntry] = useState<BlogDetail | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
-    if (!id) return;
+    if (!slug) return;
     supabase
       .from("BlogDetail")
       .select("*")
-      .eq("id", id)
+      .eq("slug", slug)
       .single()
       .then(({ data, error }) => {
         if (error || !data) {
@@ -110,7 +110,7 @@ export default function BlogEntryPage() {
         }
         setLoading(false);
       });
-  }, [id]);
+  }, [slug]);
 
   if (loading) return <><Header /><BlogSkeleton /><Footer /></>;
 
