@@ -63,7 +63,7 @@ export default function Home() {
       <section
         style={{
           position: "relative",
-          minHeight: "80svh",
+          minHeight: "100svh",
           display: "flex",
           alignItems: "center",
           padding: "0 2rem",
@@ -105,7 +105,7 @@ export default function Home() {
           style={{
             position: "relative",
             zIndex: 2,
-            maxWidth: 1500,
+            maxWidth: 1200,
             margin: "0 auto",
             width: "100%",
             paddingTop: "1rem",
@@ -118,7 +118,7 @@ export default function Home() {
               display: "flex",
               alignItems: "center",
               justifyContent: "space-between",
-              maxWidth: 1500,
+              maxWidth: 1200,
               margin: "0 auto",
               width: "100%",
               paddingTop: "1rem",
@@ -128,7 +128,7 @@ export default function Home() {
             }}
             > 
             {/* Content to the left */}
-            < div style={{ flex: 1, paddingRight: "1rem", transform:"scale(1.2)"}}>
+            < div style={{ flex: 1, paddingRight: "1rem", alignItems:"center", justifyContent:"center"}}>
               <p style={{ fontFamily: "'Lato', sans-serif", 
                           fontWeight: 300, 
                           maxWidth: 600,
