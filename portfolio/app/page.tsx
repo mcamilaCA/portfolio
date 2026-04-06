@@ -131,7 +131,7 @@ export default function Home() {
             < div style={{ flex: 1, paddingRight: "1rem", transform:"scale(1.2)"}}>
               <p style={{ fontFamily: "'Lato', sans-serif", 
                           fontWeight: 300, 
-                          maxWidth: 1500,
+                          maxWidth: 600,
                           fontSize: "0.75rem", 
                           letterSpacing: "0.25em", 
                           textTransform: "uppercase", 
