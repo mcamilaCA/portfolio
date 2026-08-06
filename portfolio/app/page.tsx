@@ -73,21 +73,6 @@ export default function Home() {
             "radial-gradient(ellipse 80% 70% at 60% 40%, #2a2317 0%, #0e0d0b 100%)",
         }}
       >
-        {/* Grain noise */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            backgroundImage:
-              "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E\")",
-            backgroundSize: "200px 200px",
-            opacity: 0.5,
-            animation: "grainShift 0.12s steps(1) infinite",
-            pointerEvents: "none",
-          }}
-        />
-
         {/* Vignette */}
         <div
           aria-hidden
@@ -129,16 +114,16 @@ export default function Home() {
             > 
             {/* Content to the left */}
             < div style={{ flex: 1, paddingRight: "1rem", alignItems:"center", justifyContent:"center"}}>
-              <p style={{ fontFamily: "'Lato', sans-serif", 
-                          fontWeight: 300, 
+              <p style={{ fontFamily: "'Lato', sans-serif",
+                          fontWeight: 300,
                           maxWidth: 600,
-                          fontSize: "0.75rem", 
-                          letterSpacing: "0.25em", 
-                          textTransform: "uppercase", 
-                          color: "var(--gold)", 
+                          fontSize: "0.75rem",
+                          letterSpacing: "0.25em",
+                          textTransform: "uppercase",
+                          color: "var(--gold)",
                           marginLeft: "7rem",
                           marginBottom: "1.5rem" }}>
-                Portfolio & Learning Journal · {new Date().getFullYear()}
+                Software Engineering &amp; ML Research · {new Date().getFullYear()}
               </p>
 
               <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
@@ -148,7 +133,7 @@ export default function Home() {
                           color: "var(--warm-parchment)",
                           letterSpacing: "0.01em",
                           marginBottom: "2rem" }}>
-                Welcome to my part of the ton.
+                Software, researched as much as built.
               </h1>
 
               <p style={{ fontFamily: "'Lato', sans-serif",
@@ -160,18 +145,17 @@ export default function Home() {
                           marginBottom: "3rem",
                           letterSpacing: "0.03em",
                           textShadow: "0 2px 12px rgba(0, 0, 0, 0.35)" }}>
-                Learner, developer, content creator &amp; storyteller — for there&apos;s never a dull day
-                if one remains curious.
+                Bachelor&apos;s in Computer Science from Florida International University. Research assistant
+                at Tsinghua University, contributing to published work on contrastive learning methods.
+                Data science &amp; machine learning intern at AbbVie.
 
                 <br />
                 <br />
 
-                Graduated with a Bachelor&apos;s in Computer Science from Florida International University and studied Translational Medicine for half a year in Tsinghua University, 
-                I&apos;m currently exploring the realms of full-stack development, content creation, and the art of storytelling with a  focus on Data Science and Machine learning.
-                <br/>
-                This portfolio is a collection of my projects, field notes, and musings as I navigate the ever-evolving landscape of technology and creativity.
+                This is a working record of what I&apos;ve built and the questions I&apos;ve chased —
+                case studies, research notes, and the reasoning behind each decision.
               </p>
-            
+
             </div>
 
             {/* Content to the rigth */}
@@ -213,11 +197,11 @@ export default function Home() {
                 (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
               }}
             >
-              Peruse My Works
+              View Projects
             </Link>
 
             <Link
-              href="/pages/about"
+              href="/pages/research"
               style={{
                 display: "inline-block",
                 padding: "0.85rem 2.2rem",
@@ -246,7 +230,7 @@ export default function Home() {
                 el.style.transform = "scale(1)";
               }}
             >
-              Of My Person
+              Research
             </Link>
           </div>
         </div>

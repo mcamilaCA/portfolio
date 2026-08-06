@@ -33,7 +33,6 @@ export default function Projects() {
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
-      console.log(projects.length);
       <Header />
       <main style={{ paddingTop: "7rem" }}>
         <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>

@@ -6,41 +6,9 @@ import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
+import Tag from "@/app/components/tag";
+import { shimmer } from "@/app/components/shimmer";
 import type { BlogDetail } from "@/app/types";
-
-// ─────────────────────────────────────────────────────────────────
-// Utility: tag pill
-// ─────────────────────────────────────────────────────────────────
-function Tag({ label }: { label: string }) {
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        padding: "0.3rem 0.85rem",
-        border: "1px solid var(--border)",
-        fontFamily: "'Lato', sans-serif",
-        fontWeight: 300,
-        fontSize: "0.68rem",
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-        color: "var(--ash)",
-      }}
-    >
-      {label}
-    </span>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// Skeleton
-// ─────────────────────────────────────────────────────────────────
-const shimmer: React.CSSProperties = {
-  background:
-    "linear-gradient(90deg, var(--parchment-alt) 0%, rgba(245,241,234,0.5) 50%, var(--parchment-alt) 100%)",
-  backgroundSize: "800px 100%",
-  animation: "shimmer 1.6s infinite linear",
-  borderRadius: 2,
-};
 
 function BlogSkeleton() {
   return (

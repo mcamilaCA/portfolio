@@ -3,6 +3,7 @@ import Link from "next/link";
 const NAVIGATE = [
   { label: "Home", href: "/" },
   { label: "Projects", href: "/pages/projects" },
+  { label: "Research", href: "/pages/research" },
   { label: "Blog", href: "/pages/blog" },
   { label: "About", href: "/pages/about" },
   {label: "Collaborate", href: "/pages/contact"}
