@@ -77,7 +77,7 @@ export default function Home() {
           paddingTop: 68,
           overflow: "hidden",
           background:
-            "radial-gradient(ellipse 80% 70% at 60% 40%, var(--ink-2) 0%, var(--ink) 100%)",
+            "linear-gradient(100deg, rgba(10,8,6,0.94) 0%, rgba(10,8,6,0.8) 32%, rgba(10,8,6,0.42) 58%, rgba(10,8,6,0.18) 78%), url('/assets/background_homepage.png') center/cover no-repeat, var(--ink)",
         }}
       >
         {/* Ambient sparkle overlay */}
@@ -268,20 +268,6 @@ export default function Home() {
                 Research
               </Link>
             </div>
-          </div>
-
-          {/* Content to the right */}
-          <div className="hero-illustration-wrap">
-            <img
-              src="/assets/background_homepage.png"
-              alt="Illustrated candlelit study — a self-portrait workspace"
-              className="hero-illustration"
-            />
-            <div
-              aria-hidden
-              className="hero-vignette"
-              style={{ backgroundImage: "url('/assets/vignette-overlay.png')", backgroundSize: "cover" }}
-            />
           </div>
         </div>
 

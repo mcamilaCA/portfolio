@@ -270,29 +270,10 @@ img {
   margin: 0 auto;
   width: 100%;
   display: grid;
-  grid-template-columns: 1.05fr 1fr;
+  grid-template-columns: minmax(0, 620px);
   gap: 3.5rem;
   align-items: center;
   padding: 2.75rem 3.5rem;
-}
-
-.hero-illustration-wrap {
-  position: relative;
-}
-
-.hero-illustration-wrap img.hero-illustration {
-  width: 100%;
-  height: auto;
-  display: block;
-  border-radius: 2px;
-}
-
-.hero-illustration-wrap .hero-vignette {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  mix-blend-mode: multiply;
-  opacity: 0.9;
 }
 
 .skill-row {
@@ -324,12 +305,6 @@ img {
     grid-template-columns: 1fr;
     gap: 2.75rem;
     padding: 3rem 1.5rem;
-  }
-
-  .hero-illustration-wrap {
-    order: -1;
-    max-width: 380px;
-    margin: 0 auto;
   }
 
   .hero-frame {
