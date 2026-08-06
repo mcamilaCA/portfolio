@@ -18,7 +18,7 @@ export default function MetaItem({ label, value }: { label: string; value: strin
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 400,
           fontSize: "1.05rem",
-          color: "var(--ink)",
+          color: "var(--gold-lt)",
           letterSpacing: "0.02em",
         }}
       >

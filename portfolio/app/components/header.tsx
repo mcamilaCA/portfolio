@@ -27,14 +27,13 @@ export default function Header() {
         left: 0,
         right: 0,
         zIndex: 100,
-        background: scrolled ? "linear-gradient(rgba(245,241,234,0.7), rgba(245,241,234,0.7)), url('/assets/bg_ptfolio.jpg') center/cover no-repeat" : "var(--parchment)",
-        backdropFilter: scrolled ? "blur(18px) saturate(1.4)" : "none",
-        WebkitBackdropFilter: scrolled ? "blur(18px) saturate(1.4)" : "none",
+        background: "rgba(20,16,13,0.9)",
+        backdropFilter: "blur(14px) saturate(1.2)",
+        WebkitBackdropFilter: "blur(14px) saturate(1.2)",
         borderBottom: scrolled
-          ? "1px solid rgba(184,154,94,0.22)"
-          : "1px solid transparent",
-        transition:
-          "background 0.4s ease, border-color 0.4s ease, backdrop-filter 0.4s ease",
+          ? "1px solid rgba(201,168,118,0.3)"
+          : "1px solid rgba(201,168,118,0.14)",
+        transition: "background 0.4s ease, border-color 0.4s ease",
       }}
     >
       <div
@@ -49,27 +48,44 @@ export default function Header() {
         }}
       >
         <Link href="/" style={{ display: "flex", alignItems: "center", justifyContent:"left",gap: "0.6rem", textDecoration: "none" }}>
-          <Image src="/assets/logo.png" alt="Logo" width= {50} height={50} />
+          <Image src="/assets/logo.png" alt="Logo" width= {36} height={36} />
           <span
             style={{
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 500,
-              fontSize: "1.05rem",
-              color: "var(--ink)",
-              letterSpacing: "0.06em",
+              fontSize: "1rem",
+              color: "var(--gold-lt)",
+              letterSpacing: "0.14em",
+              textTransform: "uppercase",
             }}
           >
-            Maria Camila Copo Amador
+            Maria Camila
           </span>
         </Link>
 
         {/* Desktop nav */}
-        <nav style={{ display: "flex", gap: "2.2rem", alignItems: "center"}} className="desktop-nav">
-          {NAV_LINKS.map((link) => (
-            <Link key={link.href} href={link.href} className="nav-link" >
-              {link.label}
-            </Link>
+        <nav style={{ display: "flex", gap: "1.1rem", alignItems: "center"}} className="desktop-nav">
+          {NAV_LINKS.map((link, i) => (
+            <span key={link.href} style={{ display: "flex", alignItems: "center", gap: "1.1rem" }}>
+              <Link href={link.href} className="nav-link-dark">
+                {link.label}
+              </Link>
+              {i < NAV_LINKS.length - 1 && (
+                <img
+                  src="/assets/nav-cross.svg"
+                  alt=""
+                  aria-hidden
+                  style={{ width: 12, height: 12, opacity: 0.55 }}
+                />
+              )}
+            </span>
           ))}
+          <img
+            src="/assets/monogram-seal-64.png"
+            alt=""
+            aria-hidden
+            style={{ width: 26, height: 26, marginLeft: "0.6rem", opacity: 0.9 }}
+          />
         </nav>
 
         {/* Mobile burger */}
@@ -94,7 +110,7 @@ export default function Header() {
                 display: "block",
                 width: 22,
                 height: 1.5,
-                background: "var(--ink)",
+                background: "var(--gold-lt)",
                 transition: "transform 0.3s, opacity 0.3s",
                 transformOrigin: "center",
                 ...(menuOpen && i === 0 ? { transform: "translateY(6.5px) rotate(45deg)" } : {}),
@@ -113,8 +129,8 @@ export default function Header() {
             display: "flex",
             flexDirection: "column",
             padding: "1rem 2rem 1.5rem",
-            borderTop: "1px solid rgba(184,154,94,0.22)",
-            background: "rgba(245,241,234,0.96)",
+            borderTop: "1px solid rgba(201,168,118,0.25)",
+            background: "rgba(20,16,13,0.97)",
             backdropFilter: "blur(18px)",
           }}
         >
@@ -127,8 +143,9 @@ export default function Header() {
                 fontFamily: "'Cormorant Garamond', serif",
                 fontSize: "1.3rem",
                 textDecoration: "none",
+                color: "var(--gold-lt)",
                 padding: "0.6rem 0",
-                borderBottom: "1px solid rgba(184,154,94,0.22)",
+                borderBottom: "1px solid rgba(201,168,118,0.2)",
                 letterSpacing: "0.05em",
               }}
             >

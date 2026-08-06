@@ -5,7 +5,8 @@ export default function SkeletonCard() {
       <div
         style={{
           background: "var(--surface)",
-          borderBottom: "3px solid rgba(184,154,94,0.22)",
+          border: "1px solid var(--border)",
+          borderBottom: "3px solid var(--border)",
           overflow: "hidden",
         }}
       >

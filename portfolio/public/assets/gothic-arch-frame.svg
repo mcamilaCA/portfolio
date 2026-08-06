@@ -1,0 +1,15 @@
+<svg width="400" height="600" viewBox="0 0 400 600" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gothic arch window frame - use as a clip-path or mask for portrait photos -->
+  <defs>
+    <clipPath id="archClip">
+      <path d="M20,600 L20,220 C20,110 100,20 200,20 C300,20 380,110 380,220 L380,600 Z"/>
+    </clipPath>
+  </defs>
+  <path d="M20,600 L20,220 C20,110 100,20 200,20 C300,20 380,110 380,220 L380,600 Z"
+        fill="none" stroke="#C9A876" stroke-width="2"/>
+  <path d="M32,600 L32,222 C32,118 106,32 200,32 C294,32 368,118 368,222 L368,600 Z"
+        fill="none" stroke="#C9A876" stroke-width="0.75"/>
+  <!-- keystone accent -->
+  <circle cx="200" cy="24" r="4" fill="#C9A876"/>
+  <!-- Usage: apply clip-path="url(#archClip)" (id namespaced per-file) to your <image> element -->
+</svg>

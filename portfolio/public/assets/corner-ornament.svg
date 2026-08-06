@@ -1,0 +1,18 @@
+<svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+  <!-- Gothic corner bracket, anchored top-left. Flip/rotate via CSS transform for other corners. -->
+  <g fill="none" stroke="#C9A876" stroke-width="1.25">
+    <path d="M6,86 L6,26 Q6,6 26,6 L86,6"/>
+  </g>
+  <g fill="none" stroke="#C9A876" stroke-width="0.6">
+    <path d="M6,64 Q6,16 16,16 Q64,16 64,6"/>
+  </g>
+  <circle cx="86" cy="6" r="1.8" fill="#C9A876"/>
+  <circle cx="6" cy="86" r="1.8" fill="#C9A876"/>
+  <!-- simple fleur-de-lis finial -->
+  <g transform="translate(16,16) scale(0.85)" fill="#C9A876" stroke="none">
+    <path d="M0,10 C0,4 -2,-2 0,-8 C2,-2 0,4 0,10 Z"/>
+    <path d="M0,2 C-8,2 -10,-5 -4,-6 C-1,-6.5 0,-3 0,2 Z"/>
+    <path d="M0,2 C8,2 10,-5 4,-6 C1,-6.5 0,-3 0,2 Z"/>
+    <path d="M-2.6,10 L2.6,10 L1.6,15 L-1.6,15 Z"/>
+  </g>
+</svg>

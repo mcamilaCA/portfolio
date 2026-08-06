@@ -77,7 +77,7 @@ export default function ProjectPage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "var(--parchment)",
+            background: "var(--ink)",
             gap: "1.5rem",
           }}
         >
@@ -87,7 +87,7 @@ export default function ProjectPage() {
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
               fontSize: "3rem",
-              color: "var(--ink)",
+              color: "var(--gold-lt)",
             }}
           >
             Project not found
@@ -104,7 +104,7 @@ export default function ProjectPage() {
   const p = project!;
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
 
       {/* ── Hero image ─────────────────────────────────────────── */}
@@ -136,7 +136,7 @@ export default function ProjectPage() {
             position: "absolute",
             inset: 0,
             background:
-              "linear-gradient(to bottom, rgba(14,13,11,0.2) 0%, var(--gold-translucent) 170%)",
+              "linear-gradient(to bottom, rgba(20,16,13,0.15) 0%, var(--ink) 100%)",
           }}
         />
 
@@ -152,7 +152,7 @@ export default function ProjectPage() {
             fontSize: "0.72rem",
             letterSpacing: "0.1em",
             textTransform: "uppercase",
-            color: "var(--parchment)",
+            color: "var(--gold-lt)",
             textDecoration: "none",
             display: "flex",
             alignItems: "center",
@@ -196,7 +196,7 @@ export default function ProjectPage() {
             fontWeight: 400,
             fontSize: "clamp(2.5rem, 6vw, 5rem)",
             lineHeight: 1.05,
-            color: "var(--ink)",
+            color: "var(--gold-lt)",
             letterSpacing: "-0.01em",
             marginBottom: "0.75rem",
           }}
@@ -324,7 +324,7 @@ export default function ProjectPage() {
                   display: "inline-block",
                   padding: "0.85rem 2.2rem",
                   border: "1px solid var(--border)",
-                  color: "var(--ink)",
+                  color: "var(--gold-lt)",
                   fontFamily: "'Lato', sans-serif",
                   fontWeight: 300,
                   fontSize: "0.75rem",
@@ -341,7 +341,7 @@ export default function ProjectPage() {
                 onMouseLeave={(e) => {
                   const el = e.currentTarget as HTMLAnchorElement;
                   el.style.borderColor = "var(--border)";
-                  el.style.color = "var(--ink)";
+                  el.style.color = "var(--gold-lt)";
                 }}
               >
                 View Repo ↗

@@ -1,0 +1,18 @@
+<svg width="500" height="40" viewBox="0 0 500 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Center ornament divider: diamond motif flanked by rules, under headline -->
+  <g fill="none" stroke="#C9A876" stroke-width="1">
+    <line x1="0" y1="20" x2="205" y2="20"/>
+    <line x1="295" y1="20" x2="500" y2="20"/>
+  </g>
+  <g fill="#C9A876" stroke="none">
+    <path d="M215,20 L222,13 L229,20 L222,27 Z"/>
+    <path d="M229,20 L236,17 L243,20 L236,23 Z"/>
+    <path d="M257,20 L264,17 L271,20 L264,23 Z"/>
+    <path d="M271,20 L278,13 L285,20 L278,27 Z"/>
+    <circle cx="250" cy="20" r="3.2"/>
+  </g>
+  <g fill="none" stroke="#C9A876" stroke-width="0.75">
+    <path d="M0,20 L8,15 M0,20 L8,25"/>
+    <path d="M500,20 L492,15 M500,20 L492,25"/>
+  </g>
+</svg>

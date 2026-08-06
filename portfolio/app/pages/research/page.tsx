@@ -18,7 +18,7 @@ const KIND_ORDER: { kind: ResearchKind; label: string; title: string }[] = [
 
 function EntrySkeleton() {
   return (
-    <div style={{ background: "var(--surface)", borderBottom: "3px solid rgba(184,154,94,0.22)", padding: "2.2rem", marginBottom: "2rem" }}>
+    <div style={{ background: "var(--surface)", border: "1px solid var(--border)", borderBottom: "3px solid var(--border)", padding: "2.2rem", marginBottom: "2rem" }}>
       <div style={{ ...shimmer, height: "0.6rem", width: "25%", marginBottom: "0.8rem" }} />
       <div style={{ ...shimmer, height: "1.4rem", width: "55%", marginBottom: "1.5rem" }} />
       <div style={{ ...shimmer, height: "0.85rem", width: "100%", marginBottom: "0.6rem" }} />
@@ -47,9 +47,38 @@ export default function Research() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
-      <main style={{ paddingTop: "7rem" }}>
+      <div className="page-hero">
+        <div aria-hidden className="page-hero-sparkle" />
+        <p
+          style={{
+            fontFamily: "'Lato', sans-serif",
+            fontWeight: 300,
+            fontSize: "0.68rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: "var(--gold)",
+            marginBottom: "0.6rem",
+          }}
+        >
+          Field Work
+        </p>
+        <h1
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 400,
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            color: "var(--gold-lt)",
+            letterSpacing: "-0.01em",
+            marginBottom: "1.1rem",
+          }}
+        >
+          Research
+        </h1>
+        <img src="/assets/section-rule.svg" alt="" aria-hidden style={{ width: 140, opacity: 0.8, margin: "0 auto" }} />
+      </div>
+      <main>
         {KIND_ORDER.map(({ kind, label, title }, sectionIndex) => {
           const groupEntries = entries.filter((e) => e.kind === kind);
           if (!loading && groupEntries.length === 0) return null;

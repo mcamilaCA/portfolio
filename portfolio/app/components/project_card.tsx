@@ -24,6 +24,7 @@ export default function ProjectCard({ project, index }: Props) {
         height: "100%",
         flexDirection: "column",
         background: "var(--surface)",
+        border: "1px solid var(--border)",
         borderBottom: "3px solid var(--gold)",
       }}
     >
@@ -101,7 +102,7 @@ export default function ProjectCard({ project, index }: Props) {
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 500,
             fontSize: "1.05rem",
-            color: "var(--ink)",
+            color: "var(--gold-lt)",
             letterSpacing: "0.01em",
             lineHeight: 1.25,
           }}
@@ -113,7 +114,7 @@ export default function ProjectCard({ project, index }: Props) {
           style={{
             width: "100%",
             height: 1,
-            background: "rgba(184,154,94,0.22)",
+            background: "var(--border)",
             margin: "1rem 0",
           }}
         />

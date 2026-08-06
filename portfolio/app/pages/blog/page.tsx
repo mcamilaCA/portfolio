@@ -26,11 +26,14 @@ export default function Blog() {
   }, []);
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
-      <main style={{ paddingTop: "7rem" }}>
-        <section style={{ padding: "4rem 2rem 7rem", background: "var(--surface)" }}>
+      <main>
+        <div className="page-hero">
+          <div aria-hidden className="page-hero-sparkle" />
           <SectionHeader label="Field Notes" title="All Blog Entries" />
+        </div>
+        <section style={{ padding: "4rem 2rem 7rem", background: "var(--ink)" }}>
           <div
             style={{
               maxWidth: 1200,
