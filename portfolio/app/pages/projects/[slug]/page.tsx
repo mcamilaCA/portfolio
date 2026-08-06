@@ -6,74 +6,11 @@ import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
+import Tag from "@/app/components/tag";
+import MetaItem from "@/app/components/metaItem";
+import Section from "@/app/components/section";
+import { shimmer } from "@/app/components/shimmer";
 import type { ProjectDetail } from "@/app/types";
-
-// ─────────────────────────────────────────────────────────────────
-// Utility: simple tag pill
-// ─────────────────────────────────────────────────────────────────
-function Tag({ label }: { label: string }) {
-  return (
-    <span
-      style={{
-        display: "inline-block",
-        padding: "0.3rem 0.85rem",
-        border: "3px solid var(--border)",
-        fontFamily: "'Lato', sans-serif",
-        fontWeight: 300,
-        fontSize: "1rem",
-        letterSpacing: "0.12em",
-        textTransform: "uppercase",
-        color: "var(--ash)",
-      }}
-    >
-      {label}
-    </span>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// Utility: meta row item (Role, Year, etc.)
-// ─────────────────────────────────────────────────────────────────
-function MetaItem({ label, value }: { label: string; value: string }) {
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.3rem" }}>
-      <p
-        style={{
-          fontFamily: "'Lato', sans-serif",
-          fontWeight: 300,
-          fontSize: "0.63rem",
-          letterSpacing: "0.2em",
-          textTransform: "uppercase",
-          color: "var(--gold)",
-        }}
-      >
-        {label}
-      </p>
-      <p
-        style={{
-          fontFamily: "'Cormorant Garamond', serif",
-          fontWeight: 400,
-          fontSize: "1.05rem",
-          color: "var(--ink)",
-          letterSpacing: "0.02em",
-        }}
-      >
-        {value}
-      </p>
-    </div>
-  );
-}
-
-// ─────────────────────────────────────────────────────────────────
-// Skeleton shimmer helper
-// ─────────────────────────────────────────────────────────────────
-const shimmer: React.CSSProperties = {
-  background:
-    "linear-gradient(90deg, var(--parchment-alt) 0%, rgba(245,241,234,0.5) 50%, var(--parchment-alt) 100%)",
-  backgroundSize: "800px 100%",
-  animation: "shimmer 1.6s infinite linear",
-  borderRadius: 2,
-};
 
 function ProjectSkeleton() {
   return (
@@ -319,26 +256,22 @@ export default function ProjectPage() {
           </div>
         )}
 
-        {/* ── Full description / body ────────────────────────────
-            Renders as plain paragraphs. If you want Markdown,
-            swap this for a library like react-markdown.         */}
-        {p.outcomes && (
-          <div
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "1rem",
-              color: "var(--ink)",
-              lineHeight: 1.85,
-              marginBottom: "3rem",
-            }}
-          >
-            {p.outcomes.split("\n\n").map((para, i) => (
-              <p key={i} style={{ marginBottom: "1.4rem" }}>
-                {para}
-              </p>
-            ))}
-          </div>
+        {/* ── Case study sections ─────────────────────────────────
+            Structured Problem/Solution/Architecture/Decisions/
+            Challenges/Lessons fields. Falls back to the legacy
+            "outcomes" blob for rows that haven't been migrated. */}
+        {p.problem && <Section label="Problem" text={p.problem} />}
+        {p.solution && <Section label="Solution" text={p.solution} />}
+        {p.architecture && <Section label="Architecture" text={p.architecture} />}
+        {p.technical_decisions && (
+          <Section label="Technical Decisions" text={p.technical_decisions} />
+        )}
+        {p.challenges && <Section label="Challenges" text={p.challenges} />}
+        {p.lessons_learned && (
+          <Section label="Lessons Learned" text={p.lessons_learned} />
+        )}
+        {!p.problem && !p.solution && !p.architecture && p.outcomes && (
+          <Section label="Outcomes" text={p.outcomes} />
         )}
 
         {/* ── CTA links ─────────────────────────────────────────── */}

@@ -1,6 +1,5 @@
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
-import Greeting from "@/app/components/greeting";
 import Socials from "@/app/components/socials";
 
 export default function About() {
@@ -8,9 +7,6 @@ export default function About() {
     <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
       <Header />
       <main style={{ paddingTop: "8rem", maxWidth: 1200, margin: "0 auto", padding: "8rem 2rem 6rem" }}>
-        
-        <Greeting/>
-          
       <div
         style={{
           display: "flex", 
