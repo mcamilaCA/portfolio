@@ -34,6 +34,7 @@ export default function ResearchEntryCard({ entry, index }: Props) {
         transform: visible ? "translateY(0)" : "translateY(28px)",
         transition: `opacity 0.65s ease ${index * 0.1}s, transform 0.65s ease ${index * 0.1}s`,
         background: "var(--surface)",
+        border: "1px solid var(--border)",
         borderBottom: "3px solid var(--gold)",
         padding: "2.2rem",
         marginBottom: "2rem",
@@ -58,7 +59,7 @@ export default function ResearchEntryCard({ entry, index }: Props) {
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 500,
           fontSize: "1.4rem",
-          color: "var(--ink)",
+          color: "var(--gold-lt)",
           letterSpacing: "0.01em",
           lineHeight: 1.3,
           marginBottom: "0.4rem",
@@ -88,7 +89,7 @@ export default function ResearchEntryCard({ entry, index }: Props) {
             style={{
               width: "100%",
               height: 1,
-              background: "rgba(184,154,94,0.22)",
+              background: "var(--border)",
               margin: "0 0 1.5rem",
             }}
           />

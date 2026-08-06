@@ -1,0 +1,22 @@
+<svg width="1000" height="700" viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+  <!-- Full-page ornate double-rule border with corner flourishes. Center is transparent -
+       stretch to any size; stroke-width scales via vector-effect. -->
+  <defs>
+    <g id="corner">
+      <path d="M0,34 L0,10 Q0,0 10,0 L34,0" fill="none" stroke="#C9A876" stroke-width="1.5"/>
+      <path d="M0,50 Q0,14 14,14 Q50,14 50,0" fill="none" stroke="#C9A876" stroke-width="0.75"/>
+      <circle cx="17" cy="17" r="2.6" fill="#C9A876"/>
+    </g>
+  </defs>
+  <rect x="14" y="14" width="972" height="672" fill="none" stroke="#C9A876" stroke-width="1"/>
+  <rect x="22" y="22" width="956" height="656" fill="none" stroke="#C9A876" stroke-width="0.5"/>
+  <use href="#corner" x="0" y="0"/>
+  <use href="#corner" x="1000" y="0" transform="scale(-1,1)"/>
+  <use href="#corner" x="0" y="700" transform="scale(1,-1)"/>
+  <use href="#corner" x="1000" y="700" transform="scale(-1,-1)"/>
+  <!-- top & bottom midpoint accents -->
+  <g fill="#C9A876" stroke="none">
+    <path d="M500,14 L507,4 L514,14 L507,24 Z"/>
+    <path d="M500,686 L507,676 L514,686 L507,696 Z"/>
+  </g>
+</svg>

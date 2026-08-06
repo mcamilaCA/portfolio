@@ -1,0 +1,14 @@
+<svg width="160" height="160" viewBox="0 0 160 160" xmlns="http://www.w3.org/2000/svg">
+  <!-- Wax-seal style monogram badge. Swap "MC" for any initials. -->
+  <circle cx="80" cy="80" r="74" fill="none" stroke="#C9A876" stroke-width="1.5"/>
+  <circle cx="80" cy="80" r="64" fill="none" stroke="#C9A876" stroke-width="0.6"/>
+  <g fill="none" stroke="#C9A876" stroke-width="0.5">
+    <circle cx="80" cy="80" r="74" stroke-dasharray="1.2 5.5" stroke-width="1.5" opacity="0.55"/>
+  </g>
+  <text x="80" y="98" text-anchor="middle" font-family="Baskerville, 'GFS Baskerville', Georgia, serif"
+        font-size="52" fill="#C9A876" letter-spacing="2">MC</text>
+  <g fill="#C9A876" stroke="none">
+    <path d="M80,18 C77,22 78,27 80,29 C82,27 83,22 80,18 Z"/>
+    <path d="M80,142 C77,138 78,133 80,131 C82,133 83,138 80,142 Z"/>
+  </g>
+</svg>

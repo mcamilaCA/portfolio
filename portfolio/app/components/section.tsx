@@ -19,7 +19,7 @@ export default function Section({ label, text }: { label: string; text: string }
           fontFamily: "'Lato', sans-serif",
           fontWeight: 300,
           fontSize: "1rem",
-          color: "var(--ink)",
+          color: "var(--body-text)",
           lineHeight: 1.85,
         }}
       >

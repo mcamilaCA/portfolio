@@ -41,7 +41,7 @@ function BodyContent({ text }: { text: string }) {
             fontFamily: i === 0 ? "'Cormorant Garamond', serif" : "'Lato', sans-serif",
             fontWeight: i === 0 ? 400 : 300,
             fontSize: i === 0 ? "1.18rem" : "1rem",
-            color: "var(--ink)",
+            color: i === 0 ? "var(--gold-lt)" : "var(--body-text)",
             lineHeight: i === 0 ? 1.75 : 1.9,
             marginBottom: "1.6rem",
             letterSpacing: i === 0 ? "0.01em" : "0",
@@ -93,7 +93,7 @@ export default function BlogEntryPage() {
             flexDirection: "column",
             alignItems: "center",
             justifyContent: "center",
-            background: "var(--parchment)",
+            background: "var(--ink)",
             gap: "1.5rem",
           }}
         >
@@ -103,7 +103,7 @@ export default function BlogEntryPage() {
               fontFamily: "'Cormorant Garamond', serif",
               fontWeight: 300,
               fontSize: "3rem",
-              color: "var(--ink)",
+              color: "var(--gold-lt)",
             }}
           >
             Entry not found
@@ -129,7 +129,7 @@ export default function BlogEntryPage() {
   const hasGallery = e.gallery && e.gallery.length > 0;
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
 
       {/* ── Hero media ─────────────────────────────────────────── */}
@@ -159,7 +159,7 @@ export default function BlogEntryPage() {
               position: "absolute",
               inset: 0,
               background:
-                "linear-gradient(to bottom, rgba(14,13,11,0.2) 0%, rgba(245,241,234,1) 100%)",
+                "linear-gradient(to bottom, rgba(20,16,13,0.15) 0%, var(--ink) 100%)",
             }}
           />
           <Link
@@ -173,7 +173,7 @@ export default function BlogEntryPage() {
               fontSize: "0.72rem",
               letterSpacing: "0.1em",
               textTransform: "uppercase",
-              color: "var(--parchment)",
+              color: "var(--gold-lt)",
               textDecoration: "none",
               zIndex: 2,
             }}
@@ -275,7 +275,7 @@ export default function BlogEntryPage() {
             fontWeight: 400,
             fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)",
             lineHeight: 1.08,
-            color: "var(--ink)",
+            color: "var(--gold-lt)",
             letterSpacing: "-0.01em",
             marginBottom: "1.5rem",
           }}
@@ -316,7 +316,7 @@ export default function BlogEntryPage() {
               top: "50%",
               left: "50%",
               transform: "translate(-50%,-50%)",
-              background: "var(--parchment)",
+              background: "var(--ink)",
               padding: "0 0.75rem",
               color: "var(--gold)",
               fontSize: "0.8rem",

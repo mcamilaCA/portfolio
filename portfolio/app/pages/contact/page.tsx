@@ -24,7 +24,7 @@ export default function Contact() {
     console.log("Form submitted"); // Debugging log
     try {
       const { error } = await supabase.from("Mails").insert([formData]);
-  
+
       if (error) {
         console.error("Error saving message to database:", error.message);
       } else {
@@ -39,45 +39,64 @@ export default function Contact() {
   };
 
   return (
-    <div style={{ minHeight: "100vh", background: "var(--parchment)" }}>
+    <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
+
+      <div className="page-hero">
+        <div aria-hidden className="page-hero-sparkle" />
+        <p
+          style={{
+            fontFamily: "'Lato', sans-serif",
+            fontWeight: 300,
+            fontSize: "0.68rem",
+            letterSpacing: "0.25em",
+            textTransform: "uppercase",
+            color: "var(--gold)",
+            marginBottom: "0.6rem",
+          }}
+        >
+          Collaborate
+        </p>
+        <h1
+          style={{
+            fontFamily: "'Cormorant Garamond', serif",
+            fontWeight: 400,
+            fontSize: "clamp(2rem, 4vw, 3rem)",
+            color: "var(--gold-lt)",
+            letterSpacing: "-0.01em",
+            marginBottom: "1.1rem",
+          }}
+        >
+          Do Not Fret, Speak Your Mind
+        </h1>
+        <img src="/assets/section-rule.svg" alt="" aria-hidden style={{ width: 140, opacity: 0.8, margin: "0 auto" }} />
+      </div>
+
       <main
         style={{
-          paddingTop: "8rem",
           maxWidth: 1200,
           margin: "0 auto",
-          padding: "4rem 2rem",
+          padding: "4.5rem 2rem 7rem",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
           textAlign: "center",
         }}
       >
-        <h1
-          style={{
-            fontFamily: "'Cormorant Garamond', serif",
-            fontWeight: 300,
-            fontSize: "clamp(2.5rem, 5vw, 2rem)",
-            lineHeight: 1.2,
-            color: "var(--ink)",
-            marginBottom: "2rem",
-          }}
-        >
-          Do not fret and speak your mind!
-        </h1>
         <p
           style={{
             fontFamily: "'Lato', sans-serif",
-            fontSize: "1.2rem",
-            lineHeight: 1.6,
-            color: "var(--ink)",
-            maxWidth: "800px",
+            fontWeight: 300,
+            fontSize: "1.05rem",
+            lineHeight: 1.8,
+            color: "var(--body-text)",
+            maxWidth: "620px",
             marginBottom: "3rem",
           }}
         >
-        If you have any ideas or requests feel free to reach out. <br/>
-        I am always open for collaborations, discussions and new opportunities        
-      </p>
+          If you have any ideas or requests feel free to reach out. <br />
+          I am always open for collaborations, discussions and new opportunities.
+        </p>
         <form
           onSubmit={handleSubmit}
           style={{
@@ -86,10 +105,11 @@ export default function Contact() {
             gap: "1.5rem",
             width: "100%",
             maxWidth: "600px",
-            background: "var(--surface)",
-            padding: "2rem",
-            borderRadius: "10px",
-            boxShadow: "0 4px 10px rgba(0, 0, 0, 0.1)",
+            background: "var(--ink-2)",
+            border: "1px solid var(--border)",
+            padding: "2.5rem",
+            borderRadius: "2px",
+            boxShadow: "0 20px 44px rgba(0,0,0,0.35)",
           }}
         >
           <input
@@ -99,16 +119,7 @@ export default function Contact() {
             value={formData.name}
             onChange={handleChange}
             required
-            style={{
-              padding: "1rem",
-              fontSize: "1rem",
-              border: "1px solid var(--ink)",
-              borderRadius: "5px",
-              outline: "none",
-              transition: "border-color 0.3s",
-            }}
-            onFocus={(e) => (e.target.style.borderColor = "var(--gold)")}
-            onBlur={(e) => (e.target.style.borderColor = "var(--ink)")}
+            className="gothic-input"
           />
           <input
             type="email"
@@ -117,16 +128,7 @@ export default function Contact() {
             value={formData.email}
             onChange={handleChange}
             required
-            style={{
-              padding: "1rem",
-              fontSize: "1rem",
-              border: "1px solid var(--ink)",
-              borderRadius: "5px",
-              outline: "none",
-              transition: "border-color 0.3s",
-            }}
-            onFocus={(e) => (e.target.style.borderColor = "var(--gold)")}
-            onBlur={(e) => (e.target.style.borderColor = "var(--ink)")}
+            className="gothic-input"
           />
           <input
             type="text"
@@ -135,16 +137,7 @@ export default function Contact() {
             value={formData.subject}
             onChange={handleChange}
             required
-            style={{
-              padding: "1rem",
-              fontSize: "1rem",
-              border: "1px solid var(--ink)",
-              borderRadius: "5px",
-              outline: "none",
-              transition: "border-color 0.3s",
-            }}
-            onFocus={(e) => (e.target.style.borderColor = "var(--gold)")}
-            onBlur={(e) => (e.target.style.borderColor = "var(--ink)")}
+            className="gothic-input"
           />
           <textarea
             name="message"
@@ -152,37 +145,34 @@ export default function Contact() {
             value={formData.message}
             onChange={handleChange}
             required
-            style={{
-              padding: "1rem",
-              fontSize: "1rem",
-              border: "1px solid var(--ink)",
-              borderRadius: "5px",
-              minHeight: "150px",
-              outline: "none",
-              transition: "border-color 0.3s",
-            }}
-            onFocus={(e) => (e.target.style.borderColor = "var(--gold)")}
-            onBlur={(e) => (e.target.style.borderColor = "var(--ink)")}
+            className="gothic-input"
+            style={{ minHeight: "150px", resize: "vertical" }}
           />
           <button
             type="submit"
             style={{
               padding: "1rem",
-              fontSize: "1rem",
-              background: "var(--ink)",
-              color: "var(--parchment)",
+              fontFamily: "'Lato', sans-serif",
+              fontWeight: 400,
+              fontSize: "0.8rem",
+              letterSpacing: "0.12em",
+              textTransform: "uppercase",
+              background: "linear-gradient(135deg,var(--gold),var(--gold-dp))",
+              color: "var(--ink)",
               border: "none",
-              borderRadius: "5px",
+              borderRadius: "2px",
               cursor: "pointer",
-              transition: "background-color 0.3s",
+              transition: "background 0.25s, transform 0.2s",
             }}
             onMouseEnter={(e) => {
-              const target = e.target as HTMLElement;
-              target.style.backgroundColor = "var(--gold)";
+              const target = e.currentTarget as HTMLButtonElement;
+              target.style.background = "var(--gold-lt)";
+              target.style.transform = "scale(1.02)";
             }}
             onMouseLeave={(e) => {
-              const target = e.target as HTMLElement;
-              target.style.backgroundColor = "var(--ink)";
+              const target = e.currentTarget as HTMLButtonElement;
+              target.style.background = "linear-gradient(135deg,var(--gold),var(--gold-dp))";
+              target.style.transform = "scale(1)";
             }}
           >
             Send Message
@@ -192,13 +182,15 @@ export default function Contact() {
           <p
             style={{
               marginTop: "2rem",
-              fontSize: "1.2rem",
-              color: "var(--ink)",
+              fontSize: "1.1rem",
+              color: "var(--gold-lt)",
               fontFamily: "'Cormorant Garamond', serif",
-              background: "var(--surface)",
-              padding: "1rem",
-              borderRadius: "5px",
-              boxShadow: "0 2px 5px rgba(0, 0, 0, 0.1)",
+              fontStyle: "italic",
+              background: "var(--ink-2)",
+              border: "1px solid var(--border)",
+              padding: "1.2rem 1.5rem",
+              borderRadius: "2px",
+              maxWidth: "600px",
             }}
           >
             {successMessage}

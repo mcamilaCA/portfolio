@@ -25,7 +25,7 @@ export default function Footer() {
     <footer
       style={{
         background: "var(--ink)",
-        color: "var(--parchment)",
+        color: "var(--gold-lt)",
         padding: "5rem 2rem 2rem",
       }}
     >
@@ -39,19 +39,19 @@ export default function Footer() {
           gridTemplateColumns: "1fr 2fr",
           gap: "4rem",
           paddingBottom: "3rem",
-          borderBottom: "1px solid rgba(184,154,94,0.18)",
+          borderBottom: "1px solid var(--border)",
         }}
       >
         {/* Brand */}
         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
           <div style={{ display: "flex", alignItems: "center", gap: "0.6rem" }}>
-            <span style={{ color: "var(--gold)", fontSize: "1.5rem", lineHeight: 1 }}>✦</span>
+            <img src="/assets/monogram-seal-64.png" alt="" aria-hidden style={{ width: 30, height: 30 }} />
             <span
               style={{
                 fontFamily: "'Cormorant Garamond', serif",
                 fontWeight: 400,
                 fontSize: "1.4rem",
-                color: "var(--parchment)",
+                color: "var(--gold-lt)",
                 letterSpacing: "0.05em",
               }}
             >
@@ -71,6 +71,12 @@ export default function Footer() {
           >
             Building at the intersection of curiosity, romanesque style &amp; functionality.
           </p>
+          <img
+            src="/assets/rose-line.svg"
+            alt=""
+            aria-hidden
+            style={{ width: 30, marginTop: "1rem", opacity: 0.75 }}
+          />
         </div>
 
         {/* Link columns */}
@@ -78,26 +84,12 @@ export default function Footer() {
           className="footer-columns"
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(3, 1fr)",
+            gridTemplateColumns: "repeat(2, 1fr)",
             gap: "2rem",
           }}
         >
           <FooterColumn title="Navigate" links={NAVIGATE} />
           <FooterColumn title="Connect" links={CONNECT} />
-          
-          <div className="sticker-container">
-            <img
-              src="/assets/stickie-me.png"
-              alt="footer sticker"
-              className="sticker-image"
-            />
-
-            <div className="sticker-bubble">
-              <div className="bubble-content">Hi! 🦋</div>
-              <div className="bubble-tail"></div>
-            </div>
-          </div>
-            
         </div>
       </div>
 
@@ -168,5 +160,5 @@ const copyStyle: React.CSSProperties = {
   fontWeight: 300,
   fontSize: "0.72rem",
   letterSpacing: "0.06em",
-  color: "rgba(107,101,96,0.7)",
+  color: "var(--ash)",
 };

@@ -13,23 +13,30 @@ html {
 
 /* ── Color Scheme ─────────────────────────────────────────────── */
 :root {
-  --ink: #0e0d0b;
-  --parchment: #f5f1ea;
-  --warm-parchment: rgba(245, 241, 234, 0.92);
-  --parchment-alt: #eee9de;
-  --gold: #b89a5e;
-  --gold-translucent: #b89a5e91;
-  --gold-light: #d4b97a;
-  --ash: #6b6560;
-  --border: rgba(184, 154, 94, 0.22);
-  --surface: #f5f1ea;
-  --surface-alt: #eee9de;
+  --ink: #14100d;
+  --ink-2: #221b15;
+  --parchment: var(--ink);
+  --warm-parchment: rgba(232, 220, 192, 0.85);
+  --parchment-alt: var(--ink-2);
+  --gold: #c9a876;
+  --gold-translucent: #c9a87691;
+  --gold-light: #e8dcc0;
+  --gold-lt: #e8dcc0;
+  --gold-dp: #8b6f3f;
+  --rose: #7a4452;
+  --rose-lt: #a8677a;
+  --ash: rgba(232, 220, 192, 0.55);
+  --border: rgba(201, 168, 118, 0.22);
+  --surface: var(--ink-2);
+  --surface-alt: #2a2016;
+  --heading: var(--gold-lt);
+  --body-text: rgba(232, 220, 192, 0.72);
 }
 
 /* ── Foundational Style ──────────────────────────────────────────────────────── */
 body {
-  background: var(--parchment);
-  color: var(--ink);
+  background: var(--ink);
+  color: var(--gold-lt);
   font-family: "Lato", sans-serif;
   font-weight: 300;
   -webkit-font-smoothing: antialiased;
@@ -42,38 +49,6 @@ img {
   display: block;
 }
 
-/* ── links ──────────────────────────────────────────── */
-.nav-link {
-  position: relative;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  color: var(--ink) !important;
-  text-decoration: none;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  transition: color 0.25s;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--gold) !important;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
 /* ── Letter Format ──────────────────────────────────────────────── */
 .letter-card {
   transition: transform 0.4s cubic-bezier(0.22, 0.68, 0, 1.2),
@@ -82,7 +57,7 @@ img {
 
 .letter-card:hover {
   transform: translateY(-6px) !important;
-  box-shadow: 0 20px 48px rgba(14, 13, 11, 0.15) !important;
+  box-shadow: 0 20px 44px rgba(0, 0, 0, 0.5), 0 0 0 1px rgba(201, 168, 118, 0.18) !important;
 }
 
 .letter-card:hover .card-img {
@@ -199,261 +174,6 @@ img {
   }
 }
 
-/* ── Footer bubble and stickie style ────────────────────────────────────────────────── */
-
-.sticker-container {
-  position: relative;
-  width: fit-content;
-}
-
-.sticker-image {
-  width: 90%;
-  height: 90%;
-}
-
-/* Bubble  */
-.sticker-bubble {
-  position: absolute;
-  top: -40px;
-  left: 50%;
-  transform: translateX(-50%) translateY(10px);
-  opacity: 0;
-  transition: all 0.3s ease;
-  pointer-events: none;
-}
-
-/* When hover */
-.sticker-container:hover .sticker-bubble {
-  opacity: 1;
-  transform: translateX(-50%) translateY(0);
-}
-
-/* Bubble style */
-.bubble-content {
-  font-size: 0.85rem;
-  padding: 6px 10px;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
-  white-space: nowrap;
-  font-family: 'Cormorant Garamond', serif;
-  letter-spacing: 0.04em;
-  background: var(--parchment);
-  color: var(--ink);
-  border: 1px solid rgba(184,154,94,0.25);
-  
-}
-
-/* Bubble Tail */
-.bubble-tail {
-  width: 8px;
-  height: 8px;
-  background: white;
-  border-left: 1px solid rgba(0,0,0,0.08);
-  border-bottom: 1px solid rgba(0,0,0,0.08);
-  transform: rotate(45deg);
-  margin: -4px auto 0;
-}
-
-/* Addition for Project and Blog Pages */
-/* ── Reset ─────────────────────────────────────────────────────── */
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
-}
-
-html {
-  scroll-behavior: smooth;
-}
-
-/* ── Design tokens ─────────────────────────────────────────────── */
-:root {
-  --ink: #0e0d0b;
-  --parchment: #f5f1ea;
-  --parchment-alt: #eee9de;
-  --gold: #b89a5e;
-  --gold-light: #d4b97a;
-  --ash: #6b6560;
-  --border: rgba(184, 154, 94, 0.22);
-  --surface: #f5f1ea;
-  --surface-alt: #eee9de;
-}
-
-/* ── Base ──────────────────────────────────────────────────────── */
-body {
-  background: var(--parchment);
-  color: var(--ink);
-  font-family: "Lato", sans-serif;
-  font-weight: 300;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-img {
-  max-width: 100%;
-  display: block;
-}
-
-/* ── Navigation links ──────────────────────────────────────────── */
-.nav-link {
-  position: relative;
-  letter-spacing: 0.08em;
-  font-size: 0.72rem;
-  text-transform: uppercase;
-  color: var(--ink) !important;
-  text-decoration: none;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  transition: color 0.25s;
-}
-
-.nav-link::after {
-  content: "";
-  position: absolute;
-  bottom: -3px;
-  left: 0;
-  width: 0;
-  height: 1px;
-  background: var(--gold);
-  transition: width 0.3s ease;
-}
-
-.nav-link:hover {
-  color: var(--gold) !important;
-}
-
-.nav-link:hover::after {
-  width: 100%;
-}
-
-/* ── Letter cards ──────────────────────────────────────────────── */
-.letter-card {
-  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0, 1.2),
-    box-shadow 0.4s ease !important;
-}
-
-.letter-card:hover {
-  transform: translateY(-6px) !important;
-  box-shadow: 0 20px 48px rgba(14, 13, 11, 0.15) !important;
-}
-
-.letter-card:hover .card-img {
-  transform: scale(1.04);
-}
-
-/* ── Card CTA link ─────────────────────────────────────────────── */
-.card-cta {
-  color: var(--gold) !important;
-  text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  transition: letter-spacing 0.3s ease, opacity 0.3s;
-  align-self: flex-start;
-}
-
-.card-cta:hover {
-  letter-spacing: 0.18em;
-  opacity: 0.8;
-}
-
-/* ── View all link ─────────────────────────────────────────────── */
-.view-all {
-  color: var(--gold);
-  text-decoration: none;
-  font-size: 0.78rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  font-family: "Lato", sans-serif;
-  font-weight: 400;
-  transition: letter-spacing 0.3s, opacity 0.3s;
-}
-
-.view-all:hover {
-  letter-spacing: 0.2em;
-  opacity: 0.75;
-}
-
-/* ── Footer links ──────────────────────────────────────────────── */
-.footer-link {
-  display: block;
-  font-family: "Lato", sans-serif;
-  font-size: 0.82rem;
-  color: var(--ash) !important;
-  text-decoration: none;
-  letter-spacing: 0.04em;
-  margin-bottom: 0.55rem;
-  transition: color 0.25s, padding-left 0.25s;
-  font-weight: 300;
-}
-
-.footer-link:hover {
-  color: var(--gold) !important;
-  padding-left: 4px;
-}
-
-/* ── Animations ────────────────────────────────────────────────── */
-@keyframes shimmer {
-  0% {
-    background-position: -400px 0;
-  }
-  100% {
-    background-position: 400px 0;
-  }
-}
-
-@keyframes heroReveal {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes scrollBounce {
-  0%,
-  100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(7px);
-  }
-}
-
-/* ── Responsive ────────────────────────────────────────────────── */
-@media (max-width: 768px) {
-  .desktop-nav {
-    display: none !important;
-  }
-
-  .hamburger {
-    display: flex !important;
-  }
-
-  .footer-top {
-    grid-template-columns: 1fr !important;
-    gap: 2.5rem !important;
-  }
-
-  .footer-columns {
-    grid-template-columns: repeat(2, 1fr) !important;
-  }
-}
-
-@media (max-width: 480px) {
-  .footer-columns {
-    grid-template-columns: 1fr !important;
-  }
-}
-
 /* ── Gallery images ────────────────────────────────────────────── */
 .gallery-img:hover {
   transform: scale(1.05);
@@ -462,4 +182,162 @@ img {
 /* ── Back link on hero ─────────────────────────────────────────── */
 .back-link:hover {
   opacity: 0.7;
+}
+
+/* ── Gothic nav (dark header) ──────────────────────────────────── */
+.nav-link-dark {
+  position: relative;
+  letter-spacing: 0.14em;
+  font-size: 0.68rem;
+  text-transform: uppercase;
+  color: var(--gold-lt) !important;
+  opacity: 0.82;
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  transition: opacity 0.25s, color 0.25s;
+}
+
+.nav-link-dark:hover {
+  opacity: 1;
+  color: var(--gold) !important;
+}
+
+/* ── Page hero banner (inner pages) ─────────────────────────────── */
+.page-hero {
+  position: relative;
+  padding: 9.5rem 2rem 3.5rem;
+  background: radial-gradient(ellipse 90% 100% at 50% 0%, var(--ink-2) 0%, var(--ink) 100%);
+  border-bottom: 1px solid var(--border);
+  overflow: hidden;
+  text-align: center;
+}
+
+.page-hero-sparkle {
+  position: absolute;
+  inset: 0;
+  background: url("/assets/gold-dust-sparkles.png") center/cover no-repeat;
+  opacity: 0.22;
+  mix-blend-mode: screen;
+  pointer-events: none;
+}
+
+/* ── Forms ───────────────────────────────────────────────────────── */
+.gothic-input {
+  padding: 1rem;
+  font-family: "Lato", sans-serif;
+  font-size: 0.95rem;
+  background: var(--ink-2);
+  color: var(--gold-lt);
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  outline: none;
+  transition: border-color 0.25s, box-shadow 0.25s;
+}
+
+.gothic-input::placeholder {
+  color: rgba(232, 220, 192, 0.4);
+}
+
+.gothic-input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 3px rgba(201, 168, 118, 0.12);
+}
+
+/* ── Hero (homepage) ───────────────────────────────────────────── */
+.hero-frame {
+  position: absolute;
+  top: 88px;
+  right: 20px;
+  bottom: 20px;
+  left: 20px;
+  border: 1px solid rgba(201, 168, 118, 0.32);
+  pointer-events: none;
+  z-index: 1;
+}
+
+.hero-corner {
+  position: absolute;
+  width: 72px;
+  height: 72px;
+  opacity: 0.85;
+}
+
+.hero-grid {
+  position: relative;
+  z-index: 2;
+  max-width: 1280px;
+  margin: 0 auto;
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1.05fr 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  padding: 2.75rem 3.5rem;
+}
+
+.hero-illustration-wrap {
+  position: relative;
+}
+
+.hero-illustration-wrap img.hero-illustration {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 2px;
+}
+
+.hero-illustration-wrap .hero-vignette {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  opacity: 0.9;
+}
+
+.skill-row {
+  display: flex;
+  align-items: center;
+  gap: 0.85rem;
+  color: var(--gold-lt);
+  opacity: 0.9;
+  transition: opacity 0.25s, transform 0.25s;
+}
+
+.skill-row:hover {
+  opacity: 1;
+  transform: translateX(3px);
+}
+
+.hero-sparkle-overlay {
+  position: absolute;
+  inset: 0;
+  background: url("/assets/gold-dust-sparkles.png") center/cover no-repeat;
+  opacity: 0.35;
+  mix-blend-mode: screen;
+  pointer-events: none;
+  z-index: 1;
+}
+
+@media (max-width: 900px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+    padding: 3rem 1.5rem;
+  }
+
+  .hero-illustration-wrap {
+    order: -1;
+    max-width: 380px;
+    margin: 0 auto;
+  }
+
+  .hero-frame {
+    inset: 10px;
+  }
+
+  .hero-corner {
+    width: 42px;
+    height: 42px;
+  }
 }

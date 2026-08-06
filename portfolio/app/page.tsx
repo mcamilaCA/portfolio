@@ -11,6 +11,14 @@ import SkeletonCard from "@/app/components/skeletonCard";
 import SectionHeader from "@/app/components/sectionHeader";
 import type { Project, Post } from "@/app/types";
 
+const SKILLS = [
+  { icon: "/assets/icon-data-science.svg", label: "Data Science" },
+  { icon: "/assets/icon-machine-learning.svg", label: "Machine Learning" },
+  { icon: "/assets/icon-bioinformatics.svg", label: "Bioinformatics" },
+  { icon: "/assets/icon-visualization.svg", label: "Visualization" },
+  { icon: "/assets/icon-storytelling.svg", label: "Storytelling" },
+];
+
 export default function Home() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [blogs, setBlogs] = useState<Post[]>([]);
@@ -66,172 +74,214 @@ export default function Home() {
           minHeight: "100svh",
           display: "flex",
           alignItems: "center",
-          padding: "0 2rem",
-          paddingTop: "1rem",
+          paddingTop: 68,
           overflow: "hidden",
           background:
-            "radial-gradient(ellipse 80% 70% at 60% 40%, #2a2317 0%, #0e0d0b 100%)",
+            "radial-gradient(ellipse 80% 70% at 60% 40%, var(--ink-2) 0%, var(--ink) 100%)",
         }}
       >
-        {/* Vignette */}
-        <div
-          aria-hidden
-          style={{
-            position: "absolute",
-            inset: 0,
-            background: "linear-gradient(to right, rgba(20, 18, 16, 0.85) 0%, rgba(20, 18, 16, 0.65) 35%,rgba(20, 18, 16, 0.3) 60%,rgba(20, 18, 16, 0.1) 100%);, url('/assets/bg_ptfolio.jpg') center/cover no-repeat",
-            pointerEvents: "none",
-          }}
-        />
+        {/* Ambient sparkle overlay */}
+        <div aria-hidden className="hero-sparkle-overlay" />
+
+        {/* Ornate frame with gothic corners */}
+        <div aria-hidden className="hero-frame">
+          <img src="/assets/corner-ornament.svg" alt="" className="hero-corner" style={{ top: -1, left: -1 }} />
+          <img src="/assets/corner-ornament.svg" alt="" className="hero-corner" style={{ top: -1, right: -1, transform: "scaleX(-1)" }} />
+          <img src="/assets/corner-ornament.svg" alt="" className="hero-corner" style={{ bottom: -1, left: -1, transform: "scaleY(-1)" }} />
+          <img src="/assets/corner-ornament.svg" alt="" className="hero-corner" style={{ bottom: -1, right: -1, transform: "scale(-1,-1)" }} />
+        </div>
 
         {/* Hero content */}
         <div
           ref={heroContentRef}
+          className="hero-grid"
           style={{
-            position: "relative",
-            zIndex: 2,
-            maxWidth: 1200,
-            margin: "0 auto",
-            width: "100%",
-            paddingTop: "1rem",
             animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
           }}
         >
+          {/* Content to the left */}
+          <div>
+            <img
+              src="/assets/section-rule.svg"
+              alt=""
+              aria-hidden
+              style={{ width: 150, marginBottom: "1.25rem", opacity: 0.8 }}
+            />
 
-          <div 
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "space-between",
-              maxWidth: 1200,
-              margin: "0 auto",
-              width: "100%",
-              paddingTop: "1rem",
-              animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
-              gap: "1rem"
+            <h1
+              style={{
+                fontFamily: "'Cormorant Garamond', serif",
+                fontWeight: 500,
+                fontSize: "clamp(2.75rem, 5.5vw, 4.5rem)",
+                lineHeight: 1.05,
+                color: "var(--gold-lt)",
+                letterSpacing: "0.05em",
+                textTransform: "uppercase",
+                marginBottom: "0.9rem",
+              }}
+            >
+              Maria Camila
+            </h1>
 
-            }}
-            > 
-            {/* Content to the left */}
-            < div style={{ flex: 1, paddingRight: "1rem", alignItems:"center", justifyContent:"center"}}>
-              <p style={{ fontFamily: "'Lato', sans-serif",
-                          fontWeight: 300,
-                          maxWidth: 600,
-                          fontSize: "0.75rem",
-                          letterSpacing: "0.25em",
-                          textTransform: "uppercase",
-                          color: "var(--gold)",
-                          marginLeft: "7rem",
-                          marginBottom: "1.5rem" }}>
-                Software Engineering &amp; ML Research · {new Date().getFullYear()}
-              </p>
+            <p
+              style={{
+                fontFamily: "'Lato', sans-serif",
+                fontWeight: 400,
+                fontSize: "0.78rem",
+                letterSpacing: "0.28em",
+                textTransform: "uppercase",
+                color: "var(--gold)",
+              }}
+            >
+              Data Scientist &amp; AI Enthusiast
+            </p>
 
-              <h1 style={{ fontFamily: "'Cormorant Garamond', serif",
-                          fontWeight: 200,
-                          fontSize: "clamp(2.5rem, 4vw, 3.5rem)",
-                          lineHeight: 1.15,
-                          color: "var(--warm-parchment)",
-                          letterSpacing: "0.01em",
-                          marginBottom: "2rem" }}>
-                Software, researched as much as built.
-              </h1>
+            <img
+              src="/assets/flourish-divider.svg"
+              alt=""
+              aria-hidden
+              style={{ width: 220, margin: "1.15rem 0" }}
+            />
 
-              <p style={{ fontFamily: "'Lato', sans-serif",
-                          fontWeight: 400,
-                          fontSize: "0.95rem",
-                          color: "rgba(245,241,234,0.58)",
-                          maxWidth: 480,
-                          lineHeight: 1.8,
-                          marginBottom: "3rem",
-                          letterSpacing: "0.03em",
-                          textShadow: "0 2px 12px rgba(0, 0, 0, 0.35)" }}>
-                Bachelor&apos;s in Computer Science from Florida International University. Research assistant
-                at Tsinghua University, contributing to published work on contrastive learning methods.
-                Data science &amp; machine learning intern at AbbVie.
+            <p
+              style={{
+                fontFamily: "'Lato', sans-serif",
+                fontWeight: 300,
+                fontSize: "0.92rem",
+                color: "rgba(232,220,192,0.72)",
+                maxWidth: 460,
+                lineHeight: 1.65,
+                letterSpacing: "0.02em",
+              }}
+            >
+              I bridge data, design, and domain knowledge to build meaningful
+              solutions that create real impact.
+              <br />
+              <br />
+              Bachelor&apos;s in Computer Science from Florida International
+              University. Research assistant at Tsinghua University,
+              contributing to published work on contrastive learning methods.
+              Data science &amp; machine learning intern at AbbVie.
+            </p>
 
-                <br />
-                <br />
-
-                This is a working record of what I&apos;ve built and the questions I&apos;ve chased —
-                case studies, research notes, and the reasoning behind each decision.
-              </p>
-
+            {/* Skills */}
+            <div style={{ display: "flex", flexDirection: "column", gap: "0.6rem", margin: "1.5rem 0" }}>
+              {SKILLS.map((skill) => (
+                <div key={skill.label} className="skill-row">
+                  <img src={skill.icon} alt="" aria-hidden style={{ width: 18, height: 18 }} />
+                  <span
+                    style={{
+                      fontFamily: "'Lato', sans-serif",
+                      fontWeight: 400,
+                      fontSize: "0.72rem",
+                      letterSpacing: "0.18em",
+                      textTransform: "uppercase",
+                    }}
+                  >
+                    {skill.label}
+                  </span>
+                </div>
+              ))}
             </div>
 
-            {/* Content to the rigth */}
-            < div style={{ flex: 1, textAlign:"left", maxWidth:"120%", transform:"scale(1.2)"}}>
-                <img src="/assets/home.png"
-                alt= "Home Gyeongbokgung Palace self-portrait"
-                style={{maxWidth: "140%",
-                        height: "auto",
-                        borderRadius: "8px"
-                }} />
+            <div style={{ width: 56, height: 1, background: "var(--gold)", opacity: 0.4, marginBottom: "1.25rem" }} />
+
+            {/* Quote */}
+            <p
+              style={{
+                display: "flex",
+                gap: "0.65rem",
+                alignItems: "flex-start",
+                fontFamily: "'Cormorant Garamond', serif",
+                fontStyle: "italic",
+                fontWeight: 400,
+                fontSize: "1.05rem",
+                color: "var(--gold-lt)",
+                lineHeight: 1.6,
+                maxWidth: 440,
+                marginBottom: "1.75rem",
+              }}
+            >
+              <img src="/assets/compass-icon.svg" alt="" aria-hidden style={{ width: 18, height: 18, marginTop: 4, flexShrink: 0 }} />
+              Curiosity is the compass. Data is the map. Impact is the destination.
+            </p>
+
+            <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
+              <Link
+                href="/pages/projects"
+                className="hero-btn-primary"
+                style={{
+                  display: "inline-block",
+                  padding: "0.85rem 2.2rem",
+                  background: "linear-gradient(135deg,var(--gold),var(--gold-dp))",
+                  boxShadow: "0 4px 14px rgba(201,168,118,0.25)",
+                  color: "var(--ink)",
+                  fontFamily: "'Lato', sans-serif",
+                  fontWeight: 400,
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.08em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  borderRadius: 1,
+                  transition: "background 0.25s, transform 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold-lt)";
+                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                  (e.currentTarget as HTMLAnchorElement).style.background = "linear-gradient(135deg,var(--gold),var(--gold-dp))";
+                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
+                }}
+              >
+                View Projects
+              </Link>
+
+              <Link
+                href="/pages/research"
+                style={{
+                  display: "inline-block",
+                  padding: "0.85rem 2.2rem",
+                  border: "1px solid rgba(232,220,192,0.35)",
+                  backdropFilter: "blur(4px)",
+                  color: "var(--gold-lt)",
+                  fontFamily: "'Lato', sans-serif",
+                  fontWeight: 300,
+                  fontSize: "0.75rem",
+                  letterSpacing: "0.12em",
+                  textTransform: "uppercase",
+                  textDecoration: "none",
+                  borderRadius: 1,
+                  transition: "border-color 0.25s, color 0.25s, transform 0.2s",
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.borderColor = "var(--gold)";
+                  el.style.transform = "scale(1.03)";
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement;
+                  el.style.borderColor = "rgba(232,220,192,0.35)";
+                  el.style.transform = "scale(1)";
+                }}
+              >
+                Research
+              </Link>
             </div>
           </div>
 
-          <div style={{ display: "flex", gap: "1rem", flexWrap: "wrap" }}>
-            <Link
-              href="/pages/projects"
-              className="hero-btn-primary"
-              style={{
-                display: "inline-block",
-                padding: "0.85rem 2.2rem",
-                background: "linear-gradient(135deg,#c6a15b,#b8924f)",
-                boxShadow: "0 4px 14px rgba(184,154,94,0.25)",
-                color: "var(--ink)",
-                fontFamily: "'Lato', sans-serif",
-                fontWeight: 400,
-                fontSize: "0.75rem",
-                letterSpacing: "0.08em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                borderRadius: 1,
-                transition: "background 0.25s, transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold-light)";
-                (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.03)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold)";
-                (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
-              }}
-            >
-              View Projects
-            </Link>
-
-            <Link
-              href="/pages/research"
-              style={{
-                display: "inline-block",
-                padding: "0.85rem 2.2rem",
-                border: "1px solid rgba(245,241,234,0.4)",
-                backdropFilter: "blur(4px)",
-                color: "var(--parchment)",
-                fontFamily: "'Lato', sans-serif",
-                fontWeight: 300,
-                fontSize: "0.75rem",
-                letterSpacing: "0.12em",
-                textTransform: "uppercase",
-                textDecoration: "none",
-                borderRadius: 1,
-                transition: "border-color 0.25s, color 0.25s, transform 0.2s",
-              }}
-              onMouseEnter={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.borderColor = "var(--gold)";
-                el.style.color = "var(--gold)";
-                el.style.transform = "scale(1.03)";
-              }}
-              onMouseLeave={(e) => {
-                const el = e.currentTarget as HTMLAnchorElement;
-                el.style.borderColor = "rgba(245,241,234,0.3)";
-                el.style.color = "var(--parchment)";
-                el.style.transform = "scale(1)";
-              }}
-            >
-              Research
-            </Link>
+          {/* Content to the right */}
+          <div className="hero-illustration-wrap">
+            <img
+              src="/assets/background_homepage.png"
+              alt="Illustrated candlelit study — a self-portrait workspace"
+              className="hero-illustration"
+            />
+            <div
+              aria-hidden
+              className="hero-vignette"
+              style={{ backgroundImage: "url('/assets/vignette-overlay.png')", backgroundSize: "cover" }}
+            />
           </div>
         </div>
 
@@ -240,7 +290,7 @@ export default function Home() {
           aria-hidden
           style={{
             position: "absolute",
-            bottom: "2.5rem",
+            bottom: "1.5rem",
             left: "50%",
             transform: "translateX(-50%)",
             display: "flex",

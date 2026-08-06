@@ -39,19 +39,18 @@ export default function SectionHeader({ label, title }: Props) {
           fontFamily: "'Cormorant Garamond', serif",
           fontWeight: 400,
           fontSize: "clamp(2rem, 4vw, 3rem)",
-          color: "var(--ink)",
+          color: "var(--gold-lt)",
           letterSpacing: "-0.01em",
-          marginBottom: "1rem",
+          marginBottom: "1.1rem",
         }}
       >
         {title}
       </h2>
-      <div
-        style={{
-          width: 48,
-          height: 1,
-          background: "var(--gold)",
-        }}
+      <img
+        src="/assets/section-rule.svg"
+        alt=""
+        aria-hidden
+        style={{ width: 140, opacity: 0.8 }}
       />
     </div>
   );
