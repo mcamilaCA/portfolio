@@ -8,10 +8,10 @@ interface SocialsProps {
 }
 
 export default function Socials({
-  instagram = "https://www.instagram.com/camis.locket",
+  instagram = "https://www.instagram.com/mcamila.ca",
   github = "https://github.com/mcamilaCA",
   linkedin = "https://www.linkedin.com/in/camicopoa/",
-  substack = "https://camilaspov.substack.com/",
+  substack = "https://substack.com/@aladysmind",
 }: SocialsProps) {
   const badgeStyle: React.CSSProperties = {
     display: "flex",
