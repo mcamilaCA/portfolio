@@ -37,7 +37,7 @@ export default function JournalCard({ entry, index, folio }: Props) {
         aria-label={entry.title}
       />
 
-      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
+      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "2/1" }}>
         {entry.media_url ? (
           <Image
             src={entry.media_url}
@@ -62,10 +62,10 @@ export default function JournalCard({ entry, index, folio }: Props) {
         )}
       </div>
 
-      <div style={{ padding: "1.1rem", display: "flex", flexDirection: "column", flex: 1 }}>
+      <div style={{ padding: "0.85rem", display: "flex", flexDirection: "column", flex: 1 }}>
         <JournalMetadata folio={folio} date={entry.date} field={field} readingTime={readingTime} compact />
 
-        <div style={{ margin: "0.75rem 0" }}>
+        <div style={{ margin: "0.55rem 0" }}>
           <JournalDivider />
         </div>
 
@@ -74,12 +74,12 @@ export default function JournalCard({ entry, index, folio }: Props) {
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 500,
-            fontSize: "1.05rem",
+            fontSize: "0.92rem",
             lineHeight: 1.2,
             color: "var(--gold-lt)",
             letterSpacing: "0.01em",
             textTransform: "uppercase",
-            marginBottom: "0.5rem",
+            marginBottom: "0.35rem",
           }}
         >
           {entry.title}
@@ -89,21 +89,21 @@ export default function JournalCard({ entry, index, folio }: Props) {
           style={{
             fontFamily: "'Lato', sans-serif",
             fontWeight: 300,
-            fontSize: "0.78rem",
+            fontSize: "0.74rem",
             color: "var(--ash)",
-            lineHeight: 1.55,
+            lineHeight: 1.45,
             display: "-webkit-box",
             WebkitLineClamp: 2,
             WebkitBoxOrient: "vertical",
             overflow: "hidden",
-            marginBottom: "0.9rem",
+            marginBottom: "0.65rem",
             flex: 1,
           }}
         >
           {entry.summary}
         </p>
 
-        <span className="journal-cta" style={{ fontSize: "0.66rem" }}>
+        <span className="journal-cta" style={{ fontSize: "0.64rem" }}>
           Read Article <span className="journal-cta-arrow">→</span>
         </span>
       </div>
