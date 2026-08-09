@@ -37,7 +37,7 @@ export default function JournalCard({ entry, index, folio }: Props) {
         aria-label={entry.title}
       />
 
-      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "2.4/1" }}>
+      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
         {entry.media_url ? (
           <Image
             src={entry.media_url}
