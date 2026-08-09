@@ -127,6 +127,103 @@ img {
   }
 }
 
+/* ── Museum gallery (Projects page) ───────────────────────────────── */
+@keyframes museumFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.015);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.masterpiece-frame {
+  position: relative;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  box-shadow: 0 30px 70px rgba(0, 0, 0, 0.55), 0 0 0 1px rgba(201, 168, 118, 0.08);
+  padding: clamp(1rem, 3vw, 2rem);
+}
+
+.masterpiece-ornament {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+.masterpiece-img {
+  animation: museumFadeIn 0.7s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.gallery-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--gold);
+  font-family: "Cormorant Garamond", serif;
+  font-size: 1.3rem;
+  cursor: pointer;
+  transition: border-color 0.25s, color 0.25s, transform 0.25s, background 0.25s;
+}
+
+.gallery-arrow:hover {
+  border-color: var(--gold);
+  color: var(--gold-lt);
+  background: var(--surface-alt);
+  transform: scale(1.08);
+}
+
+.gallery-arrow:disabled {
+  opacity: 0.3;
+  cursor: default;
+  transform: none;
+}
+
+.gallery-strip {
+  display: flex;
+  gap: 1.25rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scroll-snap-type: x proximity;
+  padding: 0.5rem 0.25rem 1.25rem;
+  scrollbar-width: none;
+}
+
+.gallery-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.gallery-thumb {
+  scroll-snap-align: start;
+  flex: 0 0 auto;
+  width: 220px;
+  cursor: pointer;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: transform 0.35s cubic-bezier(0.22, 0.68, 0, 1), border-color 0.3s, box-shadow 0.3s, opacity 0.3s;
+  opacity: 0.62;
+}
+
+.gallery-thumb:hover {
+  opacity: 0.9;
+  transform: translateY(-4px);
+}
+
+.gallery-thumb.is-active {
+  opacity: 1;
+  border-color: var(--gold);
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--gold-translucent);
+}
+
 @keyframes heroReveal {
   from {
     opacity: 0;
