@@ -7,19 +7,18 @@ import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
-import SectionHeader from "@/app/components/sectionHeader";
 import { shimmer } from "@/app/components/shimmer";
 import type { Project } from "@/app/types";
 
 function MasterpieceSkeleton() {
   return (
-    <div style={{ maxWidth: 760, margin: "0 auto" }}>
+    <div style={{ maxWidth: 620, width: "100%" }}>
       <div className="masterpiece-frame">
         <div style={{ ...shimmer, width: "100%", aspectRatio: "4/3" }} />
       </div>
-      <div style={{ ...shimmer, height: "0.6rem", width: "30%", margin: "2rem auto 1rem" }} />
-      <div style={{ ...shimmer, height: "1.6rem", width: "50%", margin: "0 auto 1rem" }} />
-      <div style={{ ...shimmer, height: "0.85rem", width: "70%", margin: "0 auto" }} />
+      <div style={{ ...shimmer, height: "0.6rem", width: "30%", margin: "1.5rem 0 1rem" }} />
+      <div style={{ ...shimmer, height: "1.6rem", width: "50%", marginBottom: "1rem" }} />
+      <div style={{ ...shimmer, height: "0.85rem", width: "70%" }} />
     </div>
   );
 }
@@ -41,7 +40,7 @@ function GalleryThumb({
       onClick={onSelect}
       aria-current={active}
       data-index={index}
-      className={`gallery-thumb${active ? " is-active" : ""}`}
+      className={`gallery-thumb gallery-rail-item${active ? " is-active" : ""}`}
       style={{ padding: 0, textAlign: "left" }}
     >
       <div style={{ position: "relative", width: "100%", aspectRatio: "4/3", overflow: "hidden" }}>
@@ -89,7 +88,7 @@ export default function Projects() {
   const [projects, setProjects] = useState<Project[]>([]);
   const [loading, setLoading] = useState(true);
   const [selected, setSelected] = useState(0);
-  const stripRef = useRef<HTMLDivElement>(null);
+  const railRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
     supabase
@@ -107,10 +106,10 @@ export default function Projects() {
   }, []);
 
   useEffect(() => {
-    const strip = stripRef.current;
-    if (!strip) return;
-    const active = strip.querySelector<HTMLElement>(`[data-index="${selected}"]`);
-    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+    const rail = railRef.current;
+    if (!rail) return;
+    const active = rail.querySelector<HTMLElement>(`[data-index="${selected}"]`);
+    active?.scrollIntoView({ behavior: "smooth", block: "nearest" });
   }, [selected]);
 
   const goTo = (direction: 1 | -1) => {
@@ -123,195 +122,254 @@ export default function Projects() {
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
       <main>
-        <div className="page-hero" style={{ padding: "4.5rem 2rem 1rem" }}>
+        {/* ── Simplified hero: just the two lines of text over the gold-dust glow ── */}
+        <div
+          style={{
+            position: "relative",
+            overflow: "hidden",
+            textAlign: "center",
+            padding: "4.5rem 2rem 1.75rem",
+            background: "radial-gradient(ellipse 90% 100% at 50% 0%, var(--ink-2) 0%, var(--ink) 100%)",
+          }}
+        >
           <div aria-hidden className="page-hero-sparkle" />
-          <SectionHeader label="Selected Work" title="The Gallery" />
+          <p
+            style={{
+              fontFamily: "'Lato', sans-serif",
+              fontWeight: 300,
+              fontSize: "0.68rem",
+              letterSpacing: "0.25em",
+              textTransform: "uppercase",
+              color: "var(--gold)",
+              marginBottom: "0.5rem",
+            }}
+          >
+            Selected Work
+          </p>
+          <h1
+            style={{
+              fontFamily: "'Cormorant Garamond', serif",
+              fontWeight: 400,
+              fontSize: "clamp(2rem, 4vw, 3rem)",
+              color: "var(--gold-lt)",
+              letterSpacing: "-0.01em",
+            }}
+          >
+            The Gallery
+          </h1>
         </div>
 
-        {/* ── Masterpiece: the currently viewed project ─────────────── */}
-        <section style={{ padding: "0.25rem 2rem 0.5rem", background: "var(--ink)", marginTop: "-3.75rem" }}>
-          {loading ? (
-            <MasterpieceSkeleton />
-          ) : featured ? (
-            <div style={{ maxWidth: 400, margin: "0 auto" }}>
-              <div className="masterpiece-wrap">
-                <div className="masterpiece-frame" style={{ padding: "0.75rem" }}>
-                  <div
-                    style={{
-                      position: "relative",
-                      width: "100%",
-                      aspectRatio: "16/9",
-                      overflow: "hidden",
-                      background: "var(--ink-2)",
-                    }}
-                  >
-                    {featured.image_url ? (
-                      <Image
-                        key={featured.slug}
-                        src={featured.image_url}
-                        alt={featured.title}
-                        fill
-                        className="masterpiece-img"
-                        style={{ objectFit: "cover" }}
-                        priority
-                      />
-                    ) : (
+        {/* ── Masterpiece (left) + vertical collection rail (right) ─────── */}
+        <section style={{ padding: "1rem 2rem 3rem", background: "var(--ink)" }}>
+          <div
+            style={{
+              maxWidth: 1300,
+              margin: "0 auto",
+              display: "flex",
+              flexWrap: "wrap",
+              alignItems: "flex-start",
+              justifyContent: "center",
+              gap: "2.5rem",
+            }}
+          >
+            {/* ── Main feature ─────────────────────────────────────────── */}
+            <div style={{ flex: "0 1 620px", minWidth: 0 }}>
+              {loading ? (
+                <MasterpieceSkeleton />
+              ) : featured ? (
+                <div style={{ maxWidth: 620 }}>
+                  <div className="masterpiece-wrap">
+                    <div className="masterpiece-frame" style={{ padding: "1rem" }}>
                       <div
                         style={{
+                          position: "relative",
                           width: "100%",
-                          height: "100%",
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
+                          aspectRatio: "4/3",
+                          overflow: "hidden",
+                          background: "var(--ink-2)",
                         }}
                       >
-                        <span style={{ fontSize: "2rem", opacity: 0.3, color: "var(--gold)" }}>✦</span>
+                        {featured.image_url ? (
+                          <Image
+                            key={featured.slug}
+                            src={featured.image_url}
+                            alt={featured.title}
+                            fill
+                            className="masterpiece-img"
+                            style={{ objectFit: "cover" }}
+                            priority
+                          />
+                        ) : (
+                          <div
+                            style={{
+                              width: "100%",
+                              height: "100%",
+                              display: "flex",
+                              alignItems: "center",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span style={{ fontSize: "2.4rem", opacity: 0.3, color: "var(--gold)" }}>✦</span>
+                          </div>
+                        )}
                       </div>
+                      <img
+                        src="/assets/border-frame.svg"
+                        alt=""
+                        aria-hidden
+                        className="masterpiece-ornament"
+                      />
+                    </div>
+
+                    {projects.length > 1 && (
+                      <>
+                        <button
+                          type="button"
+                          aria-label="Previous project"
+                          className="gallery-arrow frame-arrow frame-arrow-left"
+                          onClick={() => goTo(-1)}
+                        >
+                          ‹
+                        </button>
+                        <button
+                          type="button"
+                          aria-label="Next project"
+                          className="gallery-arrow frame-arrow frame-arrow-right"
+                          onClick={() => goTo(1)}
+                        >
+                          ›
+                        </button>
+                      </>
                     )}
                   </div>
-                  <img
-                    src="/assets/border-frame.svg"
-                    alt=""
-                    aria-hidden
-                    className="masterpiece-ornament"
-                  />
-                </div>
 
-                {projects.length > 1 && (
-                  <>
-                    <button
-                      type="button"
-                      aria-label="Previous project"
-                      className="gallery-arrow frame-arrow frame-arrow-left"
-                      onClick={() => goTo(-1)}
-                    >
-                      ‹
-                    </button>
-                    <button
-                      type="button"
-                      aria-label="Next project"
-                      className="gallery-arrow frame-arrow frame-arrow-right"
-                      onClick={() => goTo(1)}
-                    >
-                      ›
-                    </button>
-                  </>
-                )}
-              </div>
-
-              {/* ── Museum plaque ────────────────────────────────────── */}
-              <div
-                style={{
-                  maxWidth: 400,
-                  margin: "0.4rem auto 0",
-                  textAlign: "center",
-                  background: "var(--surface)",
-                  border: "1px solid var(--border)",
-                  padding: "0.6rem 1.1rem",
-                }}
-              >
-                <p
-                  style={{
-                    fontFamily: "'Lato', sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.58rem",
-                    letterSpacing: "0.25em",
-                    textTransform: "uppercase",
-                    color: "var(--gold)",
-                    marginBottom: "0.3rem",
-                  }}
-                >
-                  Fig. {String(selected + 1).padStart(2, "0")}
-                  {featured.date ? ` — ${new Date(featured.date).getFullYear()}` : ""}
-                </p>
-                <h3
-                  style={{
-                    fontFamily: "'Cormorant Garamond', serif",
-                    fontWeight: 500,
-                    fontSize: "1.2rem",
-                    color: "var(--gold-lt)",
-                    marginBottom: "0.35rem",
-                  }}
-                >
-                  {featured.title}
-                </h3>
-                <p
-                  style={{
-                    fontFamily: "'Lato', sans-serif",
-                    fontWeight: 300,
-                    fontSize: "0.76rem",
-                    color: "var(--ash)",
-                    lineHeight: 1.45,
-                    marginBottom: "0.5rem",
-                    display: "-webkit-box",
-                    WebkitLineClamp: 2,
-                    WebkitBoxOrient: "vertical",
-                    overflow: "hidden",
-                  }}
-                >
-                  {featured.summary}
-                </p>
-                {featured.tags && featured.tags.length > 0 && (
+                  {/* ── Museum plaque ────────────────────────────────── */}
                   <div
                     style={{
-                      display: "flex",
-                      flexWrap: "wrap",
-                      justifyContent: "center",
-                      gap: "0.35rem",
-                      marginBottom: "0.6rem",
+                      marginTop: "0.85rem",
+                      textAlign: "center",
+                      background: "var(--surface)",
+                      border: "1px solid var(--border)",
+                      padding: "1rem 1.5rem",
                     }}
                   >
-                    {featured.tags.map((tag) => (
-                      <Tag key={tag} label={tag} />
-                    ))}
-                  </div>
-                )}
-                <div style={{ display: "flex", justifyContent: "center", gap: "1.75rem" }}>
-                  <Link href={`/pages/projects/${featured.slug}`} className="card-cta">
-                    View work →
-                  </Link>
-                  {featured.git_url && (
-                    <a
-                      href={featured.git_url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="card-cta"
+                    <p
+                      style={{
+                        fontFamily: "'Lato', sans-serif",
+                        fontWeight: 300,
+                        fontSize: "0.62rem",
+                        letterSpacing: "0.25em",
+                        textTransform: "uppercase",
+                        color: "var(--gold)",
+                        marginBottom: "0.4rem",
+                      }}
                     >
-                      Source ↗
-                    </a>
-                  )}
+                      Fig. {String(selected + 1).padStart(2, "0")}
+                      {featured.date ? ` — ${new Date(featured.date).getFullYear()}` : ""}
+                    </p>
+                    <h3
+                      style={{
+                        fontFamily: "'Cormorant Garamond', serif",
+                        fontWeight: 500,
+                        fontSize: "1.5rem",
+                        color: "var(--gold-lt)",
+                        marginBottom: "0.5rem",
+                      }}
+                    >
+                      {featured.title}
+                    </h3>
+                    <p
+                      style={{
+                        fontFamily: "'Lato', sans-serif",
+                        fontWeight: 300,
+                        fontSize: "0.82rem",
+                        color: "var(--ash)",
+                        lineHeight: 1.55,
+                        marginBottom: "0.75rem",
+                        display: "-webkit-box",
+                        WebkitLineClamp: 2,
+                        WebkitBoxOrient: "vertical",
+                        overflow: "hidden",
+                      }}
+                    >
+                      {featured.summary}
+                    </p>
+                    {featured.tags && featured.tags.length > 0 && (
+                      <div
+                        style={{
+                          display: "flex",
+                          flexWrap: "wrap",
+                          justifyContent: "center",
+                          gap: "0.4rem",
+                          marginBottom: "0.85rem",
+                        }}
+                      >
+                        {featured.tags.map((tag) => (
+                          <Tag key={tag} label={tag} />
+                        ))}
+                      </div>
+                    )}
+                    <div style={{ display: "flex", justifyContent: "center", gap: "1.75rem" }}>
+                      <Link href={`/pages/projects/${featured.slug}`} className="card-cta">
+                        View work →
+                      </Link>
+                      {featured.git_url && (
+                        <a
+                          href={featured.git_url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="card-cta"
+                        >
+                          Source ↗
+                        </a>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              ) : (
+                <p
+                  style={{
+                    textAlign: "center",
+                    color: "var(--ash)",
+                    fontFamily: "'Lato', sans-serif",
+                  }}
+                >
+                  No projects to display yet.
+                </p>
+              )}
+            </div>
+
+            {/* ── Vertical collection rail ──────────────────────────────── */}
+            {!loading && projects.length > 1 && (
+              <div style={{ flex: "0 0 240px" }}>
+                <p
+                  style={{
+                    fontFamily: "'Lato', sans-serif",
+                    fontWeight: 300,
+                    fontSize: "0.62rem",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    color: "var(--gold)",
+                    marginBottom: "0.75rem",
+                  }}
+                >
+                  More in the Collection
+                </p>
+                <div ref={railRef} className="gallery-rail" style={{ maxHeight: 660 }}>
+                  {projects.map((p, i) => (
+                    <GalleryThumb
+                      key={p.slug}
+                      project={p}
+                      index={i}
+                      active={i === selected}
+                      onSelect={() => setSelected(i)}
+                    />
+                  ))}
                 </div>
               </div>
-            </div>
-          ) : (
-            <p
-              style={{
-                textAlign: "center",
-                color: "var(--ash)",
-                fontFamily: "'Lato', sans-serif",
-              }}
-            >
-              No projects to display yet.
-            </p>
-          )}
+            )}
+          </div>
         </section>
-
-        {/* ── Gallery strip: the rest of the collection ─────────────── */}
-        {!loading && projects.length > 1 && (
-          <section style={{ padding: "0 2rem 3rem", background: "var(--ink)" }}>
-            <div ref={stripRef} className="gallery-strip" style={{ maxWidth: 1200, margin: "0 auto" }}>
-              {projects.map((p, i) => (
-                <GalleryThumb
-                  key={p.slug}
-                  project={p}
-                  index={i}
-                  active={i === selected}
-                  onSelect={() => setSelected(i)}
-                />
-              ))}
-            </div>
-          </section>
-        )}
       </main>
       <Footer />
     </div>

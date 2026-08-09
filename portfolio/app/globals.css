@@ -214,17 +214,18 @@ img {
   right: 10px;
 }
 
-.gallery-strip {
+.gallery-rail {
   display: flex;
+  flex-direction: column;
   gap: 0.85rem;
-  overflow-x: auto;
+  overflow-y: auto;
   scroll-behavior: smooth;
-  scroll-snap-type: x proximity;
-  padding: 0.25rem 0.25rem 0.4rem;
+  scroll-snap-type: y proximity;
+  padding: 0.25rem 0.4rem 0.25rem 0.25rem;
   scrollbar-width: none;
 }
 
-.gallery-strip::-webkit-scrollbar {
+.gallery-rail::-webkit-scrollbar {
   display: none;
 }
 
@@ -248,6 +249,14 @@ img {
   opacity: 1;
   border-color: var(--gold);
   box-shadow: 0 12px 28px rgba(0, 0, 0, 0.45), 0 0 0 1px var(--gold-translucent);
+}
+
+.gallery-rail-item {
+  width: 100%;
+}
+
+.gallery-rail-item:hover {
+  transform: none;
 }
 
 @keyframes heroReveal {
