@@ -31,7 +31,7 @@ export default function FeaturedJournalCard({ entry, folio }: Props) {
 
       <div
         className="journal-card-media"
-        style={{ position: "relative", flex: "1 1 380px", minWidth: 280, aspectRatio: "4/3" }}
+        style={{ position: "relative", flex: "1 1 380px", minWidth: 280, aspectRatio: "16/9" }}
       >
         {entry.media_url ? (
           <Image
