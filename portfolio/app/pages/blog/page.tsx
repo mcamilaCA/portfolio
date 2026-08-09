@@ -60,19 +60,19 @@ export default function Blog() {
         </div>
 
         <section style={{ padding: "4.5rem 2rem 7rem", background: "var(--ink)" }}>
-          <div style={{ maxWidth: 1100, margin: "0 auto" }}>
+          <div style={{ maxWidth: 1280, margin: "0 auto" }}>
             {loading ? (
               <>
                 <JournalCardSkeleton />
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                    gap: "2.5rem",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                    gap: "1.75rem",
                     marginTop: "2.5rem",
                   }}
                 >
-                  {[0, 1].map((i) => (
+                  {[0, 1, 2].map((i) => (
                     <JournalCardSkeleton key={i} />
                   ))}
                 </div>
@@ -99,8 +99,8 @@ export default function Blog() {
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-                      gap: "2.5rem",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
+                      gap: "1.75rem",
                       marginTop: "2.5rem",
                     }}
                   >
