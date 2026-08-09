@@ -67,8 +67,8 @@ export default function Blog() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                    gap: "1.25rem",
+                    gridTemplateColumns: "repeat(auto-fit, minmax(165px, 1fr))",
+                    gap: "1rem",
                     marginTop: "2.5rem",
                   }}
                 >
@@ -99,8 +99,8 @@ export default function Blog() {
                   <div
                     style={{
                       display: "grid",
-                      gridTemplateColumns: "repeat(auto-fit, minmax(200px, 1fr))",
-                      gap: "1.25rem",
+                      gridTemplateColumns: "repeat(auto-fit, minmax(165px, 1fr))",
+                      gap: "1rem",
                       marginTop: "2.5rem",
                     }}
                   >
