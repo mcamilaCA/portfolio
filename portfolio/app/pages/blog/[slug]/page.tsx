@@ -7,17 +7,21 @@ import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
+import JournalMetadata from "@/app/components/journalMetadata";
+import JournalDivider from "@/app/components/journalDivider";
 import { shimmer } from "@/app/components/shimmer";
+import { getReadingTime } from "@/app/lib/readingTime";
 import type { BlogDetail } from "@/app/types";
 
 function BlogSkeleton() {
   return (
-    <div style={{ paddingTop: "7rem" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "4rem 2rem 7rem" }}>
-        <div style={{ ...shimmer, height: "0.65rem", width: "15%", marginBottom: "1.2rem" }} />
+    <div style={{ paddingTop: "9rem" }}>
+      <div style={{ maxWidth: 720, margin: "0 auto", padding: "2rem 2rem 7rem" }}>
+        <div style={{ ...shimmer, height: "0.6rem", width: "20%", marginBottom: "1.2rem" }} />
         <div style={{ ...shimmer, height: "3rem", width: "80%", marginBottom: "0.8rem" }} />
         <div style={{ ...shimmer, height: "3rem", width: "55%", marginBottom: "2rem" }} />
-        <div style={{ ...shimmer, height: 1, width: "100%", marginBottom: "2.5rem" }} />
+        <div style={{ ...shimmer, height: "0.75rem", width: "40%", marginBottom: "2.5rem" }} />
+        <div style={{ ...shimmer, width: "100%", aspectRatio: "3/2", marginBottom: "2.5rem" }} />
         {[100, 90, 95, 80, 88, 70].map((w, i) => (
           <div key={i} style={{ ...shimmer, height: "0.85rem", width: `${w}%`, marginBottom: "0.6rem" }} />
         ))}
@@ -60,24 +64,27 @@ function BodyContent({ text }: { text: string }) {
 export default function BlogEntryPage() {
   const { slug } = useParams<{ slug: string }>();
   const [entry, setEntry] = useState<BlogDetail | null>(null);
+  const [folio, setFolio] = useState<number | null>(null);
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
   useEffect(() => {
     if (!slug) return;
-    supabase
-      .from("BlogDetail")
-      .select("*")
-      .eq("slug", slug)
-      .single()
-      .then(({ data, error }) => {
-        if (error || !data) {
-          setNotFound(true);
-        } else {
-          setEntry(data as BlogDetail);
+    Promise.all([
+      supabase.from("BlogDetail").select("*").eq("slug", slug).single(),
+      supabase.from("Posts").select("slug, date").order("date", { ascending: false }),
+    ]).then(([{ data, error }, { data: allPosts }]) => {
+      if (error || !data) {
+        setNotFound(true);
+      } else {
+        setEntry(data as BlogDetail);
+        if (allPosts) {
+          const idx = allPosts.findIndex((p) => p.slug === slug);
+          if (idx !== -1) setFolio(allPosts.length - idx);
         }
-        setLoading(false);
-      });
+      }
+      setLoading(false);
+    });
   }, [slug]);
 
   if (loading) return <><Header /><BlogSkeleton /><Footer /></>;
@@ -109,7 +116,7 @@ export default function BlogEntryPage() {
             Entry not found
           </h1>
           <Link href="/pages/blog" className="card-cta">
-            ← Back to Blog
+            ← Back to the Journal
           </Link>
         </div>
         <Footer />
@@ -118,153 +125,50 @@ export default function BlogEntryPage() {
   }
 
   const e = entry!;
-
-  const formattedDate = new Date(e.date).toLocaleDateString("en-US", {
-    weekday: "long",
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-
+  const field = e.tags?.[0];
+  const readingTime = getReadingTime(e.body ?? e.summary);
   const hasGallery = e.gallery && e.gallery.length > 0;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
 
-      {/* ── Hero media ─────────────────────────────────────────── */}
-      {e.media_url ? (
-        <div
-          style={{
-            position: "relative",
-            width: "100%",
-            height: "60vh",
-            overflow: "hidden",
-            background: "var(--ink)",
-          }}
-        >
-          <img
-            src={e.media_url}
-            alt={e.title}
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              opacity: 0.72,
-            }}
-          />
-          <div
-            aria-hidden
-            style={{
-              position: "absolute",
-              inset: 0,
-              background:
-                "linear-gradient(to bottom, rgba(20,16,13,0.15) 0%, var(--ink) 100%)",
-            }}
-          />
-          <Link
-            href="/pages/blog"
-            style={{
-              position: "absolute",
-              top: "6rem",
-              left: "2rem",
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "0.72rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--gold-lt)",
-              textDecoration: "none",
-              zIndex: 2,
-            }}
-          >
-            ← Blog
-          </Link>
-        </div>
-      ) : (
-        /* No media: spacer + back link */
-        <div style={{ paddingTop: "7rem", paddingLeft: "2rem", paddingBottom: "1rem", maxWidth: 720, margin: "0 auto" }}>
-          <Link
-            href="/pages/blog"
-            style={{
-              fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
-              fontSize: "0.72rem",
-              letterSpacing: "0.1em",
-              textTransform: "uppercase",
-              color: "var(--ash)",
-              textDecoration: "none",
-              transition: "color 0.25s",
-            }}
-          >
-            ← Blog
-          </Link>
-        </div>
-      )}
-
-      {/* ── Content ────────────────────────────────────────────── */}
       <article
         style={{
           maxWidth: 720,
           margin: "0 auto",
-          padding: e.media_url ? "2rem 2rem 7rem" : "1rem 2rem 7rem",
+          padding: "8rem 2rem 7rem",
         }}
       >
-        {/* Date + location + mood */}
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            gap: "1rem",
-            marginBottom: "1.2rem",
-            flexWrap: "wrap",
-          }}
-        >
-          <p
+        {/* ── Back link + folio eyebrow ─────────────────────────── */}
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", flexWrap: "wrap", gap: "1rem", marginBottom: "1.75rem" }}>
+          <Link
+            href="/pages/blog"
             style={{
               fontFamily: "'Lato', sans-serif",
-              fontWeight: 300,
+              fontWeight: 400,
               fontSize: "0.68rem",
-              letterSpacing: "0.2em",
+              letterSpacing: "0.16em",
               textTransform: "uppercase",
-              color: "var(--gold)",
+              color: "var(--rose-lt)",
+              textDecoration: "none",
             }}
           >
-            {formattedDate}
-          </p>
-
-          {e.location && (
-            <>
-              <span style={{ color: "var(--border)", fontSize: "0.8rem" }}>·</span>
-              <p
-                style={{
-                  fontFamily: "'Lato', sans-serif",
-                  fontWeight: 300,
-                  fontSize: "0.68rem",
-                  letterSpacing: "0.15em",
-                  textTransform: "uppercase",
-                  color: "var(--ash)",
-                }}
-              >
-                {e.location}
-              </p>
-            </>
-          )}
-
-          {e.mood && (
-            <>
-              <span style={{ color: "var(--border)", fontSize: "0.8rem" }}>·</span>
-              <p
-                style={{
-                  fontFamily: "'Cormorant Garamond', serif",
-                  fontStyle: "italic",
-                  fontSize: "0.9rem",
-                  color: "var(--ash)",
-                }}
-              >
-                {e.mood}
-              </p>
-            </>
+            ← The Journal
+          </Link>
+          {typeof folio === "number" && (
+            <p
+              style={{
+                fontFamily: "'Lato', sans-serif",
+                fontWeight: 300,
+                fontSize: "0.68rem",
+                letterSpacing: "0.2em",
+                textTransform: "uppercase",
+                color: "var(--ash)",
+              }}
+            >
+              Journal / Folio {String(folio).padStart(3, "0")}
+            </p>
           )}
         </div>
 
@@ -273,11 +177,12 @@ export default function BlogEntryPage() {
           style={{
             fontFamily: "'Cormorant Garamond', serif",
             fontWeight: 400,
-            fontSize: "clamp(2.2rem, 5.5vw, 4.2rem)",
-            lineHeight: 1.08,
+            fontSize: "clamp(2.2rem, 5.5vw, 4rem)",
+            lineHeight: 1.1,
             color: "var(--gold-lt)",
-            letterSpacing: "-0.01em",
-            marginBottom: "1.5rem",
+            letterSpacing: "0.02em",
+            textTransform: "uppercase",
+            marginBottom: "1.1rem",
           }}
         >
           {e.title}
@@ -292,40 +197,46 @@ export default function BlogEntryPage() {
             fontSize: "1.2rem",
             color: "var(--ash)",
             lineHeight: 1.7,
-            marginBottom: "2rem",
+            marginBottom: "1.75rem",
           }}
         >
           {e.summary}
         </p>
 
-        {/* Gold rule */}
-        <div
-          style={{
-            width: "100%",
-            height: 1,
-            background: "var(--border)",
-            marginBottom: "2.5rem",
-            position: "relative",
-          }}
-        >
-          {/* Centered ornament */}
-          <span
-            aria-hidden
+        <JournalMetadata date={e.date} field={field} readingTime={readingTime} size="md" />
+
+        {(e.location || e.mood) && (
+          <p
             style={{
-              position: "absolute",
-              top: "50%",
-              left: "50%",
-              transform: "translate(-50%,-50%)",
-              background: "var(--ink)",
-              padding: "0 0.75rem",
-              color: "var(--gold)",
-              fontSize: "0.8rem",
-              lineHeight: 1,
+              fontFamily: "'Lato', sans-serif",
+              fontWeight: 300,
+              fontSize: "0.82rem",
+              color: "var(--ash)",
+              letterSpacing: "0.02em",
+              marginTop: "0.6rem",
             }}
           >
-            ✦
-          </span>
+            {[e.location, e.mood].filter(Boolean).join(" · ")}
+          </p>
+        )}
+
+        <div style={{ margin: "2rem 0" }}>
+          <JournalDivider ornament />
         </div>
+
+        {/* ── Framed hero plate ──────────────────────────────────── */}
+        {e.media_url && (
+          <div className="journal-frame" style={{ marginBottom: "2.5rem" }}>
+            <div style={{ position: "relative", width: "100%", aspectRatio: "3/2", overflow: "hidden" }}>
+              <img
+                src={e.media_url}
+                alt={e.title}
+                className="journal-img"
+                style={{ width: "100%", height: "100%", objectFit: "cover" }}
+              />
+            </div>
+          </div>
+        )}
 
         {/* Tags */}
         {e.tags && e.tags.length > 0 && (
@@ -365,14 +276,9 @@ export default function BlogEntryPage() {
         {/* ── Gallery ───────────────────────────────────────────── */}
         {hasGallery && (
           <div style={{ marginTop: "3rem" }}>
-            <div
-              style={{
-                width: "100%",
-                height: 1,
-                background: "var(--border)",
-                marginBottom: "2rem",
-              }}
-            />
+            <div style={{ marginBottom: "2rem" }}>
+              <JournalDivider />
+            </div>
             <p
               style={{
                 fontFamily: "'Lato', sans-serif",
@@ -384,7 +290,7 @@ export default function BlogEntryPage() {
                 marginBottom: "1.2rem",
               }}
             >
-              Photos
+              Plates
             </p>
             <div
               style={{
@@ -404,14 +310,14 @@ export default function BlogEntryPage() {
                 >
                   <img
                     src={url}
-                    alt={`${e.title} — photo ${i + 1}`}
+                    alt={`${e.title} — plate ${i + 1}`}
+                    className="journal-img gallery-img"
                     style={{
                       width: "100%",
                       height: "100%",
                       objectFit: "scale-down",
                       transition: "transform 0.5s cubic-bezier(.22,.68,0,1)",
                     }}
-                    className="gallery-img"
                   />
                 </div>
               ))}

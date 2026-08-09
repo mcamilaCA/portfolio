@@ -40,6 +40,8 @@ export type Post = {
     media_url?: string;
     date: string;
     summary: string;
+    tags?: string[];              // primary field/category, when present on the row
+    body?: string;                // full content, when selected — powers reading time
   };
 
 
