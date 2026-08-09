@@ -17,7 +17,7 @@ function ProjectSkeleton() {
     <div style={{ paddingTop: "7rem" }}>
       {/* Hero image skeleton */}
       <div style={{ width: "100%", height: "60vh", ...shimmer, borderRadius: 0 }} />
-      <div style={{ maxWidth: 900, margin: "0 auto", padding: "4rem 2rem" }}>
+      <div style={{ maxWidth: 700, margin: "0 auto", padding: "4rem 2rem" }}>
         <div style={{ ...shimmer, height: "0.7rem", width: "20%", marginBottom: "1.2rem" }} />
         <div style={{ ...shimmer, height: "3rem", width: "70%", marginBottom: "1rem" }} />
         <div style={{ ...shimmer, height: "1px", width: "100%", marginBottom: "2rem" }} />
