@@ -26,10 +26,12 @@ function MasterpieceSkeleton() {
 
 function GalleryThumb({
   project,
+  index,
   active,
   onSelect,
 }: {
   project: Project;
+  index: number;
   active: boolean;
   onSelect: () => void;
 }) {
@@ -38,6 +40,7 @@ function GalleryThumb({
       type="button"
       onClick={onSelect}
       aria-current={active}
+      data-index={index}
       className={`gallery-thumb${active ? " is-active" : ""}`}
       style={{ padding: 0, textAlign: "left" }}
     >
@@ -67,10 +70,10 @@ function GalleryThumb({
       <p
         style={{
           fontFamily: "'Cormorant Garamond', serif",
-          fontSize: "0.95rem",
+          fontSize: "0.88rem",
           color: "var(--gold-lt)",
-          padding: "0.7rem 0.85rem 0.85rem",
-          lineHeight: 1.3,
+          padding: "0.5rem 0.7rem 0.6rem",
+          lineHeight: 1.25,
           whiteSpace: "nowrap",
           overflow: "hidden",
           textOverflow: "ellipsis",
@@ -103,10 +106,15 @@ export default function Projects() {
       });
   }, []);
 
-  const scrollStrip = (direction: 1 | -1) => {
-    const el = stripRef.current;
-    if (!el) return;
-    el.scrollBy({ left: direction * el.clientWidth * 0.8, behavior: "smooth" });
+  useEffect(() => {
+    const strip = stripRef.current;
+    if (!strip) return;
+    const active = strip.querySelector<HTMLElement>(`[data-index="${selected}"]`);
+    active?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
+  }, [selected]);
+
+  const goTo = (direction: 1 | -1) => {
+    setSelected((s) => (s + direction + projects.length) % projects.length);
   };
 
   const featured = projects[selected];
@@ -115,79 +123,102 @@ export default function Projects() {
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
       <Header />
       <main>
-        <div className="page-hero">
+        <div className="page-hero" style={{ padding: "4.5rem 2rem 1rem" }}>
           <div aria-hidden className="page-hero-sparkle" />
           <SectionHeader label="Selected Work" title="The Gallery" />
         </div>
 
         {/* ── Masterpiece: the currently viewed project ─────────────── */}
-        <section style={{ padding: "1rem 2rem 3rem", background: "var(--ink)" }}>
+        <section style={{ padding: "0.25rem 2rem 0.5rem", background: "var(--ink)", marginTop: "-3.75rem" }}>
           {loading ? (
             <MasterpieceSkeleton />
           ) : featured ? (
-            <div style={{ maxWidth: 760, margin: "0 auto" }}>
-              <div className="masterpiece-frame">
-                <div
-                  style={{
-                    position: "relative",
-                    width: "100%",
-                    aspectRatio: "4/3",
-                    overflow: "hidden",
-                    background: "var(--ink-2)",
-                  }}
-                >
-                  {featured.image_url ? (
-                    <Image
-                      key={featured.slug}
-                      src={featured.image_url}
-                      alt={featured.title}
-                      fill
-                      className="masterpiece-img"
-                      style={{ objectFit: "cover" }}
-                      priority
-                    />
-                  ) : (
-                    <div
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "center",
-                      }}
-                    >
-                      <span style={{ fontSize: "2.4rem", opacity: 0.3, color: "var(--gold)" }}>✦</span>
-                    </div>
-                  )}
+            <div style={{ maxWidth: 400, margin: "0 auto" }}>
+              <div className="masterpiece-wrap">
+                <div className="masterpiece-frame" style={{ padding: "0.75rem" }}>
+                  <div
+                    style={{
+                      position: "relative",
+                      width: "100%",
+                      aspectRatio: "16/9",
+                      overflow: "hidden",
+                      background: "var(--ink-2)",
+                    }}
+                  >
+                    {featured.image_url ? (
+                      <Image
+                        key={featured.slug}
+                        src={featured.image_url}
+                        alt={featured.title}
+                        fill
+                        className="masterpiece-img"
+                        style={{ objectFit: "cover" }}
+                        priority
+                      />
+                    ) : (
+                      <div
+                        style={{
+                          width: "100%",
+                          height: "100%",
+                          display: "flex",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <span style={{ fontSize: "2rem", opacity: 0.3, color: "var(--gold)" }}>✦</span>
+                      </div>
+                    )}
+                  </div>
+                  <img
+                    src="/assets/border-frame.svg"
+                    alt=""
+                    aria-hidden
+                    className="masterpiece-ornament"
+                  />
                 </div>
-                <img
-                  src="/assets/border-frame.svg"
-                  alt=""
-                  aria-hidden
-                  className="masterpiece-ornament"
-                />
+
+                {projects.length > 1 && (
+                  <>
+                    <button
+                      type="button"
+                      aria-label="Previous project"
+                      className="gallery-arrow frame-arrow frame-arrow-left"
+                      onClick={() => goTo(-1)}
+                    >
+                      ‹
+                    </button>
+                    <button
+                      type="button"
+                      aria-label="Next project"
+                      className="gallery-arrow frame-arrow frame-arrow-right"
+                      onClick={() => goTo(1)}
+                    >
+                      ›
+                    </button>
+                  </>
+                )}
               </div>
 
               {/* ── Museum plaque ────────────────────────────────────── */}
               <div
                 style={{
-                  maxWidth: 560,
-                  margin: "2.25rem auto 0",
+                  maxWidth: 400,
+                  margin: "0.4rem auto 0",
                   textAlign: "center",
                   background: "var(--surface)",
                   border: "1px solid var(--border)",
-                  padding: "1.75rem 2rem",
+                  padding: "0.6rem 1.1rem",
                 }}
               >
                 <p
                   style={{
                     fontFamily: "'Lato', sans-serif",
                     fontWeight: 300,
-                    fontSize: "0.62rem",
+                    fontSize: "0.58rem",
                     letterSpacing: "0.25em",
                     textTransform: "uppercase",
                     color: "var(--gold)",
-                    marginBottom: "0.6rem",
+                    marginBottom: "0.3rem",
                   }}
                 >
                   Fig. {String(selected + 1).padStart(2, "0")}
@@ -197,9 +228,9 @@ export default function Projects() {
                   style={{
                     fontFamily: "'Cormorant Garamond', serif",
                     fontWeight: 500,
-                    fontSize: "1.7rem",
+                    fontSize: "1.2rem",
                     color: "var(--gold-lt)",
-                    marginBottom: "0.85rem",
+                    marginBottom: "0.35rem",
                   }}
                 >
                   {featured.title}
@@ -208,10 +239,14 @@ export default function Projects() {
                   style={{
                     fontFamily: "'Lato', sans-serif",
                     fontWeight: 300,
-                    fontSize: "0.85rem",
+                    fontSize: "0.76rem",
                     color: "var(--ash)",
-                    lineHeight: 1.7,
-                    marginBottom: "1.25rem",
+                    lineHeight: 1.45,
+                    marginBottom: "0.5rem",
+                    display: "-webkit-box",
+                    WebkitLineClamp: 2,
+                    WebkitBoxOrient: "vertical",
+                    overflow: "hidden",
                   }}
                 >
                   {featured.summary}
@@ -222,8 +257,8 @@ export default function Projects() {
                       display: "flex",
                       flexWrap: "wrap",
                       justifyContent: "center",
-                      gap: "0.5rem",
-                      marginBottom: "1.4rem",
+                      gap: "0.35rem",
+                      marginBottom: "0.6rem",
                     }}
                   >
                     {featured.tags.map((tag) => (
@@ -263,42 +298,17 @@ export default function Projects() {
 
         {/* ── Gallery strip: the rest of the collection ─────────────── */}
         {!loading && projects.length > 1 && (
-          <section style={{ padding: "0 2rem 7rem", background: "var(--ink)" }}>
-            <div
-              style={{
-                maxWidth: 1200,
-                margin: "0 auto",
-                display: "flex",
-                alignItems: "center",
-                gap: "1rem",
-              }}
-            >
-              <button
-                type="button"
-                aria-label="Scroll gallery left"
-                className="gallery-arrow"
-                onClick={() => scrollStrip(-1)}
-              >
-                ‹
-              </button>
-              <div ref={stripRef} className="gallery-strip">
-                {projects.map((p, i) => (
-                  <GalleryThumb
-                    key={p.slug}
-                    project={p}
-                    active={i === selected}
-                    onSelect={() => setSelected(i)}
-                  />
-                ))}
-              </div>
-              <button
-                type="button"
-                aria-label="Scroll gallery right"
-                className="gallery-arrow"
-                onClick={() => scrollStrip(1)}
-              >
-                ›
-              </button>
+          <section style={{ padding: "0 2rem 3rem", background: "var(--ink)" }}>
+            <div ref={stripRef} className="gallery-strip" style={{ maxWidth: 1200, margin: "0 auto" }}>
+              {projects.map((p, i) => (
+                <GalleryThumb
+                  key={p.slug}
+                  project={p}
+                  index={i}
+                  active={i === selected}
+                  onSelect={() => setSelected(i)}
+                />
+              ))}
             </div>
           </section>
         )}
