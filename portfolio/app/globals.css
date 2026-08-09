@@ -448,3 +448,165 @@ img {
     height: 42px;
   }
 }
+
+/* ── The Journal (Blog) — editorial archive system ─────────────── */
+.journal-rule {
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+}
+
+.journal-img {
+  filter: grayscale(18%) sepia(10%) contrast(1.04) brightness(0.98);
+}
+
+.journal-frame {
+  border: 1px solid var(--border);
+  background: var(--surface);
+  padding: 0.5rem;
+}
+
+.journal-card {
+  display: block;
+  text-decoration: none;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  transition: border-color 0.4s ease;
+}
+
+.journal-card:hover {
+  border-color: var(--rose-lt);
+}
+
+.journal-card-media {
+  overflow: hidden;
+}
+
+.journal-card-img {
+  transition: transform 0.7s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.journal-card:hover .journal-card-img {
+  transform: scale(1.04);
+}
+
+.journal-card-title {
+  transition: transform 0.5s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.journal-card:hover .journal-card-title {
+  transform: translateX(6px);
+}
+
+.journal-cta {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  color: var(--rose-lt) !important;
+  text-decoration: none;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 0.72rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.journal-cta::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -4px;
+  height: 1px;
+  width: 0;
+  background: var(--rose-lt);
+  transition: width 0.5s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.journal-card:hover .journal-cta::after,
+.journal-cta:hover::after {
+  width: 100%;
+}
+
+.journal-cta-arrow {
+  display: inline-block;
+  opacity: 0.55;
+  transition: transform 0.5s cubic-bezier(0.22, 0.68, 0, 1), opacity 0.4s ease;
+}
+
+.journal-card:hover .journal-cta-arrow,
+.journal-cta:hover .journal-cta-arrow {
+  transform: translateX(4px);
+  opacity: 1;
+}
+
+.journal-filter {
+  position: relative;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0 0 0.6rem;
+  font-family: "Lato", sans-serif;
+  font-weight: 400;
+  font-size: 0.66rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--ash);
+  transition: color 0.3s ease;
+}
+
+.journal-filter-roman {
+  color: var(--rose-lt);
+  opacity: 0.75;
+  margin-right: 0.5rem;
+}
+
+.journal-filter::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: var(--rose);
+  transform: scaleX(0);
+  transition: transform 0.4s cubic-bezier(0.22, 0.68, 0, 1);
+}
+
+.journal-filter:hover {
+  color: var(--gold-lt);
+}
+
+.journal-filter.is-active {
+  color: var(--gold-lt);
+}
+
+.journal-filter.is-active::after {
+  transform: scaleX(1);
+}
+
+.journal-card-link {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.journal-card-link:focus-visible,
+.journal-filter:focus-visible,
+.journal-cta:focus-visible {
+  outline: 1px solid var(--rose-lt);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .journal-card,
+  .journal-card-img,
+  .journal-card-title,
+  .journal-cta,
+  .journal-cta::after,
+  .journal-cta-arrow,
+  .journal-filter::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
