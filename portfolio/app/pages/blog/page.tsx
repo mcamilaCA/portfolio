@@ -67,8 +67,8 @@ export default function Blog() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(auto-fit, minmax(165px, 1fr))",
-                    gap: "1rem",
+                    gridTemplateColumns: "repeat(4, minmax(165px, 1fr))",
+                    gap: "24px",
                     marginTop: "2.5rem",
                   }}
                 >

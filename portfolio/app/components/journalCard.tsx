@@ -26,8 +26,8 @@ export default function JournalCard({ entry, index, folio }: Props) {
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(24px)",
         transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s, border-color 0.4s ease`,
-        display: "flex",
-        flexDirection: "column",
+        display: "grid",
+        gridTemplateRows: "repeat(4, auto)",
         height: "100%",
       }}
     >
@@ -37,7 +37,7 @@ export default function JournalCard({ entry, index, folio }: Props) {
         aria-label={entry.title}
       />
 
-      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "2.4/1" }}>
+      <div className="journal-card-media" style={{ position: "relative", width: "100%", aspectRatio: "16/9" }}>
         {entry.media_url ? (
           <Image
             src={entry.media_url}
@@ -62,7 +62,7 @@ export default function JournalCard({ entry, index, folio }: Props) {
         )}
       </div>
 
-      <div style={{ padding: "0.6rem", display: "flex", flexDirection: "column", flex: 1 }}>
+      <div style={{ padding: "0.6rem", display: "grid", gridTemplateRows: "repeat(4, auto)", flex: 1 }}>
         <JournalMetadata folio={folio} date={entry.date} field={field} readingTime={readingTime} compact />
 
         <div style={{ margin: "0.4rem 0" }}>
