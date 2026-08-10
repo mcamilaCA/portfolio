@@ -6,8 +6,8 @@ import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import ProjectCard from "@/app/components/project_card";
-import BlogCard from "@/app/components/blog_card";
-import SkeletonCard from "@/app/components/skeletonCard";
+import JournalCard from "@/app/components/journalCard";
+import JournalCardSkeleton from "@/app/components/journalCardSkeleton";
 import SectionHeader from "@/app/components/sectionHeader";
 import type { Project, Post } from "@/app/types";
 
@@ -327,7 +327,7 @@ export default function Home() {
           }}
         >
           {loading
-            ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
+            ? [0, 1, 2].map((i) => <JournalCardSkeleton key={i} />)
             : projects.map((p, i) => (
                 <ProjectCard key={p.id} project={p} index={i} />
               ))}
@@ -363,9 +363,9 @@ export default function Home() {
           }}
         >
           {loading
-            ? [0, 1, 2].map((i) => <SkeletonCard key={i} />)
+            ? [0, 1, 2].map((i) => <JournalCardSkeleton key={i} />)
             : blogs.map((v, i) => (
-                <BlogCard key={v.id} entry={v} index={i} />
+                <JournalCard key={v.id} entry={v} index={i} folio={blogs.length - i} />
               ))}
         </div>
 
