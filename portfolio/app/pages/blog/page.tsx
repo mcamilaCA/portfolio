@@ -67,7 +67,7 @@ export default function Blog() {
                 <div
                   style={{
                     display: "grid",
-                    gridTemplateColumns: "repeat(4, minmax(165px, 1fr))",
+                    gridTemplateColumns: "repeat(4, 1fr)",
                     gap: "24px",
                     marginTop: "2.5rem",
                   }}
