@@ -62,7 +62,7 @@ export default function JournalCard({ entry, index, folio }: Props) {
         )}
       </div>
 
-      <div style={{ padding: "0.6rem", display: "flex", flexDirection: "column", flex: 1 }}>
+      <div style={{ padding: "0.6rem", display: "grid", gridTemplateRows: "repeat(4, auto)", flex: 1 }}>
         <JournalMetadata folio={folio} date={entry.date} field={field} readingTime={readingTime} compact />
 
         <div style={{ margin: "0.4rem 0" }}>
