@@ -26,8 +26,8 @@ export default function JournalCard({ entry, index, folio }: Props) {
         opacity: visible ? 1 : 0,
         transform: visible ? "translateY(0)" : "translateY(24px)",
         transition: `opacity 0.6s ease ${index * 0.08}s, transform 0.6s ease ${index * 0.08}s, border-color 0.4s ease`,
-        display: "flex",
-        flexDirection: "column",
+        display: "grid",
+        gridTemplateRows: "repeat(4, auto)",
         height: "100%",
       }}
     >
