@@ -1,9 +1,13 @@
 "use client";
 
-import { useState } from "react";
+import { useRef, useState } from "react";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
+
+const MIN_SUBMIT_SECONDS = 3; // bots that fill+submit instantly get caught here
+const COOLDOWN_MS = 60_000; // one submission per minute per browser
+const LAST_SUBMIT_KEY = "contact_last_submit";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -14,6 +18,8 @@ export default function Contact() {
   });
 
   const [successMessage, setSuccessMessage] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const formRenderedAt = useRef(Date.now());
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -21,13 +27,38 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Form submitted"); // Debugging log
+    setErrorMessage("");
+
+    // Honeypot: real visitors never see or fill this field, so any value means a bot.
+    const honeypot = (new FormData(e.target as HTMLFormElement).get("company") as string) ?? "";
+    if (honeypot.trim() !== "") {
+      // Pretend it worked so the bot doesn't learn the field is a trap.
+      setSuccessMessage(
+        "I look forward to discussing our future endeavours. Please be patient as I will answer as soon as I am capable of!"
+      );
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      return;
+    }
+
+    if (Date.now() - formRenderedAt.current < MIN_SUBMIT_SECONDS * 1000) {
+      setErrorMessage("That was fast! Please take a moment and try again.");
+      return;
+    }
+
+    const lastSubmit = Number(window.localStorage.getItem(LAST_SUBMIT_KEY) ?? 0);
+    if (Date.now() - lastSubmit < COOLDOWN_MS) {
+      setErrorMessage("You've just sent a message — please wait a minute before sending another.");
+      return;
+    }
+
     try {
       const { error } = await supabase.from("Mails").insert([formData]);
 
       if (error) {
         console.error("Error saving message to database:", error.message);
+        setErrorMessage("Something went wrong sending your message. Please try again.");
       } else {
+        window.localStorage.setItem(LAST_SUBMIT_KEY, String(Date.now()));
         setSuccessMessage(
           "I look forward to discussing our future endeavours. Please be patient as I will answer as soon as I am capable of!"
         );
@@ -35,6 +66,7 @@ export default function Contact() {
       }
     } catch (error) {
       console.error("Error submitting form:", error);
+      setErrorMessage("Something went wrong sending your message. Please try again.");
     }
   };
 
@@ -112,6 +144,24 @@ export default function Contact() {
             boxShadow: "0 20px 44px rgba(0,0,0,0.35)",
           }}
         >
+          <input
+            type="text"
+            name="company"
+            autoComplete="off"
+            tabIndex={-1}
+            aria-hidden="true"
+            style={{
+              position: "absolute",
+              width: 1,
+              height: 1,
+              padding: 0,
+              margin: -1,
+              overflow: "hidden",
+              clip: "rect(0,0,0,0)",
+              whiteSpace: "nowrap",
+              border: 0,
+            }}
+          />
           <input
             type="text"
             name="name"
@@ -194,6 +244,24 @@ export default function Contact() {
             }}
           >
             {successMessage}
+          </p>
+        )}
+        {errorMessage && (
+          <p
+            style={{
+              marginTop: "2rem",
+              fontSize: "1rem",
+              color: "var(--gold-lt)",
+              fontFamily: "'Lato', sans-serif",
+              fontWeight: 300,
+              background: "var(--ink-2)",
+              border: "1px solid var(--border)",
+              padding: "1rem 1.5rem",
+              borderRadius: "2px",
+              maxWidth: "600px",
+            }}
+          >
+            {errorMessage}
           </p>
         )}
       </main>

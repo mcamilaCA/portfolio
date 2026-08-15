@@ -99,6 +99,44 @@ img {
   opacity: 0.75;
 }
 
+  /* ── Hero CTA buttons ─────────────────────────────────────────── */
+.hero-btn-primary {
+  transition: background 0.25s, transform 0.2s;
+}
+
+.hero-btn-primary:hover {
+  background: var(--gold-lt) !important;
+  transform: scale(1.03);
+}
+
+.hero-btn-secondary {
+  transition: border-color 0.25s, transform 0.2s;
+}
+
+.hero-btn-secondary:hover {
+  border-color: var(--gold) !important;
+  transform: scale(1.03);
+}
+
+  /* ── Project CTA buttons ─────────────────────────────────────────── */
+.project-cta-primary {
+  transition: background 0.25s, transform 0.2s;
+}
+
+.project-cta-primary:hover {
+  background: var(--gold-light) !important;
+  transform: scale(1.03);
+}
+
+.project-cta-secondary {
+  transition: border-color 0.25s, color 0.25s;
+}
+
+.project-cta-secondary:hover {
+  border-color: var(--gold) !important;
+  color: var(--gold) !important;
+}
+
 /* ── Footer links ──────────────────────────────────────────────── */
 .footer-link {
   display: block;

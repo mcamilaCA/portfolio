@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
@@ -9,64 +5,27 @@ import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
 import MetaItem from "@/app/components/metaItem";
 import Section from "@/app/components/section";
-import { shimmer } from "@/app/components/shimmer";
 import type { ProjectDetail } from "@/app/types";
 
-function ProjectSkeleton() {
-  return (
-    <div style={{ paddingTop: "7rem" }}>
-      {/* Hero image skeleton */}
-      <div style={{ width: "100%", height: "60vh", ...shimmer, borderRadius: 0 }} />
-      <div style={{ maxWidth: 700, margin: "0 auto", padding: "4rem 2rem" }}>
-        <div style={{ ...shimmer, height: "0.7rem", width: "20%", marginBottom: "1.2rem" }} />
-        <div style={{ ...shimmer, height: "3rem", width: "70%", marginBottom: "1rem" }} />
-        <div style={{ ...shimmer, height: "1px", width: "100%", marginBottom: "2rem" }} />
-        <div style={{ display: "flex", gap: "3rem", marginBottom: "3rem" }}>
-          {[1, 2, 3].map((i) => (
-            <div key={i}>
-              <div style={{ ...shimmer, height: "0.6rem", width: 60, marginBottom: "0.5rem" }} />
-              <div style={{ ...shimmer, height: "1rem", width: 90 }} />
-            </div>
-          ))}
-        </div>
-        {[1, 2, 3, 4].map((i) => (
-          <div key={i} style={{ ...shimmer, height: "0.85rem", width: `${100 - i * 7}%`, marginBottom: "0.6rem" }} />
-        ))}
-      </div>
-    </div>
-  );
-}
+export const revalidate = 60;
 
 // ─────────────────────────────────────────────────────────────────
 // Main page
 // ─────────────────────────────────────────────────────────────────
-export default function ProjectPage() {
-  const { slug } = useParams<{ slug: string }>();
-  const router = useRouter();
-  const [project, setProject] = useState<ProjectDetail | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+export default async function ProjectPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  useEffect(() => {
-    if (!slug) return;
-    supabase
-      .from("ProjectDetail")
-      .select("*")
-      .eq("slug", slug)
-      .single()
-      .then(({ data, error }) => {
-        if (error || !data) {
-          setNotFound(true);
-        } else {
-          setProject(data as ProjectDetail);
-        }
-        setLoading(false);
-      });
-  }, [slug]);
+  const { data, error } = await supabase
+    .from("ProjectDetail")
+    .select("*")
+    .eq("slug", slug)
+    .single();
 
-  if (loading) return <><Header /><ProjectSkeleton /><Footer /></>;
-
-  if (notFound) {
+  if (error || !data) {
     return (
       <>
         <Header />
@@ -101,7 +60,7 @@ export default function ProjectPage() {
     );
   }
 
-  const p = project!;
+  const p = data as ProjectDetail;
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--ink)" }}>
@@ -290,6 +249,7 @@ export default function ProjectPage() {
                 href={p.live_url}
                 target="_blank"
                 rel="noreferrer"
+                className="project-cta-primary"
                 style={{
                   display: "inline-block",
                   padding: "0.85rem 2.2rem",
@@ -301,15 +261,6 @@ export default function ProjectPage() {
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   textDecoration: "none",
-                  transition: "background 0.25s, transform 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold-light)";
-                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.03)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold)";
-                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
                 }}
               >
                 View Live ↗
@@ -320,6 +271,7 @@ export default function ProjectPage() {
                 href={p.repo_url}
                 target="_blank"
                 rel="noreferrer"
+                className="project-cta-secondary"
                 style={{
                   display: "inline-block",
                   padding: "0.85rem 2.2rem",
@@ -331,17 +283,6 @@ export default function ProjectPage() {
                   letterSpacing: "0.12em",
                   textTransform: "uppercase",
                   textDecoration: "none",
-                  transition: "border-color 0.25s, color 0.25s",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = "var(--gold)";
-                  el.style.color = "var(--gold)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = "var(--border)";
-                  el.style.color = "var(--gold-lt)";
                 }}
               >
                 View Repo ↗

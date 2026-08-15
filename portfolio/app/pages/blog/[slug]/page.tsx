@@ -1,7 +1,3 @@
-"use client";
-
-import { useEffect, useState } from "react";
-import { useParams } from "next/navigation";
 import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
@@ -9,26 +5,10 @@ import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
 import JournalMetadata from "@/app/components/journalMetadata";
 import JournalDivider from "@/app/components/journalDivider";
-import { shimmer } from "@/app/components/shimmer";
 import { getReadingTime } from "@/app/lib/readingTime";
 import type { BlogDetail } from "@/app/types";
 
-function BlogSkeleton() {
-  return (
-    <div style={{ paddingTop: "9rem" }}>
-      <div style={{ maxWidth: 720, margin: "0 auto", padding: "2rem 2rem 7rem" }}>
-        <div style={{ ...shimmer, height: "0.6rem", width: "20%", marginBottom: "1.2rem" }} />
-        <div style={{ ...shimmer, height: "3rem", width: "80%", marginBottom: "0.8rem" }} />
-        <div style={{ ...shimmer, height: "3rem", width: "55%", marginBottom: "2rem" }} />
-        <div style={{ ...shimmer, height: "0.75rem", width: "40%", marginBottom: "2.5rem" }} />
-        <div style={{ ...shimmer, width: "100%", aspectRatio: "3/2", marginBottom: "2.5rem" }} />
-        {[100, 90, 95, 80, 88, 70].map((w, i) => (
-          <div key={i} style={{ ...shimmer, height: "0.85rem", width: `${w}%`, marginBottom: "0.6rem" }} />
-        ))}
-      </div>
-    </div>
-  );
-}
+export const revalidate = 60;
 
 // ─────────────────────────────────────────────────────────────────
 // Drop-cap first letter helper
@@ -61,35 +41,22 @@ function BodyContent({ text }: { text: string }) {
 // ─────────────────────────────────────────────────────────────────
 // Main page
 // ─────────────────────────────────────────────────────────────────
-export default function BlogEntryPage() {
-  const { slug } = useParams<{ slug: string }>();
-  const [entry, setEntry] = useState<BlogDetail | null>(null);
-  const [folio, setFolio] = useState<number | null>(null);
-  const [loading, setLoading] = useState(true);
-  const [notFound, setNotFound] = useState(false);
+export default async function BlogEntryPage({
+  params,
+}: {
+  params: Promise<{ slug: string }>;
+}) {
+  const { slug } = await params;
 
-  useEffect(() => {
-    if (!slug) return;
-    Promise.all([
-      supabase.from("BlogDetail").select("*").eq("slug", slug).single(),
-      supabase.from("Posts").select("slug, date").order("date", { ascending: false }),
-    ]).then(([{ data, error }, { data: allPosts }]) => {
-      if (error || !data) {
-        setNotFound(true);
-      } else {
-        setEntry(data as BlogDetail);
-        if (allPosts) {
-          const idx = allPosts.findIndex((p) => p.slug === slug);
-          if (idx !== -1) setFolio(allPosts.length - idx);
-        }
-      }
-      setLoading(false);
-    });
-  }, [slug]);
+  // BlogDetail isn't filtered server-side here because we can't confirm it exposes
+  // a `published` column without breaking every post if it doesn't. The RLS policy
+  // (see supabase/migrations) is the real enforcement boundary for this query.
+  const [{ data, error }, { data: allPosts }] = await Promise.all([
+    supabase.from("BlogDetail").select("*").eq("slug", slug).single(),
+    supabase.from("Posts").select("slug, date").eq("published", true).order("date", { ascending: false }),
+  ]);
 
-  if (loading) return <><Header /><BlogSkeleton /><Footer /></>;
-
-  if (notFound) {
+  if (error || !data) {
     return (
       <>
         <Header />
@@ -124,7 +91,13 @@ export default function BlogEntryPage() {
     );
   }
 
-  const e = entry!;
+  const e = data as BlogDetail;
+  let folio: number | null = null;
+  if (allPosts) {
+    const idx = allPosts.findIndex((p) => p.slug === slug);
+    if (idx !== -1) folio = allPosts.length - idx;
+  }
+
   const field = e.tags?.[0];
   const readingTime = getReadingTime(e.body ?? e.summary);
   const hasGallery = e.gallery && e.gallery.length > 0;
