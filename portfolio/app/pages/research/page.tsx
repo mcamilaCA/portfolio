@@ -3,6 +3,7 @@ import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import SectionHeader from "@/app/components/sectionHeader";
 import ResearchEntryCard from "@/app/components/researchEntryCard";
+import StatusMessage from "@/app/components/statusMessage";
 import type { ResearchEntry, ResearchKind } from "@/app/types";
 
 export const revalidate = 60;
@@ -21,7 +22,7 @@ export default async function Research() {
     .order("display_order", { ascending: true });
 
   if (error) {
-    console.error("Supabase error:", error);
+    console.error("Supabase error fetching research entries:", error);
   }
 
   const entries: ResearchEntry[] = data ?? [];
@@ -59,27 +60,31 @@ export default async function Research() {
         <img src="/assets/section-rule.svg" alt="" aria-hidden style={{ width: 140, opacity: 0.8, margin: "0 auto" }} />
       </div>
       <main>
-        {KIND_ORDER.map(({ kind, label, title }, sectionIndex) => {
-          const groupEntries = entries.filter((e) => e.kind === kind);
-          if (groupEntries.length === 0) return null;
+        {error ? (
+          <StatusMessage layout="inline" variant="error" />
+        ) : (
+          KIND_ORDER.map(({ kind, label, title }, sectionIndex) => {
+            const groupEntries = entries.filter((e) => e.kind === kind);
+            if (groupEntries.length === 0) return null;
 
-          return (
-            <section
-              key={kind}
-              style={{
-                padding: "4rem 2rem 5rem",
-                background: sectionIndex % 2 === 0 ? "var(--surface)" : "var(--surface-alt)",
-              }}
-            >
-              <SectionHeader label={label} title={title} />
-              <div style={{ maxWidth: 800, margin: "0 auto" }}>
-                {groupEntries.map((entry, i) => (
-                  <ResearchEntryCard key={entry.id} entry={entry} index={i} />
-                ))}
-              </div>
-            </section>
-          );
-        })}
+            return (
+              <section
+                key={kind}
+                style={{
+                  padding: "4rem 2rem 5rem",
+                  background: sectionIndex % 2 === 0 ? "var(--surface)" : "var(--surface-alt)",
+                }}
+              >
+                <SectionHeader label={label} title={title} />
+                <div style={{ maxWidth: 800, margin: "0 auto" }}>
+                  {groupEntries.map((entry, i) => (
+                    <ResearchEntryCard key={entry.id} entry={entry} index={i} />
+                  ))}
+                </div>
+              </section>
+            );
+          })
+        )}
       </main>
       <Footer />
     </div>

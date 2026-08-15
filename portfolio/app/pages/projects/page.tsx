@@ -2,6 +2,7 @@ import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import ProjectGallery from "@/app/components/projectGallery";
+import StatusMessage from "@/app/components/statusMessage";
 
 export const revalidate = 60;
 
@@ -12,7 +13,7 @@ export default async function Projects() {
     .order("date", { ascending: false });
 
   if (error) {
-    console.error("Supabase error:", error);
+    console.error("Supabase error fetching projects:", error);
   }
 
   return (
@@ -58,7 +59,11 @@ export default async function Projects() {
 
         {/* ── Masterpiece (left) + vertical collection rail (right) ─────── */}
         <section style={{ padding: "1rem 2rem 3rem", background: "var(--ink)" }}>
-          <ProjectGallery projects={data ?? []} />
+          {error ? (
+            <StatusMessage layout="inline" variant="error" />
+          ) : (
+            <ProjectGallery projects={data ?? []} />
+          )}
         </section>
       </main>
       <Footer />

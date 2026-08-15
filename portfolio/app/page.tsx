@@ -6,6 +6,7 @@ import ProjectCard from "@/app/components/project_card";
 import JournalCard from "@/app/components/journalCard";
 import SectionHeader from "@/app/components/sectionHeader";
 import HeroParallax from "@/app/components/heroParallax";
+import StatusMessage from "@/app/components/statusMessage";
 
 export const revalidate = 60;
 
@@ -18,7 +19,10 @@ const SKILLS = [
 ];
 
 export default async function Home() {
-  const [{ data: projectData }, { data: blogData }] = await Promise.all([
+  const [
+    { data: projectData, error: projectError },
+    { data: blogData, error: blogError },
+  ] = await Promise.all([
     supabase
       .from("Projects")
       .select("id, title, summary, image_url, summary, git_url, proj_url, tags, slug, date")
@@ -31,6 +35,13 @@ export default async function Home() {
       .order("date", { ascending: false })
       .limit(3),
   ]);
+
+  if (projectError) {
+    console.error("Supabase error fetching projects:", projectError);
+  }
+  if (blogError) {
+    console.error("Supabase error fetching posts:", blogError);
+  }
 
   const projects = projectData ?? [];
   const blogs = blogData ?? [];
@@ -262,21 +273,25 @@ export default async function Home() {
       <section style={{ padding: "7rem 2rem", background: "var(--surface)" }}>
         <SectionHeader label="Selected Work" title="Recent Projects" />
 
-        <div
-          style={{
-              maxWidth: 1200,
-              margin: "0 auto",
-              display: "grid",
-              gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
-              alignItems: "stretch",
-              justifyContent: "center",
-              gap: "2rem",
-          }}
-        >
-          {projects.map((p, i) => (
-            <ProjectCard key={p.id} project={p} index={i} />
-          ))}
-        </div>
+        {projectError ? (
+          <StatusMessage layout="inline" variant="error" />
+        ) : (
+          <div
+            style={{
+                maxWidth: 1200,
+                margin: "0 auto",
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fit, minmax(220px,260px))",
+                alignItems: "stretch",
+                justifyContent: "center",
+                gap: "2rem",
+            }}
+          >
+            {projects.map((p, i) => (
+              <ProjectCard key={p.id} project={p} index={i} />
+            ))}
+          </div>
+        )}
 
         <div
           style={{
@@ -296,21 +311,25 @@ export default async function Home() {
       <section style={{ padding: "7rem 2rem", background: "var(--surface-alt)" }}>
         <SectionHeader label="Field Notes" title="Latest Blog Entries" />
 
-        <div
-          style={{
-            maxWidth: 1200,
-            margin: "0 auto",
-            display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(220px, 260px))",
-            alignItems: "stretch",
-            justifyContent: "center",
-            gap: "2rem",
-          }}
-        >
-          {blogs.map((v, i) => (
-            <JournalCard key={v.id} entry={v} index={i} folio={blogs.length - i} />
-          ))}
-        </div>
+        {blogError ? (
+          <StatusMessage layout="inline" variant="error" />
+        ) : (
+          <div
+            style={{
+              maxWidth: 1200,
+              margin: "0 auto",
+              display: "grid",
+              gridTemplateColumns: "repeat(auto-fit, minmax(220px, 260px))",
+              alignItems: "stretch",
+              justifyContent: "center",
+              gap: "2rem",
+            }}
+          >
+            {blogs.map((v, i) => (
+              <JournalCard key={v.id} entry={v} index={i} folio={blogs.length - i} />
+            ))}
+          </div>
+        )}
 
         <div
           style={{
