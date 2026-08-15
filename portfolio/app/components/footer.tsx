@@ -106,7 +106,7 @@ export default function Footer() {
         }}
       >
         <p style={copyStyle}>© {year}  Maria Camila Copo Amador. All rights reserved.</p>
-        <p style={copyStyle}> The worst enemy of creativity is self-doubt.     - Sylvia plath</p>
+        <p style={copyStyle}> The worst enemy of creativity is self-doubt.     - Sylvia Plath</p>
       </div>
     </footer>
   );
