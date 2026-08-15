@@ -5,6 +5,7 @@ import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
 import MetaItem from "@/app/components/metaItem";
 import Section from "@/app/components/section";
+import StatusMessage from "@/app/components/statusMessage";
 import type { ProjectDetail } from "@/app/types";
 
 export const revalidate = 60;
@@ -25,36 +26,33 @@ export default async function ProjectPage({
     .eq("slug", slug)
     .single();
 
-  if (error || !data) {
+  // PGRST116 is Supabase's "no rows for .single()" code — a legitimate
+  // not-found. Any other error is a real fetch failure and gets its own state.
+  if (error && error.code !== "PGRST116") {
+    console.error("Supabase error fetching project:", error);
     return (
       <>
         <Header />
-        <div
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "var(--ink)",
-            gap: "1.5rem",
-          }}
-        >
-          <span style={{ color: "var(--gold)", fontSize: "2rem" }}>✦</span>
-          <h1
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: "3rem",
-              color: "var(--gold-lt)",
-            }}
-          >
-            Project not found
-          </h1>
-          <Link href="/pages/projects" className="card-cta">
-            ← Back to projects
-          </Link>
-        </div>
+        <StatusMessage
+          variant="error"
+          backHref="/pages/projects"
+          backLabel="← Back to projects"
+        />
+        <Footer />
+      </>
+    );
+  }
+
+  if (!data) {
+    return (
+      <>
+        <Header />
+        <StatusMessage
+          variant="not-found"
+          title="Project not found"
+          backHref="/pages/projects"
+          backLabel="← Back to projects"
+        />
         <Footer />
       </>
     );

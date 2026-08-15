@@ -5,6 +5,7 @@ import Footer from "@/app/components/footer";
 import Tag from "@/app/components/tag";
 import JournalMetadata from "@/app/components/journalMetadata";
 import JournalDivider from "@/app/components/journalDivider";
+import StatusMessage from "@/app/components/statusMessage";
 import { getReadingTime } from "@/app/lib/readingTime";
 import type { BlogDetail } from "@/app/types";
 
@@ -56,36 +57,33 @@ export default async function BlogEntryPage({
     supabase.from("Posts").select("slug, date").eq("published", true).order("date", { ascending: false }),
   ]);
 
-  if (error || !data) {
+  // PGRST116 is Supabase's "no rows for .single()" code — a legitimate
+  // not-found. Any other error is a real fetch failure and gets its own state.
+  if (error && error.code !== "PGRST116") {
+    console.error("Supabase error fetching blog entry:", error);
     return (
       <>
         <Header />
-        <div
-          style={{
-            minHeight: "100vh",
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-            justifyContent: "center",
-            background: "var(--ink)",
-            gap: "1.5rem",
-          }}
-        >
-          <span style={{ color: "var(--gold)", fontSize: "2rem" }}>✦</span>
-          <h1
-            style={{
-              fontFamily: "'Cormorant Garamond', serif",
-              fontWeight: 300,
-              fontSize: "3rem",
-              color: "var(--gold-lt)",
-            }}
-          >
-            Entry not found
-          </h1>
-          <Link href="/pages/blog" className="card-cta">
-            ← Back to the Journal
-          </Link>
-        </div>
+        <StatusMessage
+          variant="error"
+          backHref="/pages/blog"
+          backLabel="← Back to the Journal"
+        />
+        <Footer />
+      </>
+    );
+  }
+
+  if (!data) {
+    return (
+      <>
+        <Header />
+        <StatusMessage
+          variant="not-found"
+          title="Entry not found"
+          backHref="/pages/blog"
+          backLabel="← Back to the Journal"
+        />
         <Footer />
       </>
     );
