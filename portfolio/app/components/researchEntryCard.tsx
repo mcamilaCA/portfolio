@@ -1,3 +1,5 @@
+"use client";
+
 import { useReveal } from "@/app/hooks/Usereveal";
 import Tag from "@/app/components/tag";
 import MetaItem from "@/app/components/metaItem";

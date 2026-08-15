@@ -1,15 +1,13 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import supabase from "@/app/config/supabase_client";
 import Header from "@/app/components/header";
 import Footer from "@/app/components/footer";
 import ProjectCard from "@/app/components/project_card";
 import JournalCard from "@/app/components/journalCard";
-import JournalCardSkeleton from "@/app/components/journalCardSkeleton";
 import SectionHeader from "@/app/components/sectionHeader";
-import type { Project, Post } from "@/app/types";
+import HeroParallax from "@/app/components/heroParallax";
+
+export const revalidate = 60;
 
 const SKILLS = [
   { icon: "/assets/icon-data-science.svg", label: "Data Science" },
@@ -19,49 +17,23 @@ const SKILLS = [
   { icon: "/assets/icon-storytelling.svg", label: "Storytelling" },
 ];
 
-export default function Home() {
-  const [projects, setProjects] = useState<Project[]>([]);
-  const [blogs, setBlogs] = useState<Post[]>([]);
-  const [loading, setLoading] = useState(true);
+export default async function Home() {
+  const [{ data: projectData }, { data: blogData }] = await Promise.all([
+    supabase
+      .from("Projects")
+      .select("id, title, summary, image_url, summary, git_url, proj_url, tags, slug, date")
+      .order("date", { ascending: false })
+      .limit(3),
+    supabase
+      .from("Posts")
+      .select("id, title, slug, published, media_url,date, summary")
+      .eq("published", true)
+      .order("date", { ascending: false })
+      .limit(3),
+  ]);
 
-  const heroContentRef = useRef<HTMLDivElement>(null);
-
-  // ── Getting Supabase data ──────────────────────────────────────────────────
-  useEffect(() => {
-    async function fetchData() {
-      const [{ data: projectData }, { data: blogData }] = await Promise.all([
-        supabase
-          .from("Projects")
-          .select("id, title, summary, image_url, summary, git_url, proj_url, tags, slug, date")
-          .order("date", { ascending: false })
-          .limit(3),
-        supabase
-          .from("Posts")
-          .select("id, title, slug, published, media_url,date, summary")
-          .order("date", { ascending: false })
-          .limit(3),
-      ]);
-
-      if (projectData) setProjects(projectData);
-      if (blogData) setBlogs(blogData);
-      setLoading(false);
-    }
-
-    fetchData();
-  }, []);
-
-  // ── Hero parallax ───────────────────────────────────────────────
-  useEffect(() => {
-    const onScroll = () => {
-      const el = heroContentRef.current;
-      if (!el) return;
-      const y = window.scrollY;
-      el.style.transform = `translateY(${y * 0.35}px)`;
-      el.style.opacity = `${Math.max(0, 1 - y / 500)}`;
-    };
-    window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  const projects = projectData ?? [];
+  const blogs = blogData ?? [];
 
   return (
     <div style={{ minHeight: "100vh", background: "var(--parchment)", overflowX: "hidden" }}>
@@ -92,13 +64,7 @@ export default function Home() {
         </div>
 
         {/* Hero content */}
-        <div
-          ref={heroContentRef}
-          className="hero-grid"
-          style={{
-            animation: "heroReveal 1.1s cubic-bezier(.22,.68,0,1) forwards",
-          }}
-        >
+        <HeroParallax>
           {/* Content to the left */}
           <div>
             <img
@@ -223,15 +189,6 @@ export default function Home() {
                   textTransform: "uppercase",
                   textDecoration: "none",
                   borderRadius: 1,
-                  transition: "background 0.25s, transform 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = "var(--gold-lt)";
-                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1.03)";
-                }}
-                onMouseLeave={(e) => {
-                  (e.currentTarget as HTMLAnchorElement).style.background = "linear-gradient(135deg,var(--gold),var(--gold-dp))";
-                  (e.currentTarget as HTMLAnchorElement).style.transform = "scale(1)";
                 }}
               >
                 View Projects
@@ -239,6 +196,7 @@ export default function Home() {
 
               <Link
                 href="/pages/research"
+                className="hero-btn-secondary"
                 style={{
                   display: "inline-block",
                   padding: "0.85rem 2.2rem",
@@ -252,24 +210,13 @@ export default function Home() {
                   textTransform: "uppercase",
                   textDecoration: "none",
                   borderRadius: 1,
-                  transition: "border-color 0.25s, color 0.25s, transform 0.2s",
-                }}
-                onMouseEnter={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = "var(--gold)";
-                  el.style.transform = "scale(1.03)";
-                }}
-                onMouseLeave={(e) => {
-                  const el = e.currentTarget as HTMLAnchorElement;
-                  el.style.borderColor = "rgba(232,220,192,0.35)";
-                  el.style.transform = "scale(1)";
                 }}
               >
                 Research
               </Link>
             </div>
           </div>
-        </div>
+        </HeroParallax>
 
         {/* Scroll hint */}
         <div
@@ -326,11 +273,9 @@ export default function Home() {
               gap: "2rem",
           }}
         >
-          {loading
-            ? [0, 1, 2].map((i) => <JournalCardSkeleton key={i} />)
-            : projects.map((p, i) => (
-                <ProjectCard key={p.id} project={p} index={i} />
-              ))}
+          {projects.map((p, i) => (
+            <ProjectCard key={p.id} project={p} index={i} />
+          ))}
         </div>
 
         <div
@@ -362,11 +307,9 @@ export default function Home() {
             gap: "2rem",
           }}
         >
-          {loading
-            ? [0, 1, 2].map((i) => <JournalCardSkeleton key={i} />)
-            : blogs.map((v, i) => (
-                <JournalCard key={v.id} entry={v} index={i} folio={blogs.length - i} />
-              ))}
+          {blogs.map((v, i) => (
+            <JournalCard key={v.id} entry={v} index={i} folio={blogs.length - i} />
+          ))}
         </div>
 
         <div

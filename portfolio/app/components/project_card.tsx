@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { useReveal } from "@/app/hooks/Usereveal";
 import type { Project } from "@/app/types";
